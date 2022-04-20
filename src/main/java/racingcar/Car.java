@@ -2,6 +2,8 @@ package racingcar;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import static racingcar.MoveCondition.*;
+
 public class Car {
 
     public MoveCondition run() {
@@ -9,7 +11,7 @@ public class Car {
     }
 
     private MoveCondition randomCondition() {
-        final int i = Randoms.pickNumberInRange(0, 9);
+        final int i = Randoms.pickNumberInRange(START_RANGE, END_RANGE);
         return new MoveCondition(i);
     }
 }

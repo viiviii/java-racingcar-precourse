@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.MoveCondition.MIN_FORWARD_CONDITION;
 
 public class MoveConditionTest {
 
@@ -11,10 +12,10 @@ public class MoveConditionTest {
     @Test
     void moveWhenMoreThan4() {
         //given
-        int moreThan4 = 4;
+        MoveCondition moveCondition = new MoveCondition(MIN_FORWARD_CONDITION);
 
         //when
-        boolean actual = new MoveCondition(moreThan4).isMove();
+        boolean actual = moveCondition.isMove();
 
         //then
         assertThat(actual).isTrue();
@@ -24,10 +25,11 @@ public class MoveConditionTest {
     @Test
     void stopWhenLessThan4() {
         //given
-        int lessThan4 = 3;
+        int lessThanMin = MIN_FORWARD_CONDITION - 1;
+        MoveCondition moveCondition = new MoveCondition(lessThanMin);
 
         //when
-        boolean actual = new MoveCondition(lessThan4).isStop();
+        boolean actual = moveCondition.isStop();
 
         //then
         assertThat(actual).isTrue();

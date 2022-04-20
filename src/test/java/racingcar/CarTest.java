@@ -12,6 +12,7 @@ import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static racingcar.MoveCondition.*;
 
 public class CarTest {
 
@@ -26,7 +27,7 @@ public class CarTest {
     @Test
     void move() throws Throwable {
         mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(4),
+                whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION),
                 () -> {
                     // given
                     MoveCondition condition = car.run();
@@ -42,8 +43,9 @@ public class CarTest {
     @DisplayName("자동차는 멈출 수 있다")
     @Test
     void stop() throws Throwable {
+        int STOP_CONDITION = MIN_FORWARD_CONDITION - 1;
         mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(3),
+                whenUsing -> whenUsing.thenReturn(STOP_CONDITION),
                 () -> {
                     // given
                     MoveCondition condition = car.run();
@@ -58,9 +60,10 @@ public class CarTest {
 
     private void mockingRandomsPickNumberInRange(
             Function<OngoingStubbing<Integer>, OngoingStubbing<Integer>> thenReturn,
-            Executable executable) throws Throwable {
+            Executable executable
+    ) throws Throwable {
         try (final MockedStatic<Randoms> mocked = mockStatic(Randoms.class)) {
-            thenReturn.apply(mocked.when(() -> Randoms.pickNumberInRange(0, 9)));
+            thenReturn.apply(mocked.when(() -> Randoms.pickNumberInRange(START_RANGE, END_RANGE)));
             executable.execute();
         }
     }

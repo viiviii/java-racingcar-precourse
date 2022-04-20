@@ -1,6 +1,11 @@
 package racingcar;
 
+// TODO: 클래스명이 이상해
 public final class MoveCondition {
+    public static final int START_RANGE = 0;
+    public static final int END_RANGE = 9;
+    public static final int MIN_FORWARD_CONDITION = 4;
+
     private final int condition;
 
     public MoveCondition(int condition) {
@@ -8,8 +13,7 @@ public final class MoveCondition {
     }
 
     public boolean isMove() {
-        final int MIN_MOVE_CONDITION = 4;
-        return condition >= MIN_MOVE_CONDITION;
+        return condition >= MIN_FORWARD_CONDITION;
     }
 
     public boolean isStop() {
