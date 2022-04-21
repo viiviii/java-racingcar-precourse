@@ -23,37 +23,97 @@ public class CarTest {
         car = new Car();
     }
 
-    @DisplayName("자동차는 전진할 수 있다")
+    @DisplayName("자동차는 1회 전진했다")
     @Test
-    void forward() throws Throwable {
+    void forwardOnce() throws Throwable {
         mockingRandomsPickNumberInRange(
                 whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION),
                 () -> {
                     // given
-                    MoveCondition moveCondition = car.move();
+                    CarResult carResult = car.move();
 
                     //when
-                    boolean actual = moveCondition.isForward();
+                    int actual = carResult.forwardCount();
 
                     //then
-                    assertThat(actual).isTrue();
+                    assertThat(actual).isOne();
                 });
     }
 
-    @DisplayName("자동차는 멈출 수 있다")
+    @DisplayName("자동차는 1회 멈춰있다")
     @Test
-    void stop() throws Throwable {
+    void stopOnce() throws Throwable {
         mockingRandomsPickNumberInRange(
                 whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION),
                 () -> {
                     // given
-                    MoveCondition moveCondition = car.move();
+                    CarResult carResult = car.move();
 
                     //when
-                    boolean actual = moveCondition.isStop();
+                    int actual = carResult.forwardCount();
 
                     //then
-                    assertThat(actual).isTrue();
+                    assertThat(actual).isZero();
+                });
+    }
+
+    @DisplayName("자동차가 2회 전진했다")
+    @Test
+    void forwardTwice() throws Throwable {
+        mockingRandomsPickNumberInRange(
+                whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION, MIN_FORWARD_CONDITION),
+                () -> {
+                    // given
+                    CarResult firstCarResult = car.move();
+                    CarResult secondsCarResult = car.move();
+
+                    //when
+                    int firstForwardCount = firstCarResult.forwardCount();
+                    int secondsForwardCount = secondsCarResult.forwardCount();
+
+                    //then
+                    assertThat(firstForwardCount).isEqualTo(1);
+                    assertThat(secondsForwardCount).isEqualTo(2);
+                });
+    }
+
+    @DisplayName("자동차가 2회 멈춰있다")
+    @Test
+    void stopTwice() throws Throwable {
+        mockingRandomsPickNumberInRange(
+                whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION, MAX_STOP_CONDITION),
+                () -> {
+                    //given
+                    CarResult firstCarResult = car.move();
+                    CarResult secondsCarResult = car.move();
+
+                    //when
+                    int firstForwardCount = firstCarResult.forwardCount();
+                    int secondsForwardCount = secondsCarResult.forwardCount();
+
+                    //then
+                    assertThat(firstForwardCount).isZero();
+                    assertThat(secondsForwardCount).isZero();
+                });
+    }
+
+    @DisplayName("자동차가 1회 전진하고 1회 멈춰있다")
+    @Test
+    void forwardAndStop() throws Throwable {
+        mockingRandomsPickNumberInRange(
+                whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION, MAX_STOP_CONDITION),
+                () -> {
+                    // given
+                    CarResult firstCarResult = car.move();
+                    CarResult secondsCarResult = car.move();
+
+                    //when
+                    int firstForwardCount = firstCarResult.forwardCount();
+                    int secondsForwardCount = secondsCarResult.forwardCount();
+
+                    //then
+                    assertThat(firstForwardCount).isOne();
+                    assertThat(secondsForwardCount).isOne();
                 });
     }
 
