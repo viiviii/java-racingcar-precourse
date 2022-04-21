@@ -23,7 +23,7 @@ public class RacingPaceTest {
     @Test
     void stop() {
         //given
-        MoveCondition run = new MoveCondition(MoveCondition.MIN_FORWARD_CONDITION - 1);
+        MoveCondition run = new MoveCondition(MoveCondition.MAX_STOP_CONDITION);
 
         //when
         String str = RacingPace.racingPace(run);

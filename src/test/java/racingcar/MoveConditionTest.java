@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.MoveCondition.MAX_STOP_CONDITION;
 import static racingcar.MoveCondition.MIN_FORWARD_CONDITION;
 
 public class MoveConditionTest {
@@ -25,8 +26,7 @@ public class MoveConditionTest {
     @Test
     void stopWhenLessThan4() {
         //given
-        int lessThanMin = MIN_FORWARD_CONDITION - 1;
-        MoveCondition moveCondition = new MoveCondition(lessThanMin);
+        MoveCondition moveCondition = new MoveCondition(MAX_STOP_CONDITION);
 
         //when
         boolean actual = moveCondition.isStop();

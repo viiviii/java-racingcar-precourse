@@ -43,9 +43,8 @@ public class CarTest {
     @DisplayName("자동차는 멈출 수 있다")
     @Test
     void stop() throws Throwable {
-        int STOP_CONDITION = MIN_FORWARD_CONDITION - 1;
         mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(STOP_CONDITION),
+                whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION),
                 () -> {
                     // given
                     MoveCondition condition = car.run();

@@ -5,6 +5,7 @@ public final class MoveCondition {
     public static final int START_RANGE = 0;
     public static final int END_RANGE = 9;
     public static final int MIN_FORWARD_CONDITION = 4;
+    public static final int MAX_STOP_CONDITION = MIN_FORWARD_CONDITION -1;
 
     private final int condition;
 
