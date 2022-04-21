@@ -1,5 +1,6 @@
 package racingcar.view;
 
+import racingcar.model.CarName;
 import racingcar.model.ForwardCount;
 import racingcar.model.MoveResult;
 import racingcar.model.RacingPace;
@@ -15,14 +16,14 @@ public class OutputView {
     }
 
     public void printRacingPace(MoveResult moveResult) {
-        final String pace = moveResultMessage(moveResult);
-        output(pace);
+        final CarName carName = moveResult.carName();
+        final ForwardCount forwardCount = moveResult.forwardCount();
+        output(moveResultMessage(carName, forwardCount));
     }
 
-    String moveResultMessage(MoveResult moveResult) {
-        final ForwardCount forwardCount = moveResult.forwardCount();
+    String moveResultMessage(CarName carName, ForwardCount forwardCount) {
         final String pace = RacingPace.racingPace(forwardCount);
-        return moveResult.carName().get() + " : " + pace;
+        return String.format("%s : %s", carName.get(), pace);
     }
 
     private void output(String message) {
