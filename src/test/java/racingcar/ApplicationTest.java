@@ -13,30 +13,6 @@ class ApplicationTest extends NsTest {
 
     private static final String ERROR_MESSAGE = "[ERROR]";
 
-    // TODO: 임시
-    @Test
-    void 자동차는_전진했다() {
-        assertRandomNumberInRangeTest(
-                () -> {
-                    run("1");
-                    assertThat(output()).contains("-");
-                },
-                MOVING_FORWARD
-        );
-    }
-
-    // TODO: 임시
-    @Test
-    void 자동차는_멈춰있다() {
-        assertRandomNumberInRangeTest(
-                () -> {
-                    run("1");
-                    assertThat(output()).isEmpty();
-                },
-                STOP
-        );
-    }
-
     @Test
     void 전진_정지() {
         assertRandomNumberInRangeTest(

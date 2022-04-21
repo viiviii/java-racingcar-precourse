@@ -20,7 +20,8 @@ public class CarTest {
 
     @BeforeEach
     void setUp() {
-        car = new Car();
+        CarName carName = new CarName("apple");
+        car = new Car(carName);
     }
 
     @DisplayName("자동차는 1회 전진했다")
