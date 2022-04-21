@@ -16,4 +16,8 @@ public class MoveCount {
         int i = Integer.parseInt(count);
         return new MoveCount(i);
     }
+
+    public int get() {
+        return count;
+    }
 }

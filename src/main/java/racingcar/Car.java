@@ -6,8 +6,14 @@ import static racingcar.MoveCondition.*;
 
 public class Car {
 
-    public MoveCondition move() {
-        return randomCondition();
+    private int forwardCount = 0;
+
+    public CarResult move() {
+        MoveCondition moveCondition = randomCondition();
+        if(moveCondition.isForward()) {
+            forwardCount += 1;
+        }
+        return new CarResult(forwardCount);
     }
 
     private MoveCondition randomCondition() {
