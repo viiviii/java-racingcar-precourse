@@ -30,10 +30,10 @@ public class CarTest {
                 whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION),
                 () -> {
                     // given
-                    CarResult carResult = car.move();
+                    MoveResult result = car.move();
 
                     //when
-                    ForwardCount actual = carResult.forwardCount();
+                    ForwardCount actual = result.forwardCount();
 
                     //then
                     assertThat(actual.get()).isOne();
@@ -47,10 +47,10 @@ public class CarTest {
                 whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION),
                 () -> {
                     // given
-                    CarResult carResult = car.move();
+                    MoveResult result = car.move();
 
                     //when
-                    ForwardCount actual = carResult.forwardCount();
+                    ForwardCount actual = result.forwardCount();
 
                     //then
                     assertThat(actual.get()).isZero();
@@ -64,12 +64,12 @@ public class CarTest {
                 whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION, MIN_FORWARD_CONDITION),
                 () -> {
                     // given
-                    CarResult firstCarResult = car.move();
-                    CarResult secondsCarResult = car.move();
+                    MoveResult firstResult = car.move();
+                    MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstCarResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondsCarResult.forwardCount();
+                    ForwardCount firstForwardCount = firstResult.forwardCount();
+                    ForwardCount secondsForwardCount = secondResult.forwardCount();
 
                     //then
                     assertThat(firstForwardCount.get()).isEqualTo(1);
@@ -84,12 +84,12 @@ public class CarTest {
                 whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION, MAX_STOP_CONDITION),
                 () -> {
                     //given
-                    CarResult firstCarResult = car.move();
-                    CarResult secondsCarResult = car.move();
+                    MoveResult firstResult = car.move();
+                    MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstCarResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondsCarResult.forwardCount();
+                    ForwardCount firstForwardCount = firstResult.forwardCount();
+                    ForwardCount secondsForwardCount = secondResult.forwardCount();
 
                     //then
                     assertThat(firstForwardCount.get()).isZero();
@@ -104,12 +104,12 @@ public class CarTest {
                 whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION, MAX_STOP_CONDITION),
                 () -> {
                     // given
-                    CarResult firstCarResult = car.move();
-                    CarResult secondsCarResult = car.move();
+                    MoveResult firstResult = car.move();
+                    MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstCarResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondsCarResult.forwardCount();
+                    ForwardCount firstForwardCount = firstResult.forwardCount();
+                    ForwardCount secondsForwardCount = secondResult.forwardCount();
 
                     //then
                     assertThat(firstForwardCount.get()).isOne();

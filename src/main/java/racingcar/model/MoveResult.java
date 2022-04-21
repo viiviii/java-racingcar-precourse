@@ -1,9 +1,9 @@
 package racingcar.model;
 
-public class CarResult {
+public class MoveResult {
     private final ForwardCount forwardCount;
 
-    public CarResult(ForwardCount forwardCount) {
+    public MoveResult(ForwardCount forwardCount) {
         this.forwardCount = forwardCount;
     }
 
