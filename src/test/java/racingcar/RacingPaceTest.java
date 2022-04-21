@@ -10,25 +10,25 @@ public class RacingPaceTest {
     @Test
     void move() {
         //given
-        MoveCondition run = new MoveCondition(MoveCondition.MIN_FORWARD_CONDITION);
+        MoveCondition moveCondition = new MoveCondition(MoveCondition.MIN_FORWARD_CONDITION);
 
         //when
-        String str = RacingPace.racingPace(run);
+        String actual = RacingPace.racingPace(moveCondition);
 
         //then
-        Assertions.assertThat(str).isEqualTo("-");
+        Assertions.assertThat(actual).isEqualTo("-");
     }
 
     @DisplayName("자동차가 멈춤 상태이면 빈 문자열로 나타낸다")
     @Test
     void stop() {
         //given
-        MoveCondition run = new MoveCondition(MoveCondition.MAX_STOP_CONDITION);
+        MoveCondition moveCondition = new MoveCondition(MoveCondition.MAX_STOP_CONDITION);
 
         //when
-        String str = RacingPace.racingPace(run);
+        String actual = RacingPace.racingPace(moveCondition);
 
         //then
-        Assertions.assertThat(str).isEmpty();
+        Assertions.assertThat(actual).isEmpty();
     }
 }

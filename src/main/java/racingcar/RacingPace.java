@@ -4,11 +4,11 @@ package racingcar;
 public class RacingPace {
 
     public static String racingPace(MoveCondition moveCondition) {
+        final String FORWARD = "-";
         final String STOP = "";
-        final String MOVE = "-";
         if (moveCondition.isStop()) {
             return STOP;
         }
-        return MOVE;
+        return FORWARD;
     }
 }

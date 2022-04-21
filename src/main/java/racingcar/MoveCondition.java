@@ -13,11 +13,11 @@ public final class MoveCondition {
         this.condition = condition;
     }
 
-    public boolean isMove() {
+    public boolean isForward() {
         return condition >= MIN_FORWARD_CONDITION;
     }
 
     public boolean isStop() {
-        return !isMove();
+        return !isForward();
     }
 }

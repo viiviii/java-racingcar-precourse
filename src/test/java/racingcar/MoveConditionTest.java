@@ -11,12 +11,12 @@ public class MoveConditionTest {
 
     @DisplayName("4 이상이면 전진이다")
     @Test
-    void moveWhenMoreThan4() {
+    void forwardWhenMoreThan4() {
         //given
         MoveCondition moveCondition = new MoveCondition(MIN_FORWARD_CONDITION);
 
         //when
-        boolean actual = moveCondition.isMove();
+        boolean actual = moveCondition.isForward();
 
         //then
         assertThat(actual).isTrue();
