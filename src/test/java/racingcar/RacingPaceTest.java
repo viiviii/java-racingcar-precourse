@@ -11,7 +11,9 @@ public class RacingPaceTest {
     @DisplayName("자동차 전진 상태는 -로 나타낸다")
     @ParameterizedTest
     @CsvSource(value = {"0, ''", "1, -", "2, --", "3, ---"})
-    void move(int forwardCount, String expected) {
+    void move(int count, String expected) {
+        //given
+        ForwardCount forwardCount = new ForwardCount(count);
         //when
         String actual = RacingPace.racingPace(forwardCount);
 

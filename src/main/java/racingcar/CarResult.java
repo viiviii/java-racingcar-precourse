@@ -1,13 +1,13 @@
 package racingcar;
 
 public class CarResult {
-    private final int forwardCount;
+    private final ForwardCount forwardCount;
 
-    public CarResult(int forwardCount) {
+    public CarResult(ForwardCount forwardCount) {
         this.forwardCount = forwardCount;
     }
 
-    public int forwardCount() {
+    public ForwardCount forwardCount() {
         return forwardCount;
     }
 }

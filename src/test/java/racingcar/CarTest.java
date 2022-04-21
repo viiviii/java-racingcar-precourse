@@ -10,8 +10,8 @@ import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.function.Function;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mockStatic;
 import static racingcar.MoveCondition.*;
 
 public class CarTest {
@@ -33,10 +33,10 @@ public class CarTest {
                     CarResult carResult = car.move();
 
                     //when
-                    int actual = carResult.forwardCount();
+                    ForwardCount actual = carResult.forwardCount();
 
                     //then
-                    assertThat(actual).isOne();
+                    assertThat(actual.get()).isOne();
                 });
     }
 
@@ -50,10 +50,10 @@ public class CarTest {
                     CarResult carResult = car.move();
 
                     //when
-                    int actual = carResult.forwardCount();
+                    ForwardCount actual = carResult.forwardCount();
 
                     //then
-                    assertThat(actual).isZero();
+                    assertThat(actual.get()).isZero();
                 });
     }
 
@@ -68,12 +68,12 @@ public class CarTest {
                     CarResult secondsCarResult = car.move();
 
                     //when
-                    int firstForwardCount = firstCarResult.forwardCount();
-                    int secondsForwardCount = secondsCarResult.forwardCount();
+                    ForwardCount firstForwardCount = firstCarResult.forwardCount();
+                    ForwardCount secondsForwardCount = secondsCarResult.forwardCount();
 
                     //then
-                    assertThat(firstForwardCount).isEqualTo(1);
-                    assertThat(secondsForwardCount).isEqualTo(2);
+                    assertThat(firstForwardCount.get()).isEqualTo(1);
+                    assertThat(secondsForwardCount.get()).isEqualTo(2);
                 });
     }
 
@@ -88,12 +88,12 @@ public class CarTest {
                     CarResult secondsCarResult = car.move();
 
                     //when
-                    int firstForwardCount = firstCarResult.forwardCount();
-                    int secondsForwardCount = secondsCarResult.forwardCount();
+                    ForwardCount firstForwardCount = firstCarResult.forwardCount();
+                    ForwardCount secondsForwardCount = secondsCarResult.forwardCount();
 
                     //then
-                    assertThat(firstForwardCount).isZero();
-                    assertThat(secondsForwardCount).isZero();
+                    assertThat(firstForwardCount.get()).isZero();
+                    assertThat(secondsForwardCount.get()).isZero();
                 });
     }
 
@@ -108,12 +108,12 @@ public class CarTest {
                     CarResult secondsCarResult = car.move();
 
                     //when
-                    int firstForwardCount = firstCarResult.forwardCount();
-                    int secondsForwardCount = secondsCarResult.forwardCount();
+                    ForwardCount firstForwardCount = firstCarResult.forwardCount();
+                    ForwardCount secondsForwardCount = secondsCarResult.forwardCount();
 
                     //then
-                    assertThat(firstForwardCount).isOne();
-                    assertThat(secondsForwardCount).isOne();
+                    assertThat(firstForwardCount.get()).isOne();
+                    assertThat(secondsForwardCount.get()).isOne();
                 });
     }
 
