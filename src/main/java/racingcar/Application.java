@@ -20,7 +20,7 @@ public class Application {
         String inputMoveCount = inputView.inputMoveCount();
         MoveCount moveCount = MoveCount.fromString(inputMoveCount);
 
-        Car car = new Car();
+        Car car = new Car(carName);
         for (int i = 0; i < moveCount.get(); i++) {
             MoveResult moveResult = car.move();
             outputView.printRacingPace(moveResult);

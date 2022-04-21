@@ -6,8 +6,13 @@ import static racingcar.model.MoveCondition.END_RANGE;
 import static racingcar.model.MoveCondition.START_RANGE;
 
 public class Car {
+    private final CarName carName;
     // TODO: 여기 부분도 객체 사용
     private int forwardCount = 0;
+
+    public Car(CarName carName) {
+        this.carName = carName;
+    }
 
     public MoveResult move() {
         moveAtRandom();
@@ -33,6 +38,6 @@ public class Car {
 
     private MoveResult createMoveResult() {
         final ForwardCount currentForwardCount = new ForwardCount(forwardCount);
-        return new MoveResult(currentForwardCount);
+        return new MoveResult(carName, currentForwardCount);
     }
 }

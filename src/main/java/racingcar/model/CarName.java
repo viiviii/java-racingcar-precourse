@@ -14,4 +14,8 @@ public class CarName {
             throw new IllegalArgumentException();
         }
     }
+
+    public String get() {
+        return carName;
+    }
 }

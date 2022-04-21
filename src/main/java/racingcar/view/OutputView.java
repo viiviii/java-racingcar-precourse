@@ -15,9 +15,14 @@ public class OutputView {
     }
 
     public void printRacingPace(MoveResult moveResult) {
+        final String pace = moveResultMessage(moveResult);
+        output(pace);
+    }
+
+    String moveResultMessage(MoveResult moveResult) {
         final ForwardCount forwardCount = moveResult.forwardCount();
         final String pace = RacingPace.racingPace(forwardCount);
-        output(pace);
+        return moveResult.carName().get() + " : " + pace;
     }
 
     private void output(String message) {
