@@ -1,9 +1,9 @@
-package racingcar;
+package racingcar.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import static racingcar.MoveCondition.END_RANGE;
-import static racingcar.MoveCondition.START_RANGE;
+import static racingcar.model.MoveCondition.END_RANGE;
+import static racingcar.model.MoveCondition.START_RANGE;
 
 public class Car {
     // TODO: 여기 부분도 객체 사용

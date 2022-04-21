@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mockStatic;
-import static racingcar.MoveCondition.*;
+import static racingcar.model.MoveCondition.*;
 
 public class CarTest {
 

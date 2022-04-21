@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 public class ForwardCount {
     private final int count;

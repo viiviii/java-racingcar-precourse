@@ -1,5 +1,8 @@
 package racingcar;
 
+import racingcar.model.Car;
+import racingcar.model.CarResult;
+import racingcar.model.MoveCount;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 

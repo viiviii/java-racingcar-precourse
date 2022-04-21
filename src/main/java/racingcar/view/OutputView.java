@@ -1,8 +1,8 @@
 package racingcar.view;
 
-import racingcar.CarResult;
-import racingcar.ForwardCount;
-import racingcar.RacingPace;
+import racingcar.model.CarResult;
+import racingcar.model.ForwardCount;
+import racingcar.model.RacingPace;
 
 public class OutputView {
 

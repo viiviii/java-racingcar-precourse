@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 // TODO: RacingPace, MoveCondidtion 이상함
 public class RacingPace {

@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 public class MoveCount {
     private final int moveCount;
