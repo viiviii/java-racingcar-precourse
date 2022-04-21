@@ -1,23 +1,19 @@
 package racingcar;
 
 public class MoveCount {
-    private final int count;
+    private final int moveCount;
 
-    private MoveCount(int count) {
-        this.count = count;
-    }
-
-    public static MoveCount fromInteger(int count) {
-        return new MoveCount(count);
+    private MoveCount(int moveCount) {
+        this.moveCount = moveCount;
     }
 
     // TODO: 명확한 예외 처리
-    public static MoveCount fromString(String count) {
-        int i = Integer.parseInt(count);
-        return new MoveCount(i);
+    public static MoveCount fromString(String input) {
+        final int count = Integer.parseInt(input);
+        return new MoveCount(count);
     }
 
     public int get() {
-        return count;
+        return moveCount;
     }
 }
