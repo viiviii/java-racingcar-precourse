@@ -1,6 +1,7 @@
 package racingcar;
 
 import racingcar.model.Car;
+import racingcar.model.CarName;
 import racingcar.model.MoveCount;
 import racingcar.model.MoveResult;
 import racingcar.view.InputView;
@@ -13,6 +14,7 @@ public class Application {
 
         outputView.printCarNameRequest();
         String inputCarName = inputView.inputCarName();
+        CarName carName = new CarName(inputCarName);
 
         outputView.printMoveCountRequest();
         String inputMoveCount = inputView.inputMoveCount();
