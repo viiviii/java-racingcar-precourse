@@ -6,7 +6,7 @@ import static racingcar.MoveCondition.*;
 
 public class Car {
 
-    public MoveCondition run() {
+    public MoveCondition move() {
         return randomCondition();
     }
 
