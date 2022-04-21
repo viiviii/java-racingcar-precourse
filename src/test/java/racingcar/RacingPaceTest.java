@@ -1,34 +1,21 @@
 package racingcar;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RacingPaceTest {
 
     @DisplayName("자동차 전진 상태는 -로 나타낸다")
-    @Test
-    void move() {
-        //given
-        MoveCondition moveCondition = new MoveCondition(MoveCondition.MIN_FORWARD_CONDITION);
-
+    @ParameterizedTest
+    @CsvSource(value = {"0, ''", "1, -", "2, --", "3, ---"})
+    void move(int forwardCount, String expected) {
         //when
-        String actual = RacingPace.racingPace(moveCondition);
+        String actual = RacingPace.racingPace(forwardCount);
 
         //then
-        Assertions.assertThat(actual).isEqualTo("-");
-    }
-
-    @DisplayName("자동차가 멈춤 상태이면 빈 문자열로 나타낸다")
-    @Test
-    void stop() {
-        //given
-        MoveCondition moveCondition = new MoveCondition(MoveCondition.MAX_STOP_CONDITION);
-
-        //when
-        String actual = RacingPace.racingPace(moveCondition);
-
-        //then
-        Assertions.assertThat(actual).isEmpty();
+        assertThat(actual).isEqualTo(expected);
     }
 }
