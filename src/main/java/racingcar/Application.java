@@ -23,7 +23,7 @@ public class Application {
         Car car = new Car(carName);
         for (int i = 0; i < moveCount.get(); i++) {
             MoveResult moveResult = car.move();
-            outputView.printRacingPace(moveResult);
+            outputView.printMoveResult(moveResult);
         }
     }
 }

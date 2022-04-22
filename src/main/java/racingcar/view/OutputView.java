@@ -3,6 +3,7 @@ package racingcar.view;
 import racingcar.model.CarName;
 import racingcar.model.Distance;
 import racingcar.model.MoveResult;
+import racingcar.model.Position;
 
 public class OutputView {
 
@@ -14,13 +15,14 @@ public class OutputView {
         output("시도할 회수는 몇회인가요?");
     }
 
-    public void printRacingPace(MoveResult moveResult) {
+    public void printMoveResult(MoveResult moveResult) {
         final CarName carName = moveResult.carName();
-        final Distance distance = Distance.from(moveResult.position());
-        output(moveResultMessage(carName, distance));
+        final Position position = moveResult.position();
+        output(moveResultMessage(carName, position));
     }
 
-    String moveResultMessage(CarName carName, Distance distance) {
+    String moveResultMessage(CarName carName, Position position) {
+        final Distance distance = Distance.from(position);
         return String.format("%s : %s", carName.get(), distance.get());
     }
 
