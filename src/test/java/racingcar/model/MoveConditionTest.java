@@ -1,11 +1,11 @@
 package racingcar.model;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
 import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class MoveConditionTest {
 

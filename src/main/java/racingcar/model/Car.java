@@ -1,9 +1,9 @@
 package racingcar.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
 import static racingcar.model.MoveCondition.END_RANGE;
 import static racingcar.model.MoveCondition.START_RANGE;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Car {
     private final CarName carName;

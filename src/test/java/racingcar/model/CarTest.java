@@ -1,18 +1,20 @@
 package racingcar.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mockStatic;
+import static racingcar.model.MoveCondition.END_RANGE;
+import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
+import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
+import static racingcar.model.MoveCondition.START_RANGE;
+
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.function.Function;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.MockedStatic;
 import org.mockito.stubbing.OngoingStubbing;
-
-import java.util.function.Function;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockStatic;
-import static racingcar.model.MoveCondition.*;
 
 public class CarTest {
 

@@ -1,11 +1,11 @@
 package racingcar.view;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.CarName;
 import racingcar.model.Position;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class OutputViewTest {
 
