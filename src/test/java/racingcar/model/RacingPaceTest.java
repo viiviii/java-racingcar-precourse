@@ -13,9 +13,9 @@ public class RacingPaceTest {
     @CsvSource(value = {"0, ''", "1, -", "2, --", "3, ---"})
     void move(int count, String expected) {
         //given
-        ForwardCount forwardCount = new ForwardCount(count);
+        Position position = new Position(count);
         //when
-        String actual = RacingPace.racingPace(forwardCount);
+        String actual = RacingPace.racingPace(position);
 
         //then
         assertThat(actual).isEqualTo(expected);

@@ -2,15 +2,15 @@ package racingcar.model;
 
 public class MoveResult {
     private final CarName carName;
-    private final ForwardCount forwardCount;
+    private final Position position;
 
-    public MoveResult(CarName carName, ForwardCount forwardCount) {
+    public MoveResult(CarName carName, Position position) {
         this.carName = carName;
-        this.forwardCount = forwardCount;
+        this.position = position;
     }
 
-    public ForwardCount forwardCount() {
-        return forwardCount;
+    public Position position() {
+        return position;
     }
 
     public CarName carName() {

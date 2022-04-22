@@ -3,7 +3,7 @@ package racingcar.view;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.CarName;
-import racingcar.model.ForwardCount;
+import racingcar.model.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,10 +16,10 @@ class OutputViewTest {
     void moveResultMessage() {
         //given
         CarName carName = new CarName("apple");
-        ForwardCount forwardCount = new ForwardCount(3);
+        Position position = new Position(3);
 
         //when
-        String actual = outputView.moveResultMessage(carName, forwardCount);
+        String actual = outputView.moveResultMessage(carName, position);
 
         //then
         assertThat(actual).isEqualTo("apple : ---");

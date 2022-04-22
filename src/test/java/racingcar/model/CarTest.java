@@ -34,7 +34,7 @@ public class CarTest {
                     MoveResult result = car.move();
 
                     //when
-                    ForwardCount actual = result.forwardCount();
+                    Position actual = result.position();
 
                     //then
                     assertThat(actual.get()).isOne();
@@ -51,7 +51,7 @@ public class CarTest {
                     MoveResult result = car.move();
 
                     //when
-                    ForwardCount actual = result.forwardCount();
+                    Position actual = result.position();
 
                     //then
                     assertThat(actual.get()).isZero();
@@ -69,12 +69,12 @@ public class CarTest {
                     MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondResult.forwardCount();
+                    Position firstPosition = firstResult.position();
+                    Position secondsPosition = secondResult.position();
 
                     //then
-                    assertThat(firstForwardCount.get()).isEqualTo(1);
-                    assertThat(secondsForwardCount.get()).isEqualTo(2);
+                    assertThat(firstPosition.get()).isEqualTo(1);
+                    assertThat(secondsPosition.get()).isEqualTo(2);
                 });
     }
 
@@ -89,12 +89,12 @@ public class CarTest {
                     MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondResult.forwardCount();
+                    Position firstPosition = firstResult.position();
+                    Position secondsPosition = secondResult.position();
 
                     //then
-                    assertThat(firstForwardCount.get()).isZero();
-                    assertThat(secondsForwardCount.get()).isZero();
+                    assertThat(firstPosition.get()).isZero();
+                    assertThat(secondsPosition.get()).isZero();
                 });
     }
 
@@ -109,12 +109,12 @@ public class CarTest {
                     MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondResult.forwardCount();
+                    Position firstPosition = firstResult.position();
+                    Position secondsPosition = secondResult.position();
 
                     //then
-                    assertThat(firstForwardCount.get()).isOne();
-                    assertThat(secondsForwardCount.get()).isOne();
+                    assertThat(firstPosition.get()).isOne();
+                    assertThat(secondsPosition.get()).isOne();
                 });
     }
 
