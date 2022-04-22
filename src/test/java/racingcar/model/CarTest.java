@@ -10,21 +10,21 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 public class CarTest {
-    private MoveCondition moveCondition = mock(MoveCondition.class);
+    private Engine engine = mock(Engine.class);
     private MyRandoms myRandoms = new MyRandoms();
     private CarName carName = new CarName("apple");
     private Car car;
 
     @BeforeEach
     void setUp() {
-        car = new Car(myRandoms, carName, moveCondition);
+        car = new Car(engine, myRandoms, carName);
     }
 
     @DisplayName("자동차는 1회 전진했다")
     @Test
     void forwardOnce() {
         //given
-        given(moveCondition.checkBy(anyInt())).willReturn(Move.FORWARD);
+        given(engine.powerBy(anyInt())).willReturn(Move.FORWARD);
 
         //when
         MoveResult result = car.move();
@@ -38,7 +38,7 @@ public class CarTest {
     @Test
     void stopOnce() {
         //given
-        given(moveCondition.checkBy(anyInt())).willReturn(Move.STOP);
+        given(engine.powerBy(anyInt())).willReturn(Move.STOP);
 
         //when
         MoveResult result = car.move();
@@ -52,7 +52,7 @@ public class CarTest {
     @Test
     void forwardTwice() {
         //given
-        given(moveCondition.checkBy(anyInt())).willReturn(Move.FORWARD, Move.FORWARD);
+        given(engine.powerBy(anyInt())).willReturn(Move.FORWARD, Move.FORWARD);
 
         //when
         MoveResult firstResult = car.move();
@@ -70,7 +70,7 @@ public class CarTest {
     @Test
     void stopTwice() {
         //given
-        given(moveCondition.checkBy(anyInt())).willReturn(Move.STOP, Move.STOP);
+        given(engine.powerBy(anyInt())).willReturn(Move.STOP, Move.STOP);
 
         //when
         MoveResult firstResult = car.move();
@@ -88,7 +88,7 @@ public class CarTest {
     @Test
     void forwardAndStop() {
         // given
-        given(moveCondition.checkBy(anyInt())).willReturn(Move.FORWARD, Move.STOP);
+        given(engine.powerBy(anyInt())).willReturn(Move.FORWARD, Move.STOP);
 
         //when
         MoveResult firstResult = car.move();

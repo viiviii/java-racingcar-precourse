@@ -5,16 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MoveConditionTest {
+public class EngineTest {
+    private Engine engine = new Engine();
 
     @DisplayName("4 이상이면 전진이다")
     @Test
     void forwardWhenMoreThan4() {
         //given
-        MoveCondition moveCondition = new MoveCondition();
+        int energy = 4; // TODO: 하드코딩 제거
 
         //when
-        Move move = moveCondition.checkBy(4); // TODO: 하드코딩 제거
+        Move move = engine.powerBy(energy);
 
         //then
         assertThat(move.isForward()).isTrue();
@@ -24,10 +25,10 @@ public class MoveConditionTest {
     @Test
     void stopWhenLessThan4() {
         //given
-        MoveCondition moveCondition = new MoveCondition();
+        int energy = 4 - 1; // TODO: 하드코딩 제거
 
         //when
-        Move move = moveCondition.checkBy(4 - 1); // TODO: 하드코딩 제거
+        Move move = engine.powerBy(energy);
 
         //then
         assertThat(move.isStop()).isTrue();
