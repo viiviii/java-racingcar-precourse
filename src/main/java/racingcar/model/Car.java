@@ -7,8 +7,7 @@ import static racingcar.model.MoveCondition.START_RANGE;
 
 public class Car {
     private final CarName carName;
-    // TODO: 여기 부분도 객체 사용
-    private int forwardCount = 0;
+    private final Position position = Position.fromZero();
 
     public Car(CarName carName) {
         this.carName = carName;
@@ -33,11 +32,12 @@ public class Car {
     }
 
     private void moveForward() {
-        forwardCount += 1;
+        position.increase();
     }
 
     private MoveResult createMoveResult() {
-        final ForwardCount currentForwardCount = new ForwardCount(forwardCount);
-        return new MoveResult(carName, currentForwardCount);
+        // TODO: 새로운 객체 리턴 vs increase 메서드 package-private vs MoveResult에 원시형으로 할당?
+        final Position currentPosition = Position.from(position.get());
+        return new MoveResult(carName, currentPosition);
     }
 }

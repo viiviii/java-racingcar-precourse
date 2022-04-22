@@ -62,7 +62,14 @@
 - MoveCondition 클래스명과 메서드 명이 사용하는 곳에서 읽어보면 이상함
 - Car 내부의 forwardCount도 객체를 사용해야 한다
     - 원시 값을 포장한 객체(ex: count)가 불변이 아니라면 모델이 아닌 곳에선 값 수정 메서드에 접근 못하게라도 하면 좋겠음
-- ForwardDCount (속닥속닥) 원본 repository에서 삭제된 Car class 보니가 position이란 단어가 있더라
+- ~~ForwardCount -> Position 용어 변경~~
+    - (장점) Position으로 바꾸니 ForwardCount보다 더 직관적인 것 같다
+    - (다른 고민) 클래스명을 바꾸니 Car, CarResult, OutputView, ... 등 여러 파일이 영향을 받았다
+        - Position이 변경되면 영향을 view에는 안주고 domain으로만 좁힐 순 없을까?
+            - 원시 값을 포장한 클래스는 전체 레이어에서 사용되는게 당연한건가?
+            - 지금 별다른 할 일이 없는 CarResult가 중간에서 View에 원시 값을 전달하도록 할까?
+                - 이렇게 바꾸면 단점이 Car class 테스트에서 원시 값을 그대로 사용해야 한다 -> 그럼 포장한 의미가 모호해진게 아닌가?
+                - domain이 dto 같은 느낌이 된 CarResult를 반환하는게 올바른가?
 
 ## 궁금증 ❓
 

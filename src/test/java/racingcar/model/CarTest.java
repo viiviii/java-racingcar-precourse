@@ -1,18 +1,20 @@
 package racingcar.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mockStatic;
+import static racingcar.model.MoveCondition.END_RANGE;
+import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
+import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
+import static racingcar.model.MoveCondition.START_RANGE;
+
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.function.Function;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.MockedStatic;
 import org.mockito.stubbing.OngoingStubbing;
-
-import java.util.function.Function;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockStatic;
-import static racingcar.model.MoveCondition.*;
 
 public class CarTest {
 
@@ -34,7 +36,7 @@ public class CarTest {
                     MoveResult result = car.move();
 
                     //when
-                    ForwardCount actual = result.forwardCount();
+                    Position actual = result.position();
 
                     //then
                     assertThat(actual.get()).isOne();
@@ -51,7 +53,7 @@ public class CarTest {
                     MoveResult result = car.move();
 
                     //when
-                    ForwardCount actual = result.forwardCount();
+                    Position actual = result.position();
 
                     //then
                     assertThat(actual.get()).isZero();
@@ -69,12 +71,12 @@ public class CarTest {
                     MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondResult.forwardCount();
+                    Position firstPosition = firstResult.position();
+                    Position secondsPosition = secondResult.position();
 
                     //then
-                    assertThat(firstForwardCount.get()).isEqualTo(1);
-                    assertThat(secondsForwardCount.get()).isEqualTo(2);
+                    assertThat(firstPosition.get()).isEqualTo(1);
+                    assertThat(secondsPosition.get()).isEqualTo(2);
                 });
     }
 
@@ -89,12 +91,12 @@ public class CarTest {
                     MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondResult.forwardCount();
+                    Position firstPosition = firstResult.position();
+                    Position secondsPosition = secondResult.position();
 
                     //then
-                    assertThat(firstForwardCount.get()).isZero();
-                    assertThat(secondsForwardCount.get()).isZero();
+                    assertThat(firstPosition.get()).isZero();
+                    assertThat(secondsPosition.get()).isZero();
                 });
     }
 
@@ -109,12 +111,12 @@ public class CarTest {
                     MoveResult secondResult = car.move();
 
                     //when
-                    ForwardCount firstForwardCount = firstResult.forwardCount();
-                    ForwardCount secondsForwardCount = secondResult.forwardCount();
+                    Position firstPosition = firstResult.position();
+                    Position secondsPosition = secondResult.position();
 
                     //then
-                    assertThat(firstForwardCount.get()).isOne();
-                    assertThat(secondsForwardCount.get()).isOne();
+                    assertThat(firstPosition.get()).isOne();
+                    assertThat(secondsPosition.get()).isOne();
                 });
     }
 
