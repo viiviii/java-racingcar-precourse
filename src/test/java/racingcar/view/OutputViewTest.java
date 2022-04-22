@@ -8,7 +8,6 @@ import racingcar.model.Position;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OutputViewTest {
-
     private OutputView outputView = new OutputView();
 
     @DisplayName("이동 결과 메세지")
