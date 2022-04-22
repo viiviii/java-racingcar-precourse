@@ -7,7 +7,7 @@ import static racingcar.model.MoveCondition.START_RANGE;
 
 public class Car {
     private final CarName carName;
-    private Position position = Position.fromZero();
+    private final Position position = Position.fromZero();
 
     public Car(CarName carName) {
         this.carName = carName;

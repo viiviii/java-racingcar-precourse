@@ -28,7 +28,7 @@ public final class Position {
         return position;
     }
 
-    public void increase() {
+    void increase() {
         position += 1;
     }
 }
