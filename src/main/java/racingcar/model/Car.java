@@ -19,8 +19,9 @@ public class Car {
     }
 
     private void moveAtRandom() {
-        final int randomEnergy = myRandoms.value();
-        final Move move = engine.powerBy(randomEnergy);
+        final int randomEnergy = myRandoms.value(); // TODO
+        final Energy energy = new Energy(randomEnergy); // TODO
+        final Move move = engine.powerBy(energy);
         if (move.isForward()) {
             moveForward();
         }

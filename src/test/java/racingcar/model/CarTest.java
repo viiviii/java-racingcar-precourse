@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -24,7 +24,7 @@ public class CarTest {
     @Test
     void forwardOnce() {
         //given
-        given(engine.powerBy(anyInt())).willReturn(Move.FORWARD);
+        given(engine.powerBy(any())).willReturn(Move.FORWARD);
 
         //when
         MoveResult result = car.move();
@@ -38,7 +38,7 @@ public class CarTest {
     @Test
     void stopOnce() {
         //given
-        given(engine.powerBy(anyInt())).willReturn(Move.STOP);
+        given(engine.powerBy(any())).willReturn(Move.STOP);
 
         //when
         MoveResult result = car.move();
@@ -52,7 +52,7 @@ public class CarTest {
     @Test
     void forwardTwice() {
         //given
-        given(engine.powerBy(anyInt())).willReturn(Move.FORWARD, Move.FORWARD);
+        given(engine.powerBy(any())).willReturn(Move.FORWARD, Move.FORWARD);
 
         //when
         MoveResult firstResult = car.move();
@@ -70,7 +70,7 @@ public class CarTest {
     @Test
     void stopTwice() {
         //given
-        given(engine.powerBy(anyInt())).willReturn(Move.STOP, Move.STOP);
+        given(engine.powerBy(any())).willReturn(Move.STOP, Move.STOP);
 
         //when
         MoveResult firstResult = car.move();
@@ -88,7 +88,7 @@ public class CarTest {
     @Test
     void forwardAndStop() {
         // given
-        given(engine.powerBy(anyInt())).willReturn(Move.FORWARD, Move.STOP);
+        given(engine.powerBy(any())).willReturn(Move.FORWARD, Move.STOP);
 
         //when
         MoveResult firstResult = car.move();
