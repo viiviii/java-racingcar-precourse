@@ -1,11 +1,11 @@
 package racingcar.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
-import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.model.MoveCondition.FORWARD;
+import static racingcar.model.MoveCondition.STOP;
 
 public class MoveConditionTest {
 
@@ -13,7 +13,7 @@ public class MoveConditionTest {
     @Test
     void forwardWhenMoreThan4() {
         //given
-        MoveCondition moveCondition = new MoveCondition(MIN_FORWARD_CONDITION);
+        MoveCondition moveCondition = new MoveCondition(FORWARD);
 
         //when
         boolean actual = moveCondition.isForward();
@@ -26,12 +26,12 @@ public class MoveConditionTest {
     @Test
     void stopWhenLessThan4() {
         //given
-        MoveCondition moveCondition = new MoveCondition(MAX_STOP_CONDITION);
+        MoveCondition moveCondition = new MoveCondition(STOP);
 
         //when
-        boolean actual = moveCondition.isStop();
+        boolean actual = moveCondition.isForward();
 
         //then
-        assertThat(actual).isTrue();
+        assertThat(actual).isFalse();
     }
 }

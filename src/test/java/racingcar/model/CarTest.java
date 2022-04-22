@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
-import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
+import static racingcar.model.MoveCondition.FORWARD;
+import static racingcar.model.MoveCondition.STOP;
 
 public class CarTest {
 
@@ -25,7 +25,7 @@ public class CarTest {
     @Test
     void forwardOnce() {
         //given
-        given(myRandoms.value()).willReturn(MIN_FORWARD_CONDITION); // TODO
+        given(myRandoms.value()).willReturn(FORWARD); // TODO
 
         //when
         MoveResult result = car.move();
@@ -39,7 +39,7 @@ public class CarTest {
     @Test
     void stopOnce() {
         //given
-        given(myRandoms.value()).willReturn(MAX_STOP_CONDITION);
+        given(myRandoms.value()).willReturn(STOP);
 
         //when
         MoveResult result = car.move();
@@ -53,7 +53,7 @@ public class CarTest {
     @Test
     void forwardTwice() {
         //given
-        given(myRandoms.value()).willReturn(MIN_FORWARD_CONDITION, MIN_FORWARD_CONDITION);
+        given(myRandoms.value()).willReturn(FORWARD, FORWARD);
 
         //when
         MoveResult firstResult = car.move();
@@ -72,8 +72,7 @@ public class CarTest {
     void stopTwice() {
 
         //given
-        // TODO: 이렇게 쓸거면 isStop()은 뭐하러 있음?
-        given(myRandoms.value()).willReturn(MAX_STOP_CONDITION, MAX_STOP_CONDITION);
+        given(myRandoms.value()).willReturn(STOP, STOP);
 
         //when
         MoveResult firstResult = car.move();
@@ -91,7 +90,7 @@ public class CarTest {
     @Test
     void forwardAndStop() {
         // given
-        given(myRandoms.value()).willReturn(MIN_FORWARD_CONDITION, MAX_STOP_CONDITION);
+        given(myRandoms.value()).willReturn(FORWARD, STOP);
 
         //when
         MoveResult firstResult = car.move();
