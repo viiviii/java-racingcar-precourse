@@ -1,132 +1,107 @@
 package racingcar.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockStatic;
-import static racingcar.model.MoveCondition.END_RANGE;
-import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
-import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
-import static racingcar.model.MoveCondition.START_RANGE;
-
-import camp.nextstep.edu.missionutils.Randoms;
-import java.util.function.Function;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-import org.mockito.MockedStatic;
-import org.mockito.stubbing.OngoingStubbing;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static racingcar.model.MoveCondition.MAX_STOP_CONDITION;
+import static racingcar.model.MoveCondition.MIN_FORWARD_CONDITION;
 
 public class CarTest {
 
+    private MyRandoms myRandoms = mock(MyRandoms.class);
+    private CarName carName = new CarName("apple");
     private Car car;
 
     @BeforeEach
     void setUp() {
-        CarName carName = new CarName("apple");
-        car = new Car(carName);
+        car = new Car(myRandoms, carName);
     }
 
     @DisplayName("자동차는 1회 전진했다")
     @Test
-    void forwardOnce() throws Throwable {
-        mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION),
-                () -> {
-                    // given
-                    MoveResult result = car.move();
+    void forwardOnce() {
+        //given
+        given(myRandoms.value()).willReturn(MIN_FORWARD_CONDITION); // TODO
 
-                    //when
-                    Position actual = result.position();
+        //when
+        MoveResult result = car.move();
+        Position actual = result.position();
 
-                    //then
-                    assertThat(actual.get()).isOne();
-                });
+        //then
+        assertThat(actual.get()).isOne();
     }
 
     @DisplayName("자동차는 1회 멈춰있다")
     @Test
-    void stopOnce() throws Throwable {
-        mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION),
-                () -> {
-                    // given
-                    MoveResult result = car.move();
+    void stopOnce() {
+        //given
+        given(myRandoms.value()).willReturn(MAX_STOP_CONDITION);
 
-                    //when
-                    Position actual = result.position();
+        //when
+        MoveResult result = car.move();
+        Position actual = result.position();
 
-                    //then
-                    assertThat(actual.get()).isZero();
-                });
+        //then
+        assertThat(actual.get()).isZero();
     }
 
     @DisplayName("자동차가 2회 전진했다")
     @Test
-    void forwardTwice() throws Throwable {
-        mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION, MIN_FORWARD_CONDITION),
-                () -> {
-                    // given
-                    MoveResult firstResult = car.move();
-                    MoveResult secondResult = car.move();
+    void forwardTwice() {
+        //given
+        given(myRandoms.value()).willReturn(MIN_FORWARD_CONDITION, MIN_FORWARD_CONDITION);
 
-                    //when
-                    Position firstPosition = firstResult.position();
-                    Position secondsPosition = secondResult.position();
+        //when
+        MoveResult firstResult = car.move();
+        MoveResult secondResult = car.move();
 
-                    //then
-                    assertThat(firstPosition.get()).isEqualTo(1);
-                    assertThat(secondsPosition.get()).isEqualTo(2);
-                });
+        Position firstPosition = firstResult.position();
+        Position secondsPosition = secondResult.position();
+
+        //then
+        assertThat(firstPosition.get()).isEqualTo(1);
+        assertThat(secondsPosition.get()).isEqualTo(2);
     }
 
     @DisplayName("자동차가 2회 멈춰있다")
     @Test
-    void stopTwice() throws Throwable {
-        mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(MAX_STOP_CONDITION, MAX_STOP_CONDITION),
-                () -> {
-                    //given
-                    MoveResult firstResult = car.move();
-                    MoveResult secondResult = car.move();
+    void stopTwice() {
 
-                    //when
-                    Position firstPosition = firstResult.position();
-                    Position secondsPosition = secondResult.position();
+        //given
+        // TODO: 이렇게 쓸거면 isStop()은 뭐하러 있음?
+        given(myRandoms.value()).willReturn(MAX_STOP_CONDITION, MAX_STOP_CONDITION);
 
-                    //then
-                    assertThat(firstPosition.get()).isZero();
-                    assertThat(secondsPosition.get()).isZero();
-                });
+        //when
+        MoveResult firstResult = car.move();
+        MoveResult secondResult = car.move();
+
+        Position firstPosition = firstResult.position(); // TODO: moveResult - 바로 원시값 리턴할까?
+        Position secondsPosition = secondResult.position();
+
+        //then
+        assertThat(firstPosition.get()).isZero();
+        assertThat(secondsPosition.get()).isZero();
     }
 
     @DisplayName("자동차가 1회 전진하고 1회 멈춰있다")
     @Test
-    void forwardAndStop() throws Throwable {
-        mockingRandomsPickNumberInRange(
-                whenUsing -> whenUsing.thenReturn(MIN_FORWARD_CONDITION, MAX_STOP_CONDITION),
-                () -> {
-                    // given
-                    MoveResult firstResult = car.move();
-                    MoveResult secondResult = car.move();
+    void forwardAndStop() {
+        // given
+        given(myRandoms.value()).willReturn(MIN_FORWARD_CONDITION, MAX_STOP_CONDITION);
 
-                    //when
-                    Position firstPosition = firstResult.position();
-                    Position secondsPosition = secondResult.position();
+        //when
+        MoveResult firstResult = car.move();
+        MoveResult secondResult = car.move();
 
-                    //then
-                    assertThat(firstPosition.get()).isOne();
-                    assertThat(secondsPosition.get()).isOne();
-                });
-    }
+        Position firstPosition = firstResult.position();
+        Position secondsPosition = secondResult.position();
 
-    private void mockingRandomsPickNumberInRange(
-            Function<OngoingStubbing<Integer>, OngoingStubbing<Integer>> thenReturn,
-            Executable executable
-    ) throws Throwable {
-        try (final MockedStatic<Randoms> mocked = mockStatic(Randoms.class)) {
-            thenReturn.apply(mocked.when(() -> Randoms.pickNumberInRange(START_RANGE, END_RANGE)));
-            executable.execute();
-        }
+        //then
+        assertThat(firstPosition.get()).isOne();
+        assertThat(secondsPosition.get()).isOne();
     }
 }

@@ -1,15 +1,12 @@
 package racingcar.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
-import static racingcar.model.MoveCondition.END_RANGE;
-import static racingcar.model.MoveCondition.START_RANGE;
-
 public class Car {
     private final CarName carName;
+    private final MyRandoms myRandoms; // TODO: 임시
     private final Position position = Position.fromZero();
 
-    public Car(CarName carName) {
+    public Car(MyRandoms myRandoms, CarName carName) {
+        this.myRandoms = myRandoms;
         this.carName = carName;
     }
 
@@ -27,7 +24,7 @@ public class Car {
     }
 
     private MoveCondition moveConditionAtRandom() {
-        final int i = Randoms.pickNumberInRange(START_RANGE, END_RANGE);
+        final int i = myRandoms.value();
         return new MoveCondition(i);
     }
 
