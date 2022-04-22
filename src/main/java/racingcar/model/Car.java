@@ -8,7 +8,7 @@ import static racingcar.model.MoveCondition.START_RANGE;
 public class Car {
     private final CarName carName;
     // TODO: 여기 부분도 객체 사용
-    private Position position = new Position(0);
+    private Position position = Position.fromZero();
 
     public Car(CarName carName) {
         this.carName = carName;
@@ -38,7 +38,7 @@ public class Car {
 
     private MoveResult createMoveResult() {
         // TODO: 새로운 객체 리턴 vs increase 메서드 package-private vs MoveResult에 원시형으로 할당?
-        final Position currentPosition = new Position(position.get());
+        final Position currentPosition = Position.from(position.get());
         return new MoveResult(carName, currentPosition);
     }
 }

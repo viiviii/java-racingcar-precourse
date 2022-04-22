@@ -11,8 +11,7 @@ public class PositionTest {
     @Test
     void increase() {
         //given
-        int DEFAULT = 0;
-        Position position = new Position(DEFAULT);
+        Position position = Position.fromZero();
 
         //when
         position.increase();
