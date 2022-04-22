@@ -1,14 +1,14 @@
 package racingcar.model;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 import static racingcar.model.MoveCondition.END_RANGE;
 import static racingcar.model.MoveCondition.START_RANGE;
-
-import camp.nextstep.edu.missionutils.Randoms;
 
 public class Car {
     private final CarName carName;
     // TODO: 여기 부분도 객체 사용
-    private int position = 0;
+    private Position position = new Position(0);
 
     public Car(CarName carName) {
         this.carName = carName;
@@ -33,11 +33,12 @@ public class Car {
     }
 
     private void moveForward() {
-        position += 1;
+        position.increase();
     }
 
     private MoveResult createMoveResult() {
-        final Position currentPosition = new Position(position);
+        // TODO: 새로운 객체 리턴 vs increase 메서드 package-private vs MoveResult에 원시형으로 할당?
+        final Position currentPosition = new Position(position.get());
         return new MoveResult(carName, currentPosition);
     }
 }
