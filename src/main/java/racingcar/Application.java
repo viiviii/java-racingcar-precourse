@@ -17,7 +17,7 @@ public class Application {
         String inputMoveCount = inputView.inputMoveCount();
         MoveCount moveCount = MoveCount.fromString(inputMoveCount);
 
-        Car car = new Car(new MyRandoms(), carName); // TODO: 임시
+        Car car = new Car(new MyRandoms(), carName, new MoveCondition()); // TODO: 임시
         for (int i = 0; i < moveCount.get(); i++) {
             MoveResult moveResult = car.move();
             outputView.printMoveResult(moveResult);

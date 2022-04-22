@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.model.MoveCondition.FORWARD;
-import static racingcar.model.MoveCondition.STOP;
 
 public class MoveConditionTest {
 
@@ -13,25 +11,25 @@ public class MoveConditionTest {
     @Test
     void forwardWhenMoreThan4() {
         //given
-        MoveCondition moveCondition = new MoveCondition(FORWARD);
+        MoveCondition moveCondition = new MoveCondition();
 
         //when
-        boolean actual = moveCondition.isForward();
+        Move move = moveCondition.checkBy(4); // TODO: 하드코딩 제거
 
         //then
-        assertThat(actual).isTrue();
+        assertThat(move.isForward()).isTrue();
     }
 
     @DisplayName("4 미만이면 멈춤이다")
     @Test
     void stopWhenLessThan4() {
         //given
-        MoveCondition moveCondition = new MoveCondition(STOP);
+        MoveCondition moveCondition = new MoveCondition();
 
         //when
-        boolean actual = moveCondition.isForward();
+        Move move = moveCondition.checkBy(4 - 1); // TODO: 하드코딩 제거
 
         //then
-        assertThat(actual).isFalse();
+        assertThat(move.isStop()).isTrue();
     }
 }

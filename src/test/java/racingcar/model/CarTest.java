@@ -5,27 +5,26 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static racingcar.model.MoveCondition.FORWARD;
-import static racingcar.model.MoveCondition.STOP;
 
 public class CarTest {
-
-    private MyRandoms myRandoms = mock(MyRandoms.class);
+    private MoveCondition moveCondition = mock(MoveCondition.class);
+    private MyRandoms myRandoms = new MyRandoms();
     private CarName carName = new CarName("apple");
     private Car car;
 
     @BeforeEach
     void setUp() {
-        car = new Car(myRandoms, carName);
+        car = new Car(myRandoms, carName, moveCondition);
     }
 
     @DisplayName("자동차는 1회 전진했다")
     @Test
     void forwardOnce() {
         //given
-        given(myRandoms.value()).willReturn(FORWARD); // TODO
+        given(moveCondition.checkBy(anyInt())).willReturn(Move.FORWARD);
 
         //when
         MoveResult result = car.move();
@@ -39,7 +38,7 @@ public class CarTest {
     @Test
     void stopOnce() {
         //given
-        given(myRandoms.value()).willReturn(STOP);
+        given(moveCondition.checkBy(anyInt())).willReturn(Move.STOP);
 
         //when
         MoveResult result = car.move();
@@ -53,7 +52,7 @@ public class CarTest {
     @Test
     void forwardTwice() {
         //given
-        given(myRandoms.value()).willReturn(FORWARD, FORWARD);
+        given(moveCondition.checkBy(anyInt())).willReturn(Move.FORWARD, Move.FORWARD);
 
         //when
         MoveResult firstResult = car.move();
@@ -70,9 +69,8 @@ public class CarTest {
     @DisplayName("자동차가 2회 멈춰있다")
     @Test
     void stopTwice() {
-
         //given
-        given(myRandoms.value()).willReturn(STOP, STOP);
+        given(moveCondition.checkBy(anyInt())).willReturn(Move.STOP, Move.STOP);
 
         //when
         MoveResult firstResult = car.move();
@@ -90,7 +88,7 @@ public class CarTest {
     @Test
     void forwardAndStop() {
         // given
-        given(myRandoms.value()).willReturn(FORWARD, STOP);
+        given(moveCondition.checkBy(anyInt())).willReturn(Move.FORWARD, Move.STOP);
 
         //when
         MoveResult firstResult = car.move();
