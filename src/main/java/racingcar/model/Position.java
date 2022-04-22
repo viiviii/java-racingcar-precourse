@@ -2,11 +2,18 @@ package racingcar.model;
 
 public final class Position {
     private static final int DEFAULT = 0;
-    
+
     private int position;
 
     private Position(int position) {
+        validateRange(position);
         this.position = position;
+    }
+
+    private void validateRange(int position) {
+        if (position < DEFAULT) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public static Position from(int position) {

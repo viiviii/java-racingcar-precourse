@@ -7,7 +7,6 @@ import static racingcar.model.MoveCondition.START_RANGE;
 
 public class Car {
     private final CarName carName;
-    // TODO: 여기 부분도 객체 사용
     private Position position = Position.fromZero();
 
     public Car(CarName carName) {
