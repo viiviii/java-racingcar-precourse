@@ -14,10 +14,11 @@ public class DistanceTest {
     void distance(int count, String expected) {
         //given
         Position position = Position.from(count);
+        
         //when
-        String actual = Distance.from(position);
+        Distance actual = Distance.from(position);
 
         //then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.get()).isEqualTo(expected);
     }
 }

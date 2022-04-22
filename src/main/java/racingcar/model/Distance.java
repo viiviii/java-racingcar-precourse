@@ -1,13 +1,28 @@
 package racingcar.model;
 
 public final class Distance {
+    private static final String ONE_STEP = "-";
 
-    public static String from(Position position) {
-        final String ONE_STEP = "-";
-        String result = "";
+    private final String value;
+
+    private Distance(String value) {
+        this.value = value;
+    }
+
+    public static Distance from(Position position) {
+        final String distance = appendStepToDistanceAs(position);
+        return new Distance(distance);
+    }
+
+    private static String appendStepToDistanceAs(Position position) {
+        final StringBuilder distance = new StringBuilder();
         for (int i = 0; i < position.get(); i++) {
-            result += ONE_STEP;
+            distance.append(ONE_STEP);
         }
-        return result;
+        return distance.toString();
+    }
+
+    public String get() {
+        return value;
     }
 }

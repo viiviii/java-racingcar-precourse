@@ -3,6 +3,7 @@ package racingcar.view;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.CarName;
+import racingcar.model.Distance;
 import racingcar.model.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,9 +18,10 @@ class OutputViewTest {
         //given
         CarName carName = new CarName("apple");
         Position position = Position.from(3);
+        Distance distance = Distance.from(position);
 
         //when
-        String actual = outputView.moveResultMessage(carName, position);
+        String actual = outputView.moveResultMessage(carName, distance);
 
         //then
         assertThat(actual).isEqualTo("apple : ---");
