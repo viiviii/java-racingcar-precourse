@@ -1,11 +1,11 @@
 package racingcar.model.car;
 
 public class CarResult {
-    private final CarName carName;
+    private final Name name;
     private final Position position;
 
-    public CarResult(CarName carName, Position position) {
-        this.carName = carName;
+    public CarResult(Name name, Position position) {
+        this.name = name;
         this.position = position;
     }
 
@@ -14,6 +14,6 @@ public class CarResult {
     }
 
     public String name() {
-        return carName.get();
+        return name.get();
     }
 }

@@ -8,12 +8,12 @@ import racingcar.model.Energy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
-    private String carName = "apple";
+    private String name = "apple";
     private Car car;
 
     @BeforeEach
     void setUp() {
-        car = new Car(carName);
+        car = new Car(name);
     }
 
     @DisplayName("자동차가 멈춰있으면 위치는 증가하지 않는다")
