@@ -1,13 +1,10 @@
-package racingcar.model;
+package racingcar.model.car;
 
-import racingcar.model.car.CarName;
-import racingcar.model.car.Position;
-
-public class MoveResult {
+public class CarResult {
     private final CarName carName;
     private final Position position;
 
-    public MoveResult(CarName carName, Position position) {
+    public CarResult(CarName carName, Position position) {
         this.carName = carName;
         this.position = position;
     }
@@ -16,7 +13,7 @@ public class MoveResult {
         return position.get();
     }
 
-    public String carName() {
+    public String name() {
         return carName.get();
     }
 }

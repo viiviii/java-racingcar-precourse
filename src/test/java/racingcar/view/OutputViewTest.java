@@ -11,13 +11,13 @@ class OutputViewTest {
 
     @DisplayName("이동 결과 메세지 형식은 {자동차이름 : 거리}이다")
     @Test
-    void moveResultMessage() {
+    void carResultMessage() {
         //given
         String carName = "apple";
         Distance distance = Distance.from(3);
 
         //when
-        String actual = outputView.moveResultMessage(carName, distance);
+        String actual = outputView.carResultMessage(carName, distance);
 
         //then
         assertThat(actual).isEqualTo("apple : ---");

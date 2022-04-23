@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.Energy;
-import racingcar.model.MoveResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,8 +23,8 @@ public class CarTest {
         Energy energy = lessEnergy();
 
         //when
-        MoveResult moveResult = car.moveBy(energy);
-        int position = moveResult.position();
+        CarResult result = car.moveBy(energy);
+        int position = result.position();
 
         //then
         assertThat(position).isZero();
@@ -38,10 +37,10 @@ public class CarTest {
         Energy energy = forwardEnergy();
 
         //when
-        MoveResult firstMoveResult = car.moveBy(energy);
-        MoveResult secondMoveResult = car.moveBy(energy);
-        int firstPosition = firstMoveResult.position();
-        int secondsPosition = secondMoveResult.position();
+        CarResult firstResult = car.moveBy(energy);
+        CarResult secondResult = car.moveBy(energy);
+        int firstPosition = firstResult.position();
+        int secondsPosition = secondResult.position();
 
         //then
         assertThat(firstPosition).isEqualTo(1);

@@ -1,7 +1,7 @@
 package racingcar.view;
 
 import racingcar.model.Distance;
-import racingcar.model.MoveResult;
+import racingcar.model.car.CarResult;
 
 public class OutputView {
 
@@ -13,13 +13,13 @@ public class OutputView {
         output("시도할 회수는 몇회인가요?");
     }
 
-    public void printMoveResult(MoveResult moveResult) {
-        final String carName = moveResult.carName();
-        final Distance distance = Distance.from(moveResult.position());
-        output(moveResultMessage(carName, distance));
+    public void printCarResult(CarResult carResult) {
+        final String carName = carResult.name();
+        final Distance distance = Distance.from(carResult.position());
+        output(carResultMessage(carName, distance));
     }
 
-    String moveResultMessage(String carName, Distance distance) {
+    String carResultMessage(String carName, Distance distance) {
         return String.format("%s : %s", carName, distance.get());
     }
 
