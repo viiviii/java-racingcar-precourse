@@ -1,29 +1,27 @@
 package racingcar.model.car;
 
 import racingcar.model.Energy;
-import racingcar.model.MoveResult;
 
 public class Car {
     private final Engine engine = new Engine();
-    private final Position position = Position.fromZero();
+    private final Position position = Position.init();
 
-    private final CarName carName;
+    private final Name name;
 
-    public Car(CarName carName) {
-        this.carName = carName;
+    public Car(String name) {
+        this.name = new Name(name);
     }
 
-    public MoveResult moveBy(Energy energy) {
+    // TODO: Position 리턴하는게 자연스럽지 않나?
+    public CarResult moveBy(Energy energy) {
         final Move move = engine.powerBy(energy);
         if (move.isForward()) {
             position.increase();
         }
-        return createMoveResult();
+        return createResult();
     }
 
-    private MoveResult createMoveResult() {
-        // TODO: 새로운 객체 리턴 vs increase 메서드 package-private vs MoveResult에 원시형으로 할당?
-        final Position currentPosition = Position.from(position.get());
-        return new MoveResult(carName, currentPosition);
+    private CarResult createResult() {
+        return new CarResult(name, Position.copyOf(position));
     }
 }

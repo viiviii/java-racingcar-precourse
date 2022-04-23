@@ -1,6 +1,6 @@
 package racingcar.model.car;
 
-public final class Position {
+final class Position {
     private static final int DEFAULT = 0;
 
     private int value;
@@ -16,20 +16,19 @@ public final class Position {
         }
     }
 
-    // TODO: 생성자 없앨 수 있나? -> view에서 원시 값 사용하면 가능함
-    public static Position from(int position) {
-        return new Position(position);
+    static Position init() {
+        return new Position(DEFAULT);
     }
 
-    public static Position fromZero() {
-        return Position.from(DEFAULT);
-    }
-
-    public int get() {
-        return value;
+    static Position copyOf(Position position) {
+        return new Position(position.get());
     }
 
     void increase() {
         value += 1;
+    }
+
+    int get() {
+        return value;
     }
 }

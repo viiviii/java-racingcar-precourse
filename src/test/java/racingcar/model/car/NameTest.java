@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class CarNameTest {
+public class NameTest {
 
     @DisplayName("자동차 이름은 5자 이하만 가능하다")
     @Test
@@ -15,7 +15,7 @@ public class CarNameTest {
         String fiveLength = "apple";
 
         //when
-        Throwable thrown = catchThrowable(() -> new CarName(fiveLength));
+        Throwable thrown = catchThrowable(() -> new Name(fiveLength));
 
         //then
         assertThat(thrown).doesNotThrowAnyException();
@@ -28,7 +28,7 @@ public class CarNameTest {
         String sixLength = "banana";
 
         //when
-        Throwable thrown = catchThrowable(() -> new CarName(sixLength));
+        Throwable thrown = catchThrowable(() -> new Name(sixLength));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
