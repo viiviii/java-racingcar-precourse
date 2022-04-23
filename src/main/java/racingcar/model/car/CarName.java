@@ -1,11 +1,11 @@
-package racingcar.model;
+package racingcar.model.car;
 
-public class CarName {
-    private final String carName;
+public final class CarName {
+    private final String value;
 
     public CarName(String carName) {
         validateLength(carName);
-        this.carName = carName;
+        this.value = carName;
     }
 
     private void validateLength(String carName) {
@@ -16,6 +16,6 @@ public class CarName {
     }
 
     public String get() {
-        return carName;
+        return value;
     }
 }

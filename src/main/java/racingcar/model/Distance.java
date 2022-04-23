@@ -1,5 +1,7 @@
 package racingcar.model;
 
+import racingcar.model.car.Position;
+
 public final class Distance {
     private static final String ONE_STEP = "-";
 

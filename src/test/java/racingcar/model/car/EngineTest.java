@@ -1,18 +1,20 @@
-package racingcar.model;
+package racingcar.model.car;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.model.Energy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EngineTest {
     private Engine engine = new Engine();
+    private int ENGINE_FORWARD_ENERGY = 4;
 
     @DisplayName("에너지가 4 이상이면 전진한다")
     @Test
     void forwardWhenMoreThan4() {
         //given
-        int moreThan4 = 4;
+        int moreThan4 = ENGINE_FORWARD_ENERGY;
 
         //when
         Energy energy = Energy.fromInteger(moreThan4);
@@ -26,7 +28,7 @@ public class EngineTest {
     @Test
     void stopWhenLessThan4() {
         //given
-        int lessThan4 = 4 - 1;
+        int lessThan4 = ENGINE_FORWARD_ENERGY - 1;
 
         //when
         Energy energy = Energy.fromInteger(lessThan4);

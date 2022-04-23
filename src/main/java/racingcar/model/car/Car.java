@@ -1,13 +1,15 @@
-package racingcar.model;
+package racingcar.model.car;
+
+import racingcar.model.Energy;
+import racingcar.model.MoveResult;
 
 public class Car {
+    private final Engine engine = new Engine();
     private final Position position = Position.fromZero();
-    private final Engine engine;
 
     private final CarName carName;
 
-    public Car(Engine engine, CarName carName) {
-        this.engine = engine;
+    public Car(CarName carName) {
         this.carName = carName;
     }
 

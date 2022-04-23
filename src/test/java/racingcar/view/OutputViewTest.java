@@ -2,8 +2,8 @@ package racingcar.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.model.CarName;
-import racingcar.model.Position;
+import racingcar.model.car.CarName;
+import racingcar.model.car.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

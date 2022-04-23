@@ -1,13 +1,13 @@
-package racingcar.model;
+package racingcar.model.car;
 
 public final class Position {
     private static final int DEFAULT = 0;
 
-    private int position;
+    private int value;
 
     private Position(int position) {
         validateRange(position);
-        this.position = position;
+        this.value = position;
     }
 
     private void validateRange(int position) {
@@ -16,6 +16,7 @@ public final class Position {
         }
     }
 
+    // TODO: 생성자 없앨 수 있나? -> view에서 원시 값 사용하면 가능함
     public static Position from(int position) {
         return new Position(position);
     }
@@ -25,10 +26,10 @@ public final class Position {
     }
 
     public int get() {
-        return position;
+        return value;
     }
 
     void increase() {
-        position += 1;
+        value += 1;
     }
 }

@@ -1,9 +1,9 @@
 package racingcar.view;
 
-import racingcar.model.CarName;
 import racingcar.model.Distance;
 import racingcar.model.MoveResult;
-import racingcar.model.Position;
+import racingcar.model.car.CarName;
+import racingcar.model.car.Position;
 
 public class OutputView {
 
