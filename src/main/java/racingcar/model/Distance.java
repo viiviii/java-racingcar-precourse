@@ -1,7 +1,5 @@
 package racingcar.model;
 
-import racingcar.model.car.Position;
-
 public final class Distance {
     private static final String ONE_STEP = "-";
 
@@ -11,14 +9,14 @@ public final class Distance {
         this.value = value;
     }
 
-    public static Distance from(Position position) {
+    public static Distance from(int position) {
         final String distance = appendStepToDistanceAs(position);
         return new Distance(distance);
     }
 
-    private static String appendStepToDistanceAs(Position position) {
+    private static String appendStepToDistanceAs(int position) {
         final StringBuilder distance = new StringBuilder();
-        for (int i = 0; i < position.get(); i++) {
+        for (int i = 0; i < position; i++) {
             distance.append(ONE_STEP);
         }
         return distance.toString();

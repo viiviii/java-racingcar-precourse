@@ -2,8 +2,6 @@ package racingcar.view;
 
 import racingcar.model.Distance;
 import racingcar.model.MoveResult;
-import racingcar.model.car.CarName;
-import racingcar.model.car.Position;
 
 public class OutputView {
 
@@ -16,14 +14,13 @@ public class OutputView {
     }
 
     public void printMoveResult(MoveResult moveResult) {
-        final CarName carName = moveResult.carName();
-        final Position position = moveResult.position();
-        output(moveResultMessage(carName, position));
+        final String carName = moveResult.carName();
+        final Distance distance = Distance.from(moveResult.position());
+        output(moveResultMessage(carName, distance));
     }
 
-    String moveResultMessage(CarName carName, Position position) {
-        final Distance distance = Distance.from(position);
-        return String.format("%s : %s", carName.get(), distance.get());
+    String moveResultMessage(String carName, Distance distance) {
+        return String.format("%s : %s", carName, distance.get());
     }
 
     private void output(String message) {

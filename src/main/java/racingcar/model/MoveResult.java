@@ -12,11 +12,11 @@ public class MoveResult {
         this.position = position;
     }
 
-    public Position position() {
-        return position;
+    public int position() {
+        return position.get();
     }
 
-    public CarName carName() {
-        return carName;
+    public String carName() {
+        return carName.get();
     }
 }

@@ -9,8 +9,8 @@ public class Car {
 
     private final CarName carName;
 
-    public Car(CarName carName) {
-        this.carName = carName;
+    public Car(String carName) {
+        this.carName = new CarName(carName);
     }
 
     public MoveResult moveBy(Energy energy) {
