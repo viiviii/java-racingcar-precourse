@@ -4,7 +4,7 @@ import racingcar.model.Energy;
 
 public class Car {
     private final Engine engine = new Engine();
-    private final Position position = Position.fromZero();
+    private final Position position = Position.init();
 
     private final Name name;
 
@@ -22,7 +22,6 @@ public class Car {
 
     private CarResult createResult() {
         // TODO: 새로운 객체 리턴 vs increase 메서드 package-private vs CarResult에 원시형으로 할당?
-        final Position currentPosition = Position.from(position.get());
-        return new CarResult(name, currentPosition);
+        return new CarResult(name, Position.copyOf(position));
     }
 }

@@ -4,34 +4,48 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class PositionTest {
 
-    @DisplayName("포지션을 증가할 수 있다")
+    @DisplayName("초기 값은 0이다")
+    @Test
+    void initialValueIsZero() {
+        //given
+        Position position = Position.init();
+
+        //when
+        int initialValue = position.get();
+
+        //then
+        assertThat(initialValue).isZero();
+    }
+
+    @DisplayName("값을 증가할 수 있다")
     @Test
     void increase() {
         //given
-        Position position = Position.fromZero();
+        Position position = Position.init();
 
         //when
         position.increase();
+        int increasePosition = position.get();
 
         //then
-        assertThat(position.get()).isOne();
+        assertThat(increasePosition).isOne();
     }
 
-    @DisplayName("포지션이 음수인 경우 예외가 발생한다")
+    @DisplayName("copyOf은 새로운 객체를 리턴한다")
     @Test
-    void throwExceptionWhenNegativePosition() {
+    void copyOf() {
         //given
-        int negative = -1;
+        Position origin = Position.init();
 
         //when
-        Throwable thrown = catchThrowable(() -> Position.from(negative));
-
+        Position copy = Position.copyOf(origin);
+        origin.increase();
 
         //then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(origin.get()).isOne();
+        assertThat(copy.get()).isZero();
     }
 }
