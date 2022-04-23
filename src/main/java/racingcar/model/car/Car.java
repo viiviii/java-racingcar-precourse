@@ -12,6 +12,7 @@ public class Car {
         this.name = new Name(name);
     }
 
+    // TODO: Position 리턴하는게 자연스럽지 않나?
     public CarResult moveBy(Energy energy) {
         final Move move = engine.powerBy(energy);
         if (move.isForward()) {
@@ -21,7 +22,6 @@ public class Car {
     }
 
     private CarResult createResult() {
-        // TODO: 새로운 객체 리턴 vs increase 메서드 package-private vs CarResult에 원시형으로 할당?
         return new CarResult(name, Position.copyOf(position));
     }
 }

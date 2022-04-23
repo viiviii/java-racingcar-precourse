@@ -1,5 +1,6 @@
 package racingcar.model;
 
+// TODO: 위치 이상함
 public final class Distance {
     private static final String ONE_STEP = "-";
 
