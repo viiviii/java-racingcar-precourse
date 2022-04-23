@@ -1,9 +1,10 @@
 package racingcar;
 
-import racingcar.model.Car;
-import racingcar.model.CarName;
+import racingcar.model.Energy;
 import racingcar.model.MoveCount;
 import racingcar.model.MoveResult;
+import racingcar.model.car.Car;
+import racingcar.model.car.CarName;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -22,7 +23,8 @@ public class Application {
 
         Car car = new Car(carName);
         for (int i = 0; i < moveCount.get(); i++) {
-            MoveResult moveResult = car.move();
+            Energy energy = Energy.atRandom();
+            MoveResult moveResult = car.moveBy(energy);
             outputView.printMoveResult(moveResult);
         }
     }

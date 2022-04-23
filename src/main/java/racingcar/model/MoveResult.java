@@ -1,5 +1,8 @@
 package racingcar.model;
 
+import racingcar.model.car.CarName;
+import racingcar.model.car.Position;
+
 public class MoveResult {
     private final CarName carName;
     private final Position position;

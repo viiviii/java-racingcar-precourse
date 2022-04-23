@@ -3,6 +3,7 @@ package racingcar.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import racingcar.model.car.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +15,7 @@ public class DistanceTest {
     void distance(int count, String expected) {
         //given
         Position position = Position.from(count);
-        
+
         //when
         Distance actual = Distance.from(position);
 
