@@ -5,29 +5,25 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 public class CarTest {
-    private Engine engine = mock(Engine.class);
-    private MyRandoms myRandoms = new MyRandoms();
+    private Engine engine = new Engine();
     private CarName carName = new CarName("apple");
     private Car car;
 
     @BeforeEach
     void setUp() {
-        car = new Car(engine, myRandoms, carName);
+        car = new Car(engine, carName);
     }
 
     @DisplayName("자동차는 1회 전진했다")
     @Test
     void forwardOnce() {
         //given
-        given(engine.powerBy(any())).willReturn(Move.FORWARD);
+        Energy energy = Energy.fromInteger(4); // TODO: 하드코딩 제거
 
         //when
-        MoveResult result = car.move();
+        MoveResult result = car.moveBy(energy);
         Position actual = result.position();
 
         //then
@@ -38,10 +34,10 @@ public class CarTest {
     @Test
     void stopOnce() {
         //given
-        given(engine.powerBy(any())).willReturn(Move.STOP);
+        Energy energy = Energy.fromInteger(4 - 1); // TODO: 하드코딩 제거
 
         //when
-        MoveResult result = car.move();
+        MoveResult result = car.moveBy(energy);
         Position actual = result.position();
 
         //then
@@ -52,11 +48,11 @@ public class CarTest {
     @Test
     void forwardTwice() {
         //given
-        given(engine.powerBy(any())).willReturn(Move.FORWARD, Move.FORWARD);
+        Energy energy = Energy.fromInteger(4); // TODO: 하드코딩 제거
 
         //when
-        MoveResult firstResult = car.move();
-        MoveResult secondResult = car.move();
+        MoveResult firstResult = car.moveBy(energy);
+        MoveResult secondResult = car.moveBy(energy);
 
         Position firstPosition = firstResult.position();
         Position secondsPosition = secondResult.position();
@@ -70,11 +66,11 @@ public class CarTest {
     @Test
     void stopTwice() {
         //given
-        given(engine.powerBy(any())).willReturn(Move.STOP, Move.STOP);
+        Energy energy = Energy.fromInteger(4 - 1); // TODO: 하드코딩 제거
 
         //when
-        MoveResult firstResult = car.move();
-        MoveResult secondResult = car.move();
+        MoveResult firstResult = car.moveBy(energy);
+        MoveResult secondResult = car.moveBy(energy);
 
         Position firstPosition = firstResult.position(); // TODO: moveResult - 바로 원시값 리턴할까?
         Position secondsPosition = secondResult.position();
@@ -88,11 +84,12 @@ public class CarTest {
     @Test
     void forwardAndStop() {
         // given
-        given(engine.powerBy(any())).willReturn(Move.FORWARD, Move.STOP);
+        Energy forwardEnergy = Energy.fromInteger(4); // TODO: 하드코딩 제거
+        Energy lessEnergy = Energy.fromInteger(4 - 1); // TODO: 하드코딩 제거
 
         //when
-        MoveResult firstResult = car.move();
-        MoveResult secondResult = car.move();
+        MoveResult firstResult = car.moveBy(forwardEnergy);
+        MoveResult secondResult = car.moveBy(lessEnergy);
 
         Position firstPosition = firstResult.position();
         Position secondsPosition = secondResult.position();

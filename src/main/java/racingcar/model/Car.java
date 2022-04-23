@@ -2,32 +2,21 @@ package racingcar.model;
 
 public class Car {
     private final Position position = Position.fromZero();
-
     private final Engine engine;
-    private final CarName carName;
-    private final MyRandoms myRandoms; // TODO: 임시
 
-    public Car(Engine engine, MyRandoms myRandoms, CarName carName) {
+    private final CarName carName;
+
+    public Car(Engine engine, CarName carName) {
         this.engine = engine;
-        this.myRandoms = myRandoms;
         this.carName = carName;
     }
 
-    public MoveResult move() {
-        moveAtRandom();
-        return createMoveResult();
-    }
-
-    private void moveAtRandom() {
-        final Energy energy = Energy.atRandom(); // TODO
+    public MoveResult moveBy(Energy energy) {
         final Move move = engine.powerBy(energy);
         if (move.isForward()) {
-            moveForward();
+            position.increase();
         }
-    }
-
-    private void moveForward() {
-        position.increase();
+        return createMoveResult();
     }
 
     private MoveResult createMoveResult() {
