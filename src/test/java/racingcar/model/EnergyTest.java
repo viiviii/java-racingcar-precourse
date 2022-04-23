@@ -16,8 +16,8 @@ class EnergyTest {
         int max = 9;
 
         //when
-        Energy minEnergy = new Energy(min);
-        Energy maxEnergy = new Energy(max);
+        Energy minEnergy = Energy.fromInteger(min);
+        Energy maxEnergy = Energy.fromInteger(max);
 
         //then
         assertThat(minEnergy.get()).isEqualTo(min); // TODO: 정상 객체 테스트 다른 곳과 일관성 맞추기
@@ -28,12 +28,12 @@ class EnergyTest {
     @Test
     void throwExceptionWhenInvalidRange() {
         //given
-        int min = 0;
-        int max = 9;
+        int lessThanMin = 0 - 1;
+        int overMax = 9 + 1;
 
         //when
-        Throwable lessThanMinThrown = catchThrowable(() -> new Energy(min - 1));
-        Throwable overMaxThrown = catchThrowable(() -> new Energy(max + 1));
+        Throwable lessThanMinThrown = catchThrowable(() -> Energy.fromInteger(lessThanMin));
+        Throwable overMaxThrown = catchThrowable(() -> Energy.fromInteger(overMax));
 
         //then
         assertThat(lessThanMinThrown).isInstanceOf(IllegalArgumentException.class); // TODO: 명확한 에러 처리

@@ -12,9 +12,10 @@ public class EngineTest {
     @Test
     void forwardWhenMoreThan4() {
         //given
-        Energy energy = new Energy(4); // TODO: 하드코딩 제거
+        int moreThan4 = 4;
 
         //when
+        Energy energy = Energy.fromInteger(moreThan4);
         Move move = engine.powerBy(energy);
 
         //then
@@ -25,9 +26,10 @@ public class EngineTest {
     @Test
     void stopWhenLessThan4() {
         //given
-        Energy energy = new Energy(4 - 1); // TODO: 하드코딩 제거,
+        int lessThan4 = 4 - 1;
 
         //when
+        Energy energy = Energy.fromInteger(lessThan4);
         Move move = engine.powerBy(energy);
 
         //then
