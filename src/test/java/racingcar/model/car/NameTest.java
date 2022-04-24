@@ -2,6 +2,9 @@ package racingcar.model.car;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -19,6 +22,18 @@ public class NameTest {
 
         //then
         assertThat(thrown).doesNotThrowAnyException();
+    }
+
+    @DisplayName("자동차 이름이 빈 값이거나 공백이면 예외가 발생한다")
+    @ParameterizedTest(name = "[{index}] name=\"{0}\"")
+    @EmptySource
+    @ValueSource(strings = " ")
+    void throwExceptionWhenEmptyString(String name) {
+        //when
+        Throwable thrown = catchThrowable(() -> new Name(name));
+
+        //then
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("자동차 이름이 5글자를 초과하면 예외가 발생한다")
