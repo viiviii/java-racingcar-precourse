@@ -1,6 +1,5 @@
-package racingcar.model;
+package racingcar.view.message;
 
-// TODO: 위치 이상함
 public final class Distance {
     private static final String ONE_STEP = "-";
 

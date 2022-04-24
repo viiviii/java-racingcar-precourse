@@ -1,13 +1,21 @@
 package racingcar.view;
 
-import racingcar.model.Distance;
 import racingcar.model.car.CarResult;
+import racingcar.view.message.Distance;
+import racingcar.view.message.Message;
 
 import java.io.PrintStream;
 import java.util.List;
 
+// TODO: Result만 어떻게 하면 테스트 할 수 있을 것 같애
 public class OutputView {
-    private final PrintStream output = System.out;
+    private final PrintStream output;
+    private final Message message;
+
+    public OutputView(PrintStream output, Message message) {
+        this.output = output;
+        this.message = message;
+    }
 
     public void printResult(List<List<CarResult>> result) {
         printTitle();
@@ -15,21 +23,22 @@ public class OutputView {
     }
 
     private void printTitle() {
-        output.printf("%n실행 결과%n");
+        output.println();
+        output.println(message.resultTitle());
     }
 
     private void printContentWith(List<List<CarResult>> result) {
         for (List<CarResult> carResults : result) {
-            printCarDistancesWith(carResults);
+            printMoveDistancesWith(carResults);
             output.println();
         }
     }
 
-    private void printCarDistancesWith(List<CarResult> result) {
+    private void printMoveDistancesWith(List<CarResult> result) {
         for (CarResult carResult : result) {
             final String carName = carResult.name();
             final Distance distance = Distance.from(carResult.position());
-            output.printf("%s : %s%n", carName, distance.get());
+            output.println(message.moveDistance(carName, distance));
         }
     }
 }

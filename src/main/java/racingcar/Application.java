@@ -3,12 +3,14 @@ package racingcar;
 import racingcar.controller.Game;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
+import racingcar.view.message.Message;
 
 public class Application {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
-
+        final Message message = new Message();
+        final InputView inputView = new InputView(message);
+        final OutputView outputView = new OutputView(System.out, message);
+        
         new Game(inputView, outputView).play();
     }
 }
