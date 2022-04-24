@@ -3,6 +3,10 @@ package racingcar.model.car;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PositionTest {
@@ -47,5 +51,35 @@ public class PositionTest {
         //then
         assertThat(origin.get()).isOne();
         assertThat(copy.get()).isZero();
+    }
+
+
+    @Test
+    void comparable() {
+        //given
+        Position position1 = new Position(1);
+        Position position2 = new Position(2);
+        Position position3 = new Position(3);
+
+        //when
+        List<Position> positions = Arrays.asList(position3, position2, position1);
+        Collections.sort(positions);
+
+        //then
+        assertThat(positions).containsExactly(position1, position2, position3);
+    }
+
+    @Test
+    void equality() {
+        //given
+        int number = 1;
+
+        //when
+        Position position = new Position(number);
+        Position other = new Position(number);
+
+        //then
+        assertThat(position).isEqualTo(other);
+        assertThat(position).hasSameHashCodeAs(other);
     }
 }
