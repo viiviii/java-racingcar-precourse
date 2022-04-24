@@ -1,29 +1,44 @@
 package racingcar.view;
 
-import racingcar.model.Distance;
 import racingcar.model.car.CarResult;
+import racingcar.view.message.Distance;
+import racingcar.view.message.Message;
 
+import java.io.PrintStream;
+import java.util.List;
+
+// TODO: Result만 어떻게 하면 테스트 할 수 있을 것 같애
 public class OutputView {
+    private final PrintStream output;
+    private final Message message;
 
-    public void printCarNameRequest() {
-        output("경주할 자동차 이름을 입력하세요."); // TODO: 여러대 올 때 메세지 변경
+    public OutputView(PrintStream output, Message message) {
+        this.output = output;
+        this.message = message;
     }
 
-    public void printMoveCountRequest() {
-        output("시도할 회수는 몇회인가요?");
+    public void printResult(List<List<CarResult>> result) {
+        printTitle();
+        printContentWith(result);
     }
 
-    public void printCarResult(CarResult carResult) {
-        final String carName = carResult.name();
-        final Distance distance = Distance.from(carResult.position());
-        output(carResultMessage(carName, distance));
+    private void printTitle() {
+        output.println();
+        output.println(message.resultTitle());
     }
 
-    String carResultMessage(String carName, Distance distance) {
-        return String.format("%s : %s", carName, distance.get());
+    private void printContentWith(List<List<CarResult>> result) {
+        for (List<CarResult> carResults : result) {
+            printMoveDistancesWith(carResults);
+            output.println();
+        }
     }
 
-    private void output(String message) {
-        System.out.println(message);
+    private void printMoveDistancesWith(List<CarResult> result) {
+        for (CarResult carResult : result) {
+            final String carName = carResult.name();
+            final Distance distance = Distance.from(carResult.position());
+            output.println(message.moveDistance(carName, distance));
+        }
     }
 }
