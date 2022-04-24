@@ -4,9 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    // TODO: 여러개 되면 names로 변경
-    public String inputCarName() {
-        print("경주할 자동차 이름을 입력하세요.");
+    public String inputCarsNames() {
+        print("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         return input();
     }
 

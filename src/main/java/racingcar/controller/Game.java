@@ -1,13 +1,11 @@
 package racingcar.controller;
 
-import racingcar.model.Energy;
+import racingcar.Cars;
 import racingcar.model.MoveCount;
-import racingcar.model.car.Car;
 import racingcar.model.car.CarResult;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -20,29 +18,19 @@ public class Game {
     }
 
     public void play() {
-        final Car car = inputCar();
+        final Cars cars = inputCarsNames();
         final MoveCount moveCount = inputMoveCount();
-        final List<CarResult> result = start(car, moveCount);
+        final List<List<CarResult>> result = cars.move(moveCount);
         outputView.printResult(result);
     }
 
-    private Car inputCar() {
-        final String carName = inputView.inputCarName();
-        return new Car(carName);
+    private Cars inputCarsNames() {
+        final String names = inputView.inputCarsNames();
+        return Cars.fromString(names);
     }
 
     private MoveCount inputMoveCount() {
         final String inputMoveCount = inputView.inputMoveCount();
         return MoveCount.fromString(inputMoveCount);
-    }
-
-    private List<CarResult> start(Car car, MoveCount moveCount) {
-        final List<CarResult> result = new ArrayList<>();
-        for (int i = 0; i < moveCount.get(); i++) {
-            final Energy energy = Energy.atRandom();
-            final CarResult carResult = car.moveBy(energy);
-            result.add(carResult);
-        }
-        return result;
     }
 }

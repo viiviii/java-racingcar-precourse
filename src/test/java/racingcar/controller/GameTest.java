@@ -19,7 +19,7 @@ class GameTest {
         //given
         Game game = new Game(inputView, outputView);
 
-        given(inputView.inputCarName()).willReturn("pobi");
+        given(inputView.inputCarsNames()).willReturn("pobi");
         given(inputView.inputMoveCount()).willReturn("3");
         InOrder inOrder = inOrder(inputView, outputView);
 
@@ -27,7 +27,7 @@ class GameTest {
         game.play();
 
         //then
-        inOrder.verify(inputView).inputCarName();
+        inOrder.verify(inputView).inputCarsNames();
         inOrder.verify(inputView).inputMoveCount();
         inOrder.verify(outputView).printResult(any());
     }
