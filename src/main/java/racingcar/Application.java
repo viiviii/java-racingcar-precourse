@@ -12,11 +12,9 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        outputView.printCarNameRequest();
         String carName = inputView.inputCarName();
         Car car = new Car(carName);
 
-        outputView.printMoveCountRequest();
         String inputMoveCount = inputView.inputMoveCount();
         MoveCount moveCount = MoveCount.fromString(inputMoveCount);
 
