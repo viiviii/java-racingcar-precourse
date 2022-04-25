@@ -8,7 +8,6 @@ public class Message {
         return "실행 결과";
     }
 
-    // TODO: 객체 자체를 파라미터로
     public String moveDistance(String carName, Distance distance) {
         return String.format("%s : %s", carName, distance.get());
     }

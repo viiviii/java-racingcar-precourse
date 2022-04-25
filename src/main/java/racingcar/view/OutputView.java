@@ -7,11 +7,10 @@ import racingcar.view.message.Message;
 import java.io.PrintStream;
 import java.util.List;
 
-// TODO: Result만 어떻게 하면 테스트 할 수 있을 것 같애
 public class OutputView {
     private final PrintStream output;
     private final Message message;
-
+    
     public OutputView(PrintStream output, Message message) {
         this.output = output;
         this.message = message;

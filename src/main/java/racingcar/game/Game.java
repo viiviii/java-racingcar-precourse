@@ -22,7 +22,7 @@ public class Game {
         final MoveCount moveCount = createMoveCount();
         final List<List<CarDto>> result = race.startWith(moveCount);
         outputView.printResult(result);
-        final List<String> winners = race.getWinner(); // TODO
+        final List<String> winners = race.getWinner();
         outputView.printWinners(winners);
     }
 

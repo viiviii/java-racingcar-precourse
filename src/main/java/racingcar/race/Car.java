@@ -2,7 +2,6 @@ package racingcar.race;
 
 import racingcar.rule.*;
 
-// TODO: Equals, HashCode 할까말까
 class Car {
     private final Engine engine = new Engine();
     private final Name name;
