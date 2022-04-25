@@ -1,6 +1,6 @@
 package racingcar.view;
 
-import racingcar.race.CarResult;
+import racingcar.race.CarDto;
 import racingcar.view.message.Distance;
 import racingcar.view.message.Message;
 
@@ -17,7 +17,7 @@ public class OutputView {
         this.message = message;
     }
 
-    public void printResult(List<List<CarResult>> result) {
+    public void printResult(List<List<CarDto>> result) {
         printTitle();
         printContentWith(result);
     }
@@ -27,17 +27,17 @@ public class OutputView {
         output.println(message.resultTitle());
     }
 
-    private void printContentWith(List<List<CarResult>> result) {
-        for (List<CarResult> carResults : result) {
-            printMoveDistancesWith(carResults);
+    private void printContentWith(List<List<CarDto>> result) {
+        for (List<CarDto> cars : result) {
+            printMoveDistancesWith(cars);
             output.println();
         }
     }
 
-    private void printMoveDistancesWith(List<CarResult> result) {
-        for (CarResult carResult : result) {
-            final String carName = carResult.name();
-            final Distance distance = Distance.from(carResult.position());
+    private void printMoveDistancesWith(List<CarDto> cars) {
+        for (CarDto car : cars) {
+            final String carName = car.name();
+            final Distance distance = Distance.from(car.position());
             output.println(message.moveDistance(carName, distance));
         }
     }

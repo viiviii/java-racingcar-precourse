@@ -1,6 +1,6 @@
 package racingcar.game;
 
-import racingcar.race.CarResult;
+import racingcar.race.CarDto;
 import racingcar.race.Race;
 import racingcar.rule.MoveCount;
 import racingcar.view.InputView;
@@ -20,7 +20,7 @@ public class Game {
     public void play() {
         final Race race = Race.from(inputCarsNames());
         final MoveCount moveCount = inputMoveCount();
-        final List<List<CarResult>> result = race.startWith(moveCount);
+        final List<List<CarDto>> result = race.startWith(moveCount);
         outputView.printResult(result);
         final List<String> winners = race.getWinner(); // TODO
         outputView.printWinners(winners);

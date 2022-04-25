@@ -31,27 +31,27 @@ public final class Race {
         return cars;
     }
 
-    public List<List<CarResult>> startWith(MoveCount moveCount) {
-        final List<List<CarResult>> result = new ArrayList<>();
+    public List<List<CarDto>> startWith(MoveCount moveCount) {
+        final List<List<CarDto>> result = new ArrayList<>();
         for (int i = 0; i < moveCount.get(); i++) {
-            final List<CarResult> moveCar = move();
+            final List<CarDto> moveCar = move();
             result.add(moveCar);
         }
         return result;
     }
 
-    private List<CarResult> move() {
-        final List<CarResult> result = new ArrayList<>();
+    private List<CarDto> move() {
+        final List<CarDto> result = new ArrayList<>();
         for (Car car : cars) {
             final Energy energy = Energy.atRandom();
             car.moveBy(energy);
-            result.add(carResult(car));
+            result.add(carDtoFrom(car));
         }
         return result;
     }
 
-    private CarResult carResult(Car car) {
-        return new CarResult(car.name(), car.position());
+    private CarDto carDtoFrom(Car car) {
+        return new CarDto(car.name(), car.position());
     }
 
     public List<String> getWinner() {
