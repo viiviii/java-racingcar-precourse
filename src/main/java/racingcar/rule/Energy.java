@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.Objects;
 
-// TODO
 public class Energy implements Comparable<Energy> {
     private static final int MIN = 0;
     private static final int MAX = 9;
