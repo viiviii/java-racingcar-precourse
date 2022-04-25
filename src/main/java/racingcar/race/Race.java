@@ -2,6 +2,7 @@ package racingcar.race;
 
 import racingcar.rule.Energy;
 import racingcar.rule.MoveCount;
+import racingcar.rule.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,11 +67,11 @@ public final class Race {
     }
 
     private CarDto carDtoFrom(Car car) {
-        return new CarDto(car.name(), car.position());
+        return new CarDto(car.name().get(), car.position().get());
     }
 
     public List<String> getWinner() {
-        final int raceMaxPosition = maxPosition();
+        final Position raceMaxPosition = maxPosition();
         final List<String> names = new ArrayList<>();
         for (Car car : cars) {
             addNameWhenSamePositionTo(names, raceMaxPosition, car);
@@ -78,13 +79,13 @@ public final class Race {
         return names;
     }
 
-    private void addNameWhenSamePositionTo(List<String> names, int raceMaxPosition, Car car) {
+    private void addNameWhenSamePositionTo(List<String> names, Position raceMaxPosition, Car car) {
         if (car.inPosition(raceMaxPosition)) {
-            names.add(car.name());
+            names.add(car.name().get());
         }
     }
 
-    private int maxPosition() {
+    private Position maxPosition() {
         return Collections
                 .max(cars, Car::compareToPosition)
                 .position();

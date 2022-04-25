@@ -3,12 +3,15 @@ package racingcar.race;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.rule.MoveCount;
+import racingcar.rule.Name;
+import racingcar.rule.Position;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 class RaceTest {
@@ -65,6 +68,8 @@ class RaceTest {
         //given
         Car car = mock(Car.class);
         MoveCount moveCount = MoveCount.fromString("5");
+        given(car.name()).willReturn(new Name("pobi"));
+        given(car.position()).willReturn(new Position(3));
 
         //when
         Race.from(car).startWith(moveCount);

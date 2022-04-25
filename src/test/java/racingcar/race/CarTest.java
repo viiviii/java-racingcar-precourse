@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.rule.Energy;
 import racingcar.rule.Engine;
+import racingcar.rule.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +15,8 @@ class CarTest {
     @Test
     void returnTrueWhenSamePosition() {
         //given
-        int samePosition = 5;
-        Car car = Car.of("pobi", samePosition);
+        Position samePosition = new Position(5);
+        Car car = Car.of("pobi", samePosition.get());
 
         //when
         boolean actual = car.inPosition(samePosition);
@@ -29,10 +30,10 @@ class CarTest {
     void returnFalseWhenDifferencePosition() {
         //given
         int position = 5;
-        int other = 3;
         Car car = Car.of("pobi", position);
 
         //when
+        Position other = new Position(3);
         boolean actual = car.inPosition(other);
 
         //then
@@ -46,10 +47,10 @@ class CarTest {
         Car car = Car.inStartingPositionWith(name);
 
         //when
-        int position = car.moveBy(lessEnergy());
+        Position position = car.moveBy(lessEnergy());
 
         //then
-        assertThat(position).isZero();
+        assertThat(position.get()).isZero();
     }
 
     @DisplayName("자동차가 전진할 때 마다 위치는 1씩 증가한다")
@@ -59,12 +60,12 @@ class CarTest {
         Car car = Car.inStartingPositionWith(name);
 
         //when
-        int firstPosition = car.moveBy(forwardEnergy());
-        int secondsPosition = car.moveBy(forwardEnergy());
+        Position firstPosition = car.moveBy(forwardEnergy());
+        Position secondsPosition = car.moveBy(forwardEnergy());
 
         //then
-        assertThat(firstPosition).isEqualTo(1);
-        assertThat(secondsPosition).isEqualTo(2);
+        assertThat(firstPosition.get()).isEqualTo(1);
+        assertThat(secondsPosition.get()).isEqualTo(2);
     }
 
     private Energy forwardEnergy() {
