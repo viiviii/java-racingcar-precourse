@@ -1,6 +1,6 @@
 package racingcar.view;
 
-import racingcar.CarResult;
+import racingcar.race.CarResult;
 import racingcar.view.message.Distance;
 import racingcar.view.message.Message;
 

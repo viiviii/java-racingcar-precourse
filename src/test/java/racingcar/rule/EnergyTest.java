@@ -1,4 +1,4 @@
-package racingcar.model;
+package racingcar.rule;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

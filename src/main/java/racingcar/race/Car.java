@@ -1,9 +1,9 @@
-package racingcar.model.car;
+package racingcar.race;
 
-import racingcar.model.Energy;
+import racingcar.rule.*;
 
 // TODO: Equals, HashCode 할까말까
-public class Car {
+class Car {
     private final Engine engine = new Engine();
     private final Name name;
     private final Position position;
@@ -13,35 +13,35 @@ public class Car {
         this.position = position;
     }
 
-    public static Car of(String name, int position) {
+    static Car of(String name, int position) {
         final Name carName = new Name(name);
         final Position carPosition = new Position(position);
         return new Car(carName, carPosition);
     }
 
-    public static Car inStartingPositionWith(String name) {
+    static Car inStartingPositionWith(String name) {
         final Name carName = new Name(name);
         final Position carPosition = Position.init();
         return new Car(carName, carPosition);
     }
 
-    public String name() {
+    String name() {
         return name.get();
     }
 
-    public int position() {
+    int position() {
         return position.get();
     }
 
-    public int compareToPosition(Car car) {
+    int compareToPosition(Car car) {
         return this.position.compareTo(car.position);
     }
 
-    public boolean inPosition(int other) {
+    boolean inPosition(int other) {
         return this.position.equals(new Position(other));
     }
 
-    public int moveBy(Energy energy) {
+    int moveBy(Energy energy) {
         final Move move = engine.powerBy(energy);
         if (move.isForward()) {
             position.increase();

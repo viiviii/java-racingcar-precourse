@@ -1,10 +1,11 @@
-package racingcar.model.car;
+package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.model.Energy;
+import racingcar.rule.Energy;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.rule.Engine.MIN_FORWARD_ENERGY;
 
 public class CarTest {
     private String name = "apple";
@@ -67,10 +68,10 @@ public class CarTest {
     }
 
     private Energy forwardEnergy() {
-        return Energy.fromInteger(Engine.MIN_FORWARD_ENERGY);
+        return Energy.fromInteger(MIN_FORWARD_ENERGY);
     }
 
     private Energy lessEnergy() {
-        return Energy.fromInteger(Engine.MIN_FORWARD_ENERGY - 1);
+        return Energy.fromInteger(MIN_FORWARD_ENERGY - 1);
     }
 }

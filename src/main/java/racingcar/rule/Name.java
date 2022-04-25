@@ -1,9 +1,9 @@
-package racingcar.model.car;
+package racingcar.rule;
 
-final class Name {
+public class Name {
     private final String value;
 
-    Name(String name) {
+    public Name(String name) {
         final String trimName = name.trim();
         validateMinLength(trimName);
         validateMaxLength(trimName);
@@ -24,7 +24,7 @@ final class Name {
         }
     }
 
-    String get() {
+    public String get() {
         return value;
     }
 }

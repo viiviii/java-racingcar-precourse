@@ -1,13 +1,13 @@
-package racingcar.model.car;
+package racingcar.rule;
 
 import java.util.Objects;
 
-final class Position implements Comparable<Position> {
+public class Position implements Comparable<Position> {
     private static final int DEFAULT = 0;
 
     private int value;
 
-    Position(int position) {
+    public Position(int position) {
         validateRange(position);
         this.value = position;
     }
@@ -18,15 +18,15 @@ final class Position implements Comparable<Position> {
         }
     }
 
-    static Position init() {
+    public static Position init() {
         return new Position(DEFAULT);
     }
 
-    void increase() {
+    public void increase() {
         value += 1;
     }
 
-    int get() {
+    public int get() {
         return value;
     }
 

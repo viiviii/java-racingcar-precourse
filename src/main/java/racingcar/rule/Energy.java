@@ -1,8 +1,9 @@
-package racingcar.model;
+package racingcar.rule;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public final class Energy {
+// TODO
+public class Energy {
     private static final int MIN = 0;
     private static final int MAX = 9;
 
