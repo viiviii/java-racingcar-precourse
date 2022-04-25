@@ -1,6 +1,5 @@
-package racingcar.model;
+package racingcar.rule;
 
-// TODO: 위치 이상함
 public class MoveCount {
     private final int moveCount;
 
