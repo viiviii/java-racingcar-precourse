@@ -73,12 +73,15 @@ public final class Race {
         final int raceMaxPosition = maxPosition();
         final List<String> names = new ArrayList<>();
         for (Car car : cars) {
-            // TODO
-            if (car.inPosition(raceMaxPosition)) {
-                names.add(car.name());
-            }
+            addNameWhenSamePositionTo(names, raceMaxPosition, car);
         }
         return names;
+    }
+
+    private void addNameWhenSamePositionTo(List<String> names, int raceMaxPosition, Car car) {
+        if (car.inPosition(raceMaxPosition)) {
+            names.add(car.name());
+        }
     }
 
     private int maxPosition() {
