@@ -33,7 +33,9 @@ public class NameTest {
         Throwable thrown = catchThrowable(() -> new Name(name));
 
         //then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동차 이름은 1자 이상이어야 한다.");
     }
 
     @DisplayName("자동차 이름이 5글자를 초과하면 예외가 발생한다")
@@ -46,6 +48,8 @@ public class NameTest {
         Throwable thrown = catchThrowable(() -> new Name(sixLength));
 
         //then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동차 이름은 5자 이하여야 한다.");
     }
 }

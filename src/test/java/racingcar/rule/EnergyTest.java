@@ -36,8 +36,8 @@ class EnergyTest {
         Throwable overMaxThrown = catchThrowable(() -> Energy.fromInteger(overMax));
 
         //then
-        assertThat(lessThanMinThrown).isInstanceOf(IllegalArgumentException.class); // TODO: 명확한 에러 처리
-        assertThat(overMaxThrown).isInstanceOf(IllegalArgumentException.class); // TODO: 명확한 에러 처리
+        assertThat(lessThanMinThrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(overMaxThrown).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

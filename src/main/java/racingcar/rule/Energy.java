@@ -16,7 +16,8 @@ public class Energy {
 
     private void validateRange(int energy) {
         if (energy < MIN || energy > MAX) {
-            throw new IllegalArgumentException();
+            final String message = String.format("범위가 유효하지 않음. 유효 범위=(%d~%d)", MIN, MAX);
+            throw new IllegalArgumentException(message);
         }
     }
 
