@@ -12,7 +12,14 @@ public final class Race {
     private final List<Car> cars;
 
     private Race(List<Car> cars) {
+        validateMinSize(cars);
         this.cars = cars;
+    }
+
+    private void validateMinSize(List<Car> cars) {
+        if (cars.isEmpty()) {
+            throw new IllegalArgumentException("자동차는 1대 이상이어야 한다.");
+        }
     }
 
     public static Race from(String... names) {

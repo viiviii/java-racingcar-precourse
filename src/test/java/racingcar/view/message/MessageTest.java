@@ -66,4 +66,19 @@ class MessageTest {
         //then
         assertThat(actual).isEqualTo("최종 우승자: pobi, honux");
     }
+
+    @DisplayName("에러")
+    @Test
+    void error() {
+        //given
+        String errorMessage = "시도 회수는 숫자여야 한다.";
+
+        //when
+        String actual = message.error(errorMessage);
+
+
+        //then
+        assertThat(actual).startsWith("[ERROR]");
+        assertThat(actual).containsOnlyOnce("[ERROR]");
+    }
 }

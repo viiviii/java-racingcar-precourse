@@ -45,4 +45,9 @@ public class OutputView {
     public void printWinners(List<String> winners) {
         output.println(message.winners(winners));
     }
+
+
+    public void printError(String errorMessage) {
+        output.println(message.error(errorMessage));
+    }
 }

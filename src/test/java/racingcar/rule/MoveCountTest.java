@@ -33,4 +33,34 @@ public class MoveCountTest {
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("최소 시도 횟수보다 작은 경우 예외가 발생한다")
+    @Test
+    void throwExceptionWhenLessThanMin() {
+        //given
+        String invalidCount = "0";
+
+        //when
+        Throwable thrown = catchThrowable(() -> MoveCount.fromString(invalidCount));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("시도 횟수는 1 이상이어야 한다.");
+    }
+
+    @DisplayName("최대 시도 횟수보다 큰 경우 예외가 발생한다")
+    @Test
+    void throwExceptionWhenGraterThanMax() {
+        //given
+        String invalidCount = "101";
+
+        //when
+        Throwable thrown = catchThrowable(() -> MoveCount.fromString(invalidCount));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("시도 횟수는 100 이하여야 한다.");
+    }
 }

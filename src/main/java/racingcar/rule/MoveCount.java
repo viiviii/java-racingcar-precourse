@@ -4,10 +4,25 @@ public class MoveCount {
     private final int moveCount;
 
     private MoveCount(int moveCount) {
+        validateMin(moveCount);
+        validateMax(moveCount);
         this.moveCount = moveCount;
     }
 
-    // TODO: 명확한 예외 처리
+    private void validateMin(int moveCount) {
+        final int MIN_MOVE_COUNT = 1;
+        if (moveCount < MIN_MOVE_COUNT) {
+            throw new IllegalArgumentException("시도 횟수는 1 이상이어야 한다.");
+        }
+    }
+
+    private void validateMax(int moveCount) {
+        final int MAX_MOVE_COUNT = 100;
+        if (moveCount > MAX_MOVE_COUNT) {
+            throw new IllegalArgumentException("시도 횟수는 100 이하여야 한다.");
+        }
+    }
+
     public static MoveCount fromString(String input) {
         final int count = Integer.parseInt(input);
         return new MoveCount(count);

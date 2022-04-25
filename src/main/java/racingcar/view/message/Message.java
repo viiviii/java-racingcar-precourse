@@ -25,4 +25,8 @@ public class Message {
         final String winners = String.join(", ", names);
         return String.format("최종 우승자: %s", winners);
     }
+
+    public String error(String message) {
+        return String.format("[ERROR]: %s", message);
+    }
 }
