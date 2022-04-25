@@ -86,6 +86,30 @@ class RaceTest {
         //then
         assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("자동차는 1대 이상이어야 한다.");
+                .hasMessage("경주할 자동차는 1대 이상이어야 한다.");
+    }
+
+    @DisplayName("경주할 자동차는 최대 10대까지 가능하다")
+    @Test
+    void thrownExceptionWhenMaxCars() {
+        //given
+        String[] carNames = longCarsNames();
+
+        //when
+        Throwable thrown = catchThrowable(() -> Race.from(carNames));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("경주할 자동차는 10대 이하여야 한다.");
+    }
+
+    private String[] longCarsNames() {
+        final int GRATER_THAN_CAR_LIST_SIZE = 11;
+        final String[] names = new String[GRATER_THAN_CAR_LIST_SIZE];
+        for (int i = 0; i < GRATER_THAN_CAR_LIST_SIZE; i++) {
+            names[i] = String.format("car%d", i);
+        }
+        return names;
     }
 }

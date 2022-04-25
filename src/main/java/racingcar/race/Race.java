@@ -13,12 +13,20 @@ public final class Race {
 
     private Race(List<Car> cars) {
         validateMinSize(cars);
+        validateMaxSize(cars);
         this.cars = cars;
     }
 
     private void validateMinSize(List<Car> cars) {
         if (cars.isEmpty()) {
-            throw new IllegalArgumentException("자동차는 1대 이상이어야 한다.");
+            throw new IllegalArgumentException("경주할 자동차는 1대 이상이어야 한다.");
+        }
+    }
+
+    private void validateMaxSize(List<Car> cars) {
+        final int MAX_SIZE = 10;
+        if (cars.size() > MAX_SIZE) {
+            throw new IllegalArgumentException("경주할 자동차는 10대 이하여야 한다.");
         }
     }
 
