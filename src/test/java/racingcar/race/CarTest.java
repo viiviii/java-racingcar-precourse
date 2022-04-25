@@ -3,9 +3,9 @@ package racingcar.race;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.rule.Energy;
+import racingcar.rule.Engine;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.rule.Engine.MIN_FORWARD_ENERGY;
 
 class CarTest {
     private String name = "apple";
@@ -68,10 +68,11 @@ class CarTest {
     }
 
     private Energy forwardEnergy() {
-        return Energy.fromInteger(MIN_FORWARD_ENERGY);
+        return Engine.MIN_FORWARD_ENERGY;
     }
 
     private Energy lessEnergy() {
-        return Energy.fromInteger(MIN_FORWARD_ENERGY - 1);
+        final int lessThanForwardEnergy = Engine.MIN_FORWARD_ENERGY.get() - 1;
+        return Energy.from(lessThanForwardEnergy);
     }
 }

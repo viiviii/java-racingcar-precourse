@@ -16,8 +16,8 @@ class EnergyTest {
         int max = 9;
 
         //when
-        Energy minEnergy = Energy.fromInteger(min);
-        Energy maxEnergy = Energy.fromInteger(max);
+        Energy minEnergy = Energy.from(min);
+        Energy maxEnergy = Energy.from(max);
 
         //then
         assertThat(minEnergy.get()).isEqualTo(min);
@@ -32,11 +32,56 @@ class EnergyTest {
         int overMax = 9 + 1;
 
         //when
-        Throwable lessThanMinThrown = catchThrowable(() -> Energy.fromInteger(lessThanMin));
-        Throwable overMaxThrown = catchThrowable(() -> Energy.fromInteger(overMax));
+        Throwable lessThanMinThrown = catchThrowable(() -> Energy.from(lessThanMin));
+        Throwable overMaxThrown = catchThrowable(() -> Energy.from(overMax));
 
         //then
         assertThat(lessThanMinThrown).isInstanceOf(IllegalArgumentException.class);
         assertThat(overMaxThrown).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void isLessThan() {
+        //given
+        int number = 5;
+        Energy energy = Energy.from(number);
+        Energy less = Energy.from(number - 1);
+
+        //when
+        boolean actual = less.isLessThan(energy);
+
+        //then
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    void isGraterThan() {
+        //given
+        int number = 5;
+        Energy energy = Energy.from(number);
+        Energy grater = Energy.from(number + 1);
+
+        //when
+        boolean actual = grater.isGraterThan(energy);
+
+        //then
+        assertThat(actual).isTrue();
+    }
+
+    @DisplayName("natural ordering과 equals가 일치하도록 권장된다")
+    @Test
+    void comparableAndEquality() {
+        //given
+        int sameNumber = 1;
+
+        //when
+        Energy energy = Energy.from(sameNumber);
+        Energy other = Energy.from(sameNumber);
+
+        //then
+        assertThat(energy)
+                .isEqualTo(other)
+                .hasSameHashCodeAs(other)
+                .isEqualByComparingTo(other);
     }
 }

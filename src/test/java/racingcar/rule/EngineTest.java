@@ -16,7 +16,7 @@ class EngineTest {
         int moreThan4 = ENGINE_FORWARD_ENERGY;
 
         //when
-        Energy energy = Energy.fromInteger(moreThan4);
+        Energy energy = Energy.from(moreThan4);
         Move move = engine.powerBy(energy);
 
         //then
@@ -30,7 +30,7 @@ class EngineTest {
         int lessThan4 = ENGINE_FORWARD_ENERGY - 1;
 
         //when
-        Energy energy = Energy.fromInteger(lessThan4);
+        Energy energy = Energy.from(lessThan4);
         Move move = engine.powerBy(energy);
 
         //then
