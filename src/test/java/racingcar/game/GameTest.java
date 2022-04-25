@@ -47,6 +47,7 @@ class GameTest {
     @DisplayName("잘못된 시도 횟수인 경우 다시 입력 받는다")
     @Test
     void inputAgainWhenInvalidMoveCount() {
+        //given
         given(inputView.inputMoveCount()).willReturn("-1", "0", "1");
 
         //when

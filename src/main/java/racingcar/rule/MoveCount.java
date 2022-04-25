@@ -1,12 +1,12 @@
 package racingcar.rule;
 
 public class MoveCount {
-    private final int moveCount;
+    private final int value;
 
-    private MoveCount(int moveCount) {
-        validateMin(moveCount);
-        validateMax(moveCount);
-        this.moveCount = moveCount;
+    private MoveCount(int value) {
+        validateMin(value);
+        validateMax(value);
+        this.value = value;
     }
 
     private void validateMin(int moveCount) {
@@ -29,6 +29,6 @@ public class MoveCount {
     }
 
     public int get() {
-        return moveCount;
+        return value;
     }
 }

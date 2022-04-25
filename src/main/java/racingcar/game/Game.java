@@ -37,7 +37,6 @@ public class Game {
         }
     }
 
-
     MoveCount createMoveCount() {
         try {
             final String inputMoveCount = inputView.inputMoveCount();

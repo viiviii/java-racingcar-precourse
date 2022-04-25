@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class NameTest {
+class NameTest {
 
     @DisplayName("자동차 이름은 5자 이하만 가능하다")
     @Test

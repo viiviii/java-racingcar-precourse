@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class MoveCountTest {
+class MoveCountTest {
 
     @DisplayName("숫자 문자열로 생성할 수 있다")
     @Test

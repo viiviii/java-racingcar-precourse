@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EngineTest {
+class EngineTest {
     private Engine engine = new Engine();
     private int ENGINE_FORWARD_ENERGY = 4;
 

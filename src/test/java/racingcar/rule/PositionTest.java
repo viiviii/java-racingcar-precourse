@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class PositionTest {
+class PositionTest {
 
     @DisplayName("초기 값은 0이다")
     @Test
@@ -79,7 +79,6 @@ public class PositionTest {
 
         //when
         Throwable thrown = catchThrowable(() -> new Position(lessThanMin));
-
 
         //then
         assertThat(thrown)

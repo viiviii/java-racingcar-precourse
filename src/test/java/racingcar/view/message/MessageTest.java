@@ -76,9 +76,9 @@ class MessageTest {
         //when
         String actual = message.error(errorMessage);
 
-
         //then
-        assertThat(actual).startsWith("[ERROR]");
-        assertThat(actual).containsOnlyOnce("[ERROR]");
+        assertThat(actual)
+                .startsWith("[ERROR]")
+                .containsOnlyOnce("[ERROR]");
     }
 }
