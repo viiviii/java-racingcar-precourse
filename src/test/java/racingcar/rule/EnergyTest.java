@@ -20,7 +20,7 @@ class EnergyTest {
         Energy maxEnergy = Energy.fromInteger(max);
 
         //then
-        assertThat(minEnergy.get()).isEqualTo(min); // TODO: 정상 객체 테스트 다른 곳과 일관성 맞추기
+        assertThat(minEnergy.get()).isEqualTo(min);
         assertThat(maxEnergy.get()).isEqualTo(max);
     }
 
@@ -36,8 +36,7 @@ class EnergyTest {
         Throwable overMaxThrown = catchThrowable(() -> Energy.fromInteger(overMax));
 
         //then
-        assertThat(lessThanMinThrown).isInstanceOf(IllegalArgumentException.class); // TODO: 명확한 에러 처리
-        assertThat(overMaxThrown).isInstanceOf(IllegalArgumentException.class); // TODO: 명확한 에러 처리
+        assertThat(lessThanMinThrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(overMaxThrown).isInstanceOf(IllegalArgumentException.class);
     }
-
 }

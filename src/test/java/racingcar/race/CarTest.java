@@ -7,7 +7,7 @@ import racingcar.rule.Energy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static racingcar.rule.Engine.MIN_FORWARD_ENERGY;
 
-public class CarTest {
+class CarTest {
     private String name = "apple";
 
     @DisplayName("자동차가 해당 위치에 있으면 true")

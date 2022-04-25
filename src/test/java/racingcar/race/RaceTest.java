@@ -7,10 +7,11 @@ import racingcar.rule.MoveCount;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class RaceTest {
+class RaceTest {
 
     @DisplayName("이름으로 자동차들을 만든다")
     @Test
@@ -23,7 +24,7 @@ public class RaceTest {
         List<Car> cars = Race.mapCars(name1, name2);
 
         //then
-        assertThat(cars.size()).isEqualTo(2);
+        assertThat(cars).hasSize(2);
     }
 
     @DisplayName("우승자가 한 명일 때")
@@ -70,5 +71,21 @@ public class RaceTest {
 
         //then
         verify(car, times(moveCount.get())).moveBy(any());
+    }
+
+
+    @DisplayName("빈 목록인 경우 예외가 발생한다")
+    @Test
+    void throwExceptionWhenEmpty() {
+        //given
+        String[] empty = ",,".split(",");
+
+        //when
+        Throwable thrown = catchThrowable(() -> Race.from(empty));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동차는 1대 이상이어야 한다.");
     }
 }

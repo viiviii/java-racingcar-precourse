@@ -8,13 +8,14 @@ public class Position implements Comparable<Position> {
     private int value;
 
     public Position(int position) {
-        validateRange(position);
+        validateMin(position);
         this.value = position;
     }
 
-    private void validateRange(int position) {
+    private void validateMin(int position) {
         if (position < DEFAULT) {
-            throw new IllegalArgumentException();
+            final String message = String.format("위치는 %d 이상이어야 한다.", DEFAULT);
+            throw new IllegalArgumentException(message);
         }
     }
 
@@ -46,10 +47,5 @@ public class Position implements Comparable<Position> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return "Position{" + "value=" + value + '}';
     }
 }

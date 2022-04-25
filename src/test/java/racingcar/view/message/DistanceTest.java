@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DistanceTest {
+class DistanceTest {
 
     @DisplayName("거리는 -로 나타낸다")
     @ParameterizedTest

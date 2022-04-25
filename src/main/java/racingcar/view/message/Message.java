@@ -8,7 +8,6 @@ public class Message {
         return "실행 결과";
     }
 
-    // TODO: 객체 자체를 파라미터로
     public String moveDistance(String carName, Distance distance) {
         return String.format("%s : %s", carName, distance.get());
     }
@@ -24,5 +23,9 @@ public class Message {
     public String winners(List<String> names) {
         final String winners = String.join(", ", names);
         return String.format("최종 우승자: %s", winners);
+    }
+
+    public String error(String message) {
+        return String.format("[ERROR]: %s", message);
     }
 }

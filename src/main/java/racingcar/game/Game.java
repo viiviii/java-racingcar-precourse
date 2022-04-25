@@ -18,21 +18,32 @@ public class Game {
     }
 
     public void play() {
-        final Race race = Race.from(inputCarsNames());
-        final MoveCount moveCount = inputMoveCount();
+        final Race race = createRace();
+        final MoveCount moveCount = createMoveCount();
         final List<List<CarDto>> result = race.startWith(moveCount);
         outputView.printResult(result);
-        final List<String> winners = race.getWinner(); // TODO
+        final List<String> winners = race.getWinner();
         outputView.printWinners(winners);
     }
 
-    private String[] inputCarsNames() {
-        final String names = inputView.inputCarsNames();
-        return names.split(",");  // TODO
+    Race createRace() {
+        try {
+            final String names = inputView.inputCarsNames();
+            final String[] carNames = names.split(",");
+            return Race.from(carNames);
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            return createRace();
+        }
     }
 
-    private MoveCount inputMoveCount() {
-        final String inputMoveCount = inputView.inputMoveCount();
-        return MoveCount.fromString(inputMoveCount);
+    MoveCount createMoveCount() {
+        try {
+            final String inputMoveCount = inputView.inputMoveCount();
+            return MoveCount.fromString(inputMoveCount);
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            return createMoveCount();
+        }
     }
 }

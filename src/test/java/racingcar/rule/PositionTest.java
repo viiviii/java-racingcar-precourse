@@ -8,8 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class PositionTest {
+class PositionTest {
 
     @DisplayName("초기 값은 0이다")
     @Test
@@ -68,5 +69,20 @@ public class PositionTest {
                 .isEqualTo(other)
                 .hasSameHashCodeAs(other)
                 .isEqualByComparingTo(other);
+    }
+
+    @DisplayName("최소 값보다 작은 경우 예외가 발생한다")
+    @Test
+    void throwExceptionWhenLessThanMin() {
+        //given
+        int lessThanMin = -1;
+
+        //when
+        Throwable thrown = catchThrowable(() -> new Position(lessThanMin));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("위치는 0 이상이어야 한다.");
     }
 }

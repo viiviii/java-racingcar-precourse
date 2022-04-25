@@ -1,6 +1,6 @@
 package racingcar.view.message;
 
-public final class Distance {
+public class Distance {
     private static final String ONE_STEP = "-";
 
     private final String value;
