@@ -24,27 +24,27 @@ class Car {
         return new Car(carName, carPosition);
     }
 
-    String name() {
-        return name.get();
+    Name name() {
+        return name;
     }
 
-    int position() {
-        return position.get();
+    Position position() {
+        return position;
     }
 
     int compareToPosition(Car car) {
         return this.position.compareTo(car.position);
     }
 
-    boolean inPosition(int other) {
-        return this.position.equals(new Position(other));
+    boolean inPosition(Position other) {
+        return this.position.equals(other);
     }
 
-    int moveBy(Energy energy) {
+    Position moveBy(Energy energy) {
         final Move move = engine.powerBy(energy);
         if (move.isForward()) {
             position.increase();
         }
-        return position();
+        return position.copy();
     }
 }

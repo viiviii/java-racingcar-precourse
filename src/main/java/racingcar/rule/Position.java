@@ -31,6 +31,10 @@ public class Position implements Comparable<Position> {
         return value;
     }
 
+    public Position copy() {
+        return new Position(value);
+    }
+
     @Override
     public int compareTo(Position other) {
         return Integer.compare(this.value, other.value);

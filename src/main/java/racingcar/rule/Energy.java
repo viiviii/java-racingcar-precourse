@@ -2,8 +2,9 @@ package racingcar.rule;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-// TODO
-public class Energy {
+import java.util.Objects;
+
+public class Energy implements Comparable<Energy> {
     private static final int MIN = 0;
     private static final int MAX = 9;
 
@@ -21,7 +22,7 @@ public class Energy {
         }
     }
 
-    public static Energy fromInteger(int energy) {
+    public static Energy from(int energy) {
         return new Energy(energy);
     }
 
@@ -33,4 +34,32 @@ public class Energy {
     public int get() {
         return value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Energy)) return false;
+        Energy energy = (Energy) o;
+        return value == energy.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(Energy other) {
+        return Integer.compare(this.value, other.value);
+    }
+
+    public boolean isLessThan(Energy other) {
+        return this.compareTo(other) < 0;
+    }
+
+    public boolean isGraterThan(Energy other) {
+        return this.compareTo(other) > 0;
+    }
+
+
 }

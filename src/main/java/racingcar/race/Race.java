@@ -2,6 +2,7 @@ package racingcar.race;
 
 import racingcar.rule.Energy;
 import racingcar.rule.MoveCount;
+import racingcar.rule.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,12 +14,20 @@ public final class Race {
 
     private Race(List<Car> cars) {
         validateMinSize(cars);
+        validateMaxSize(cars);
         this.cars = cars;
     }
 
     private void validateMinSize(List<Car> cars) {
         if (cars.isEmpty()) {
-            throw new IllegalArgumentException("자동차는 1대 이상이어야 한다.");
+            throw new IllegalArgumentException("경주할 자동차는 1대 이상이어야 한다.");
+        }
+    }
+
+    private void validateMaxSize(List<Car> cars) {
+        final int MAX_SIZE = 10;
+        if (cars.size() > MAX_SIZE) {
+            throw new IllegalArgumentException("경주할 자동차는 10대 이하여야 한다.");
         }
     }
 
@@ -58,22 +67,25 @@ public final class Race {
     }
 
     private CarDto carDtoFrom(Car car) {
-        return new CarDto(car.name(), car.position());
+        return new CarDto(car.name().get(), car.position().get());
     }
 
     public List<String> getWinner() {
-        final int raceMaxPosition = maxPosition();
+        final Position raceMaxPosition = maxPosition();
         final List<String> names = new ArrayList<>();
         for (Car car : cars) {
-            // TODO
-            if (car.inPosition(raceMaxPosition)) {
-                names.add(car.name());
-            }
+            addNameWhenSamePositionTo(names, raceMaxPosition, car);
         }
         return names;
     }
 
-    private int maxPosition() {
+    private void addNameWhenSamePositionTo(List<String> names, Position raceMaxPosition, Car car) {
+        if (car.inPosition(raceMaxPosition)) {
+            names.add(car.name().get());
+        }
+    }
+
+    private Position maxPosition() {
         return Collections
                 .max(cars, Car::compareToPosition)
                 .position();
