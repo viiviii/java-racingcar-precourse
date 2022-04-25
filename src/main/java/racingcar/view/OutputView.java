@@ -1,6 +1,6 @@
 package racingcar.view;
 
-import racingcar.model.car.CarResult;
+import racingcar.CarResult;
 import racingcar.view.message.Distance;
 import racingcar.view.message.Message;
 
@@ -40,5 +40,9 @@ public class OutputView {
             final Distance distance = Distance.from(carResult.position());
             output.println(message.moveDistance(carName, distance));
         }
+    }
+
+    public void printWinners(List<String> winners) {
+        output.println(message.winners(winners));
     }
 }

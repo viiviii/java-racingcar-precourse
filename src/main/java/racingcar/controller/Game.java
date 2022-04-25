@@ -1,8 +1,8 @@
 package racingcar.controller;
 
+import racingcar.CarResult;
 import racingcar.Cars;
 import racingcar.model.MoveCount;
-import racingcar.model.car.CarResult;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -23,6 +23,8 @@ public class Game {
         final MoveCount moveCount = inputMoveCount();
         final List<List<CarResult>> result = startRaceWith(cars, moveCount);
         outputView.printResult(result);
+        final List<String> winners = cars.getWinner(); // TODO
+        outputView.printWinners(winners);
     }
 
     private Cars inputCarsNames() {

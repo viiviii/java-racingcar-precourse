@@ -38,22 +38,6 @@ public class PositionTest {
         assertThat(increasePosition).isOne();
     }
 
-    @DisplayName("copyOf은 새로운 객체를 리턴한다")
-    @Test
-    void copyOf() {
-        //given
-        Position origin = Position.init();
-
-        //when
-        Position copy = Position.copyOf(origin);
-        origin.increase();
-
-        //then
-        assertThat(origin.get()).isOne();
-        assertThat(copy.get()).isZero();
-    }
-
-
     @Test
     void comparable() {
         //given
@@ -69,8 +53,9 @@ public class PositionTest {
         assertThat(positions).containsExactly(position1, position2, position3);
     }
 
+    @DisplayName("natural ordering과 equals가 일치하도록 권장된다")
     @Test
-    void equality() {
+    void comparableAndEquality() {
         //given
         int number = 1;
 
@@ -79,7 +64,9 @@ public class PositionTest {
         Position other = new Position(number);
 
         //then
-        assertThat(position).isEqualTo(other);
-        assertThat(position).hasSameHashCodeAs(other);
+        assertThat(position)
+                .isEqualTo(other)
+                .hasSameHashCodeAs(other)
+                .isEqualByComparingTo(other);
     }
 }

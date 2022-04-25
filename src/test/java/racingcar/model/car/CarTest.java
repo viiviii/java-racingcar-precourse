@@ -1,6 +1,5 @@
 package racingcar.model.car;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.Energy;
@@ -9,22 +8,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
     private String name = "apple";
-    private Car car;
 
-    @BeforeEach
-    void setUp() {
-        car = new Car(name);
+    @DisplayName("자동차가 해당 위치에 있으면 true")
+    @Test
+    void returnTrueWhenSamePosition() {
+        //given
+        int samePosition = 5;
+        Car car = Car.of("pobi", samePosition);
+
+        //when
+        boolean actual = car.inPosition(samePosition);
+
+        //then
+        assertThat(actual).isTrue();
+    }
+
+    @DisplayName("자동차의 위치가 다르면 false 리턴")
+    @Test
+    void returnFalseWhenDifferencePosition() {
+        //given
+        int position = 5;
+        int other = 3;
+        Car car = Car.of("pobi", position);
+
+        //when
+        boolean actual = car.inPosition(other);
+
+        //then
+        assertThat(actual).isFalse();
     }
 
     @DisplayName("자동차가 멈춰있으면 위치는 증가하지 않는다")
     @Test
     void stopOnce() {
         //given
-        Energy energy = lessEnergy();
+        Car car = Car.inStartingPositionWith(name);
 
         //when
-        CarResult result = car.moveBy(energy);
-        int position = result.position();
+        int position = car.moveBy(lessEnergy());
 
         //then
         assertThat(position).isZero();
@@ -34,13 +55,11 @@ public class CarTest {
     @Test
     void forwardTwice() {
         //given
-        Energy energy = forwardEnergy();
+        Car car = Car.inStartingPositionWith(name);
 
         //when
-        CarResult firstResult = car.moveBy(energy);
-        CarResult secondResult = car.moveBy(energy);
-        int firstPosition = firstResult.position();
-        int secondsPosition = secondResult.position();
+        int firstPosition = car.moveBy(forwardEnergy());
+        int secondsPosition = car.moveBy(forwardEnergy());
 
         //then
         assertThat(firstPosition).isEqualTo(1);

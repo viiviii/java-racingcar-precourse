@@ -3,6 +3,9 @@ package racingcar.view.message;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MessageTest {
@@ -42,13 +45,25 @@ class MessageTest {
     @Test
     void moveDistance() {
         //given
-        String carName = "apple";
         Distance distance = Distance.from(3);
 
         //when
-        String actual = message.moveDistance(carName, distance);
+        String actual = message.moveDistance("apple", distance);
 
         //then
         assertThat(actual).isEqualTo("apple : ---");
+    }
+
+    @DisplayName("최종 우승자")
+    @Test
+    void winners() {
+        //given
+        List<String> winners = Arrays.asList("pobi", "honux");
+
+        //when
+        String actual = message.winners(winners);
+
+        //then
+        assertThat(actual).isEqualTo("최종 우승자: pobi, honux");
     }
 }

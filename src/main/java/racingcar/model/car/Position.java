@@ -7,7 +7,6 @@ final class Position implements Comparable<Position> {
 
     private int value;
 
-    // TODO: 테스트 하려고 열어둠
     Position(int position) {
         validateRange(position);
         this.value = position;
@@ -21,10 +20,6 @@ final class Position implements Comparable<Position> {
 
     static Position init() {
         return new Position(DEFAULT);
-    }
-
-    static Position copyOf(Position position) {
-        return new Position(position.get());
     }
 
     void increase() {

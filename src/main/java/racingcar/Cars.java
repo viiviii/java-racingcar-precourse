@@ -2,9 +2,10 @@ package racingcar;
 
 import racingcar.model.Energy;
 import racingcar.model.car.Car;
-import racingcar.model.car.CarResult;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public final class Cars {
@@ -19,9 +20,13 @@ public final class Cars {
         final List<Car> cars = new ArrayList<>();
         final String[] carsNames = names.split(","); // TODO
         for (String carName : carsNames) {
-            cars.add(new Car(carName));
+            cars.add(Car.inStartingPositionWith(carName));
         }
         return new Cars(cars);
+    }
+
+    public static Cars from(Car... cars) {
+        return new Cars(Arrays.asList(cars));
     }
 
     // TODO: 필요없나 테스트에서만 쓰는데
@@ -29,14 +34,31 @@ public final class Cars {
         return cars.size();
     }
 
-    // TODO: 여기에선 CarResult에서 모델 사용하고 controller인 game에서 DTO로 변환 가능?
     public List<CarResult> move() {
         final List<CarResult> result = new ArrayList<>();
         for (Car car : cars) {
             final Energy energy = Energy.atRandom();
-            final CarResult carResult = car.moveBy(energy);
-            result.add(carResult);
+            final int position = car.moveBy(energy);
+            result.add(new CarResult(car.name(), position));
         }
         return result;
+    }
+
+    public List<String> getWinner() {
+        final int raceMaxPosition = maxPosition();
+        final List<String> names = new ArrayList<>();
+        for (Car car : cars) {
+            // TODO
+            if (car.inPosition(raceMaxPosition)) {
+                names.add(car.name());
+            }
+        }
+        return names;
+    }
+
+    private int maxPosition() {
+        return Collections
+                .max(cars, Car::compareToPosition)
+                .position();
     }
 }
