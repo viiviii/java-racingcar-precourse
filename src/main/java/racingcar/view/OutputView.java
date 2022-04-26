@@ -1,6 +1,7 @@
 package racingcar.view;
 
 import racingcar.race.CarDto;
+import racingcar.race.Winners;
 import racingcar.view.message.Distance;
 import racingcar.view.message.Message;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class OutputView {
     private final PrintStream output;
     private final Message message;
-    
+
     public OutputView(PrintStream output, Message message) {
         this.output = output;
         this.message = message;
@@ -41,7 +42,7 @@ public class OutputView {
         }
     }
 
-    public void printWinners(List<String> winners) {
+    public void printWinners(Winners winners) {
         output.println(message.winners(winners));
     }
 

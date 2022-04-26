@@ -2,9 +2,8 @@ package racingcar.view.message;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
+import racingcar.race.Winners;
+import racingcar.rule.Name;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,7 +57,9 @@ class MessageTest {
     @Test
     void winners() {
         //given
-        List<String> winners = Arrays.asList("pobi", "honux");
+        Winners winners = new Winners();
+        winners.add(new Name("pobi"));
+        winners.add(new Name("honux"));
 
         //when
         String actual = message.winners(winners);

@@ -41,10 +41,10 @@ class RaceTest {
         Race race = Race.from(car1, car2, car3);
 
         //when
-        List<String> actual = race.getWinner();
+        Winners actual = race.getWinners();
 
         //then
-        assertThat(actual).containsOnly("crong");
+        assertThat(actual.get()).containsOnly("crong");
     }
 
     @DisplayName("우승자가 여러 명일 때")
@@ -57,10 +57,10 @@ class RaceTest {
         Race race = Race.from(car1, car2, car3);
 
         //when
-        List<String> actual = race.getWinner();
+        Winners actual = race.getWinners();
 
         //then
-        assertThat(actual).containsOnly("crong", "honux");
+        assertThat(actual.get()).containsOnly("crong", "honux");
     }
 
     @DisplayName("이동 횟수만큼 자동차가 움직인다")
