@@ -12,12 +12,6 @@ class Car {
         this.position = position;
     }
 
-    static Car of(String name, int position) {
-        final Name carName = new Name(name);
-        final Position carPosition = new Position(position);
-        return new Car(carName, carPosition);
-    }
-
     static Car of(String name, Position position) {
         final Name carName = new Name(name);
         return new Car(carName, position);
