@@ -1,6 +1,6 @@
 package racingcar.view.message;
 
-import java.util.List;
+import racingcar.race.Winners;
 
 public class Message {
 
@@ -20,8 +20,8 @@ public class Message {
         return "시도할 회수는 몇회인가요?";
     }
 
-    public String winners(List<String> names) {
-        final String winners = String.join(", ", names);
+    public String winners(Winners names) {
+        final String winners = String.join(", ", names.get());
         return String.format("최종 우승자: %s", winners);
     }
 

@@ -2,11 +2,13 @@ package racingcar.view.message;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.race.Winners;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class MessageTest {
     private Message message = new Message();
@@ -58,7 +60,8 @@ class MessageTest {
     @Test
     void winners() {
         //given
-        List<String> winners = Arrays.asList("pobi", "honux");
+        Winners winners = mock(Winners.class);
+        given(winners.get()).willReturn(Arrays.asList("pobi", "honux"));
 
         //when
         String actual = message.winners(winners);

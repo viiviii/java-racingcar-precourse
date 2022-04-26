@@ -67,19 +67,12 @@ public final class Race {
         return result;
     }
 
-    public List<String> getWinner() {
-        final Position raceMaxPosition = maxPosition();
-        final List<String> names = new ArrayList<>();
+    public Winners getWinners() {
+        final Winners winners = Winners.asMaxPosition(maxPosition());
         for (Car car : cars) {
-            addNameWhenSamePositionTo(names, raceMaxPosition, car);
+            winners.addIfMaxPosition(car);
         }
-        return names;
-    }
-
-    private void addNameWhenSamePositionTo(List<String> names, Position raceMaxPosition, Car car) {
-        if (car.inPosition(raceMaxPosition)) {
-            names.add(car.name().get());
-        }
+        return winners;
     }
 
     private Position maxPosition() {

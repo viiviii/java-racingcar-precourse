@@ -2,6 +2,7 @@ package racingcar.game;
 
 import racingcar.race.CarDto;
 import racingcar.race.Race;
+import racingcar.race.Winners;
 import racingcar.rule.MoveCount;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -22,7 +23,7 @@ public class Game {
         final MoveCount moveCount = createMoveCount();
         final List<List<CarDto>> result = race.startWith(moveCount);
         outputView.printResult(result);
-        final List<String> winners = race.getWinner();
+        final Winners winners = race.getWinners();
         outputView.printWinners(winners);
     }
 
