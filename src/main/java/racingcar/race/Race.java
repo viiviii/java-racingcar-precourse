@@ -40,9 +40,10 @@ public final class Race {
     }
 
     static List<Car> mapCars(String... names) {
+        final Position position = Position.start();
         final List<Car> cars = new ArrayList<>();
         for (String name : names) {
-            cars.add(Car.inStartingPositionWith(name));
+            cars.add(Car.of(name, position));
         }
         return cars;
     }

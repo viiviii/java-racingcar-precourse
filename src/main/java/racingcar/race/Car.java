@@ -12,16 +12,9 @@ class Car {
         this.position = position;
     }
 
-    static Car of(String name, int position) {
+    static Car of(String name, Position position) {
         final Name carName = new Name(name);
-        final Position carPosition = new Position(position);
-        return new Car(carName, carPosition);
-    }
-
-    static Car inStartingPositionWith(String name) {
-        final Name carName = new Name(name);
-        final Position carPosition = Position.start();
-        return new Car(carName, carPosition);
+        return new Car(carName, position);
     }
 
     Name name() {

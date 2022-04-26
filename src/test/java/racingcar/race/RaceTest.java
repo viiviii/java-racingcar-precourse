@@ -16,6 +16,9 @@ import static org.mockito.Mockito.*;
 
 class RaceTest {
 
+    private Position position = new Position(1);
+    private Position winnerPosition = new Position(3);
+
     @DisplayName("이름으로 자동차들을 만든다")
     @Test
     void create() {
@@ -34,9 +37,9 @@ class RaceTest {
     @Test
     void winner() {
         //given
-        Car car1 = Car.of("pobi", 1);
-        Car car2 = Car.of("crong", 3);
-        Car car3 = Car.of("honux", 2);
+        Car car1 = Car.of("pobi", position);
+        Car car2 = Car.of("crong", winnerPosition);
+        Car car3 = Car.of("honux", position);
         Race race = Race.from(car1, car2, car3);
 
         //when
@@ -50,9 +53,9 @@ class RaceTest {
     @Test
     void winners() {
         //given
-        Car car1 = Car.of("pobi", 3);
-        Car car2 = Car.of("crong", 4);
-        Car car3 = Car.of("honux", 4);
+        Car car1 = Car.of("pobi", position);
+        Car car2 = Car.of("crong", winnerPosition);
+        Car car3 = Car.of("honux", winnerPosition);
         Race race = Race.from(car1, car2, car3);
 
         //when
@@ -69,7 +72,7 @@ class RaceTest {
         Car car = mock(Car.class);
         MoveCount moveCount = MoveCount.fromString("5");
         given(car.name()).willReturn(new Name("pobi"));
-        given(car.position()).willReturn(new Position(3));
+        given(car.position()).willReturn(position);
 
         //when
         Race.from(car).startWith(moveCount);
