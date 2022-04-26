@@ -14,29 +14,42 @@ class PositionTest {
 
     @DisplayName("초기 값은 0이다")
     @Test
-    void initialValueIsZero() {
+    void startValueIsZero() {
         //given
-        Position position = Position.init();
+        Position position = Position.start();
 
         //when
-        int initialValue = position.get();
+        int actual = position.get();
 
         //then
-        assertThat(initialValue).isZero();
+        assertThat(actual).isZero();
     }
 
     @DisplayName("값을 증가할 수 있다")
     @Test
     void increase() {
         //given
-        Position position = Position.init();
+        Position position = Position.start();
 
         //when
         position.increase();
-        int increasePosition = position.get();
 
         //then
-        assertThat(increasePosition).isOne();
+        assertThat(position.get()).isOne();
+    }
+
+    @DisplayName("값을 복사하여 새로운 객체를 리턴한다")
+    @Test
+    void copy() {
+        //given
+        Position origin = Position.start();
+
+        //when
+        Position copy = origin.copy();
+        origin.increase();
+
+        //then
+        assertThat(copy).isNotEqualTo(origin);
     }
 
     @Test
