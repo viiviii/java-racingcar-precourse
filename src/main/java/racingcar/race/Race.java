@@ -62,13 +62,9 @@ public final class Race {
         for (Car car : cars) {
             final Energy energy = Energy.atRandom();
             car.moveBy(energy);
-            result.add(carDtoFrom(car));
+            result.add(CarDto.from(car));
         }
         return result;
-    }
-
-    private CarDto carDtoFrom(Car car) {
-        return new CarDto(car.name().get(), car.position().get());
     }
 
     public List<String> getWinner() {
