@@ -68,18 +68,11 @@ public final class Race {
     }
 
     public Winners getWinners() {
-        final Position raceMaxPosition = maxPosition();
-        final Winners winners = new Winners();
+        final Winners winners = Winners.asMaxPosition(maxPosition());
         for (Car car : cars) {
-            addNameWhenSamePositionTo(winners, raceMaxPosition, car);
+            winners.addIfMaxPosition(car);
         }
         return winners;
-    }
-
-    private void addNameWhenSamePositionTo(Winners winners, Position raceMaxPosition, Car car) {
-        if (car.inPosition(raceMaxPosition)) {
-            winners.add(car.name());
-        }
     }
 
     private Position maxPosition() {

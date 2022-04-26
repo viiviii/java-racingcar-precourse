@@ -2,36 +2,46 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.rule.Name;
+import racingcar.rule.Position;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersTest {
-    private Name name = new Name("pobi");
+    private Position position = new Position(5);
+    private String winningCarName = "pobi";
+    private Car winningCar = Car.of(winningCarName, position);
+    private Winners winners = Winners.asMaxPosition(position);
 
-    @DisplayName("우승자 이름을 추가할 수 있다")
+    @DisplayName("자동차의 거리가 레이싱 최대 거리이면 값이 추가된다")
     @Test
-    void add() {
-        //given
-        Winners winners = new Winners();
-
+    void addReturnTrueWhenWinners() {
         //when
-        winners.add(name);
+        boolean actual = winners.addIfMaxPosition(winningCar);
 
         //then
-        assertThat(winners.add(name)).isTrue();
+        assertThat(actual).isTrue();
+    }
+
+    @DisplayName("자동차의 거리가 레이싱 최대 거리가 아니면 값은 추가되지 않는다")
+    @Test
+    void addReturnFalseWhenNotWinners() {
+        //given
+        Car unmovedCar = Car.of("user", Position.start());
+
+        //when
+        boolean actual = winners.addIfMaxPosition(unmovedCar);
+
+        //then
+        assertThat(actual).isFalse();
     }
 
     @DisplayName("우승자 인원을 구할 수 있다")
     @Test
     void size() {
-        //given
-        Winners winners = new Winners();
-
         //when
-        winners.add(name);
+        winners.addIfMaxPosition(winningCar);
 
         //then
         assertThat(winners.size()).isOne();
@@ -40,30 +50,23 @@ class WinnersTest {
     @DisplayName("우승자 이름은 String 목록으로 리턴한다")
     @Test
     void get() {
-        //given
-        Winners winners = new Winners();
-        winners.add(name);
-
         //when
+        winners.addIfMaxPosition(winningCar);
         List<String> actual = winners.get();
 
         //then
-        assertThat(actual).containsOnly(name.get());
+        assertThat(actual).containsOnly(winningCarName);
     }
 
     @DisplayName("우승자 이름 목록은 항상 새로운 목록에 담아 반환한다")
     @Test
     void returnNewListWhenGetValues() {
-        //given
-        Winners origin = new Winners();
-        origin.add(name);
-
         //when
-        List<String> copy = origin.get();
+        List<String> copy = winners.get();
         copy.add("other");
 
         //then
-        assertThat(origin.size()).isEqualTo(1);
-        assertThat(copy.size()).isEqualTo(2);
+        assertThat(winners.size()).isZero();
+        assertThat(copy.size()).isOne();
     }
 }

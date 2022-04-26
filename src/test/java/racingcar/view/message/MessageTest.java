@@ -3,9 +3,12 @@ package racingcar.view.message;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.race.Winners;
-import racingcar.rule.Name;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class MessageTest {
     private Message message = new Message();
@@ -57,9 +60,8 @@ class MessageTest {
     @Test
     void winners() {
         //given
-        Winners winners = new Winners();
-        winners.add(new Name("pobi"));
-        winners.add(new Name("honux"));
+        Winners winners = mock(Winners.class);
+        given(winners.get()).willReturn(Arrays.asList("pobi", "honux"));
 
         //when
         String actual = message.winners(winners);

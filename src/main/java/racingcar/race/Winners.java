@@ -1,24 +1,39 @@
 package racingcar.race;
 
 import racingcar.rule.Name;
+import racingcar.rule.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class Winners {
-    private List<String> value = new ArrayList<>();
+    private final List<Name> winnerNames = new ArrayList<>();
+    private final Position maxPosition;
 
-    public boolean add(Name winner) {
-        return value.add(winner.get());
+    private Winners(Position position) {
+        this.maxPosition = position;
+    }
+
+    public static Winners asMaxPosition(Position position) {
+        return new Winners(position);
     }
 
     public int size() {
-        return value.size();
+        return winnerNames.size();
+    }
+
+    public boolean addIfMaxPosition(Car car) {
+        if (!car.inPosition(maxPosition)) {
+            return false;
+        }
+        return winnerNames.add(car.name());
     }
 
     public List<String> get() {
-        return new ArrayList<>(value);
+        final List<String> names = new ArrayList<>();
+        for (Name winnerName : winnerNames) {
+            names.add(winnerName.get());
+        }
+        return names;
     }
-
-
 }
