@@ -10,20 +10,22 @@ import racingcar.rule.Position;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CarTest {
+    private Position position = Position.start();
+    private Position otherPosition = new Position(3);
     private String name = "apple";
     private Car car;
 
     @BeforeEach
     void setUp() {
-        car = Car.inStartingPositionWith(name);
+        car = Car.of(name, position);
     }
 
     @DisplayName("다른 자동차와 위치 비교")
     @Test
     void comparePositionTo() {
         //given
-        Car sameCar = Car.inStartingPositionWith("same");
-        Car frontCar = Car.of("front", 3);
+        Car sameCar = Car.of("same", position);
+        Car frontCar = Car.of("front", otherPosition);
 
         //then
         assertThat(car.comparePositionTo(frontCar)).isEqualTo(-1);
@@ -34,11 +36,8 @@ class CarTest {
     @DisplayName("자동차가 해당 위치에 있으면 true")
     @Test
     void returnTrueWhenSamePosition() {
-        //given
-        Position samePosition = Position.start();
-
         //when
-        boolean actual = car.inPosition(samePosition);
+        boolean actual = car.inPosition(position);
 
         //then
         assertThat(actual).isTrue();
@@ -47,11 +46,8 @@ class CarTest {
     @DisplayName("자동차가 해당 위치가 아니면 false를 리턴한다")
     @Test
     void returnFalseWhenDifferencePosition() {
-        //given
-        Position other = new Position(3);
-
         //when
-        boolean actual = car.inPosition(other);
+        boolean actual = car.inPosition(otherPosition);
 
         //then
         assertThat(actual).isFalse();

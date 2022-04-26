@@ -18,10 +18,9 @@ class Car {
         return new Car(carName, carPosition);
     }
 
-    static Car inStartingPositionWith(String name) {
+    static Car of(String name, Position position) {
         final Name carName = new Name(name);
-        final Position carPosition = Position.start();
-        return new Car(carName, carPosition);
+        return new Car(carName, position);
     }
 
     Name name() {
