@@ -87,7 +87,7 @@ public final class Race {
 
     private Position maxPosition() {
         return Collections
-                .max(cars, Car::compareToPosition)
+                .max(cars, Car::comparePositionTo)
                 .position();
     }
 }

@@ -1,5 +1,6 @@
 package racingcar.race;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.rule.Energy;
@@ -10,56 +11,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CarTest {
     private String name = "apple";
+    private Car car;
 
-    @DisplayName("다른 자동차와 같은 위치면 0을 리턴한다")
-    @Test
-    void compareToPositionWhenEquals() {
-        //given
-        int samePosition = 3;
-        Car car = Car.of("pobi", samePosition);
-        Car other = Car.of("other", samePosition);
-
-        //when
-        int actual = car.compareToPosition(other);
-
-        //then
-        assertThat(actual).isZero();
+    @BeforeEach
+    void setUp() {
+        car = Car.inStartingPositionWith(name);
     }
 
-    @DisplayName("다른 자동차보다 위치가 앞에 있으면 1을 리턴한다")
+    @DisplayName("다른 자동차와 위치 비교")
     @Test
-    void compareToPositionWhenFront() {
+    void comparePositionTo() {
         //given
-        Car car = Car.of("pobi", 5);
-        Car other = Car.of("other", 1);
-
-        //when
-        int actual = car.compareToPosition(other);
+        Car sameCar = Car.inStartingPositionWith("same");
+        Car frontCar = Car.of("front", 3);
 
         //then
-        assertThat(actual).isEqualTo(1);
-    }
-
-    @DisplayName("다른 자동차보다 위치가 뒤에 있으면 -1을 리턴한다")
-    @Test
-    void compareToPositionWhenBack() {
-        //given
-        Car car = Car.of("pobi", 1);
-        Car other = Car.of("other", 5);
-
-        //when
-        int actual = car.compareToPosition(other);
-
-        //then
-        assertThat(actual).isEqualTo(-1);
+        assertThat(car.comparePositionTo(frontCar)).isEqualTo(-1);
+        assertThat(car.comparePositionTo(sameCar)).isEqualTo(0);
+        assertThat(frontCar.comparePositionTo(car)).isEqualTo(1);
     }
 
     @DisplayName("자동차가 해당 위치에 있으면 true")
     @Test
     void returnTrueWhenSamePosition() {
         //given
-        Position samePosition = new Position(5);
-        Car car = Car.of("pobi", samePosition.get());
+        Position samePosition = Position.start();
 
         //when
         boolean actual = car.inPosition(samePosition);
@@ -72,11 +48,9 @@ class CarTest {
     @Test
     void returnFalseWhenDifferencePosition() {
         //given
-        int position = 5;
-        Car car = Car.of("pobi", position);
+        Position other = new Position(3);
 
         //when
-        Position other = new Position(3);
         boolean actual = car.inPosition(other);
 
         //then
@@ -87,10 +61,10 @@ class CarTest {
     @Test
     void stopOnce() {
         //given
-        Car car = Car.inStartingPositionWith(name);
+        Energy stop = Energy.from(Engine.FORWARD_ENERGY.get() - 1);
 
         //when
-        Position position = car.moveBy(lessEnergy());
+        Position position = car.moveBy(stop);
 
         //then
         assertThat(position.get()).isZero();
@@ -100,23 +74,14 @@ class CarTest {
     @Test
     void forwardTwice() {
         //given
-        Car car = Car.inStartingPositionWith(name);
+        Energy forward = Engine.FORWARD_ENERGY;
 
         //when
-        Position firstPosition = car.moveBy(forwardEnergy());
-        Position secondsPosition = car.moveBy(forwardEnergy());
+        Position firstPosition = car.moveBy(forward);
+        Position secondsPosition = car.moveBy(forward);
 
         //then
         assertThat(firstPosition.get()).isEqualTo(1);
         assertThat(secondsPosition.get()).isEqualTo(2);
-    }
-
-    private Energy forwardEnergy() {
-        return Engine.MIN_FORWARD_ENERGY;
-    }
-
-    private Energy lessEnergy() {
-        final int lessThanForwardEnergy = Engine.MIN_FORWARD_ENERGY.get() - 1;
-        return Energy.from(lessThanForwardEnergy);
     }
 }

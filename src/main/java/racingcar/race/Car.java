@@ -20,7 +20,7 @@ class Car {
 
     static Car inStartingPositionWith(String name) {
         final Name carName = new Name(name);
-        final Position carPosition = Position.init();
+        final Position carPosition = Position.start();
         return new Car(carName, carPosition);
     }
 
@@ -32,7 +32,7 @@ class Car {
         return position;
     }
 
-    int compareToPosition(Car car) {
+    int comparePositionTo(Car car) {
         return this.position.compareTo(car.position);
     }
 

@@ -16,7 +16,7 @@ class PositionTest {
     @Test
     void initialValueIsZero() {
         //given
-        Position position = Position.init();
+        Position position = Position.start();
 
         //when
         int initialValue = position.get();
@@ -29,7 +29,7 @@ class PositionTest {
     @Test
     void increase() {
         //given
-        Position position = Position.init();
+        Position position = Position.start();
 
         //when
         position.increase();

@@ -3,7 +3,7 @@ package racingcar.rule;
 import java.util.Objects;
 
 public class Position implements Comparable<Position> {
-    private static final int DEFAULT = 0;
+    private static final int START_POSITION = 0;
 
     private int value;
 
@@ -13,14 +13,14 @@ public class Position implements Comparable<Position> {
     }
 
     private void validateMin(int position) {
-        if (position < DEFAULT) {
-            final String message = String.format("위치는 %d 이상이어야 한다.", DEFAULT);
+        if (position < START_POSITION) {
+            final String message = String.format("위치는 %d 이상이어야 한다.", START_POSITION);
             throw new IllegalArgumentException(message);
         }
     }
 
-    public static Position init() {
-        return new Position(DEFAULT);
+    public static Position start() {
+        return new Position(START_POSITION);
     }
 
     public void increase() {
