@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import racingcar.rule.MoveCount;
 import racingcar.rule.Position;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,20 +18,6 @@ class RaceTest {
 
     private Position position = new Position(1);
     private Position winnerPosition = new Position(3);
-
-    @DisplayName("이름으로 자동차들을 만든다")
-    @Test
-    void create() {
-        //given
-        String name1 = "pobi";
-        String name2 = "crong";
-
-        //when
-        List<Car> cars = Race.mapCars(name1, name2);
-
-        //then
-        assertThat(cars).hasSize(2);
-    }
 
     @DisplayName("우승자가 한 명일 때")
     @Test
@@ -82,7 +70,7 @@ class RaceTest {
     @Test
     void throwExceptionWhenEmpty() {
         //given
-        String[] empty = ",,".split(",");
+        List<Car> empty = Collections.emptyList();
 
         //when
         Throwable thrown = catchThrowable(() -> Race.from(empty));
@@ -97,10 +85,11 @@ class RaceTest {
     @Test
     void thrownExceptionWhenMaxCars() {
         //given
-        String[] carNames = longCarsNames();
+        int GRATER_THAN_CAR_LIST_SIZE = 10 + 1;
+        List<Car> cars = createCarAs(GRATER_THAN_CAR_LIST_SIZE);
 
         //when
-        Throwable thrown = catchThrowable(() -> Race.from(carNames));
+        Throwable thrown = catchThrowable(() -> Race.from(cars));
 
         //then
         assertThat(thrown)
@@ -108,12 +97,13 @@ class RaceTest {
                 .hasMessage("경주할 자동차는 10대 이하여야 한다.");
     }
 
-    private String[] longCarsNames() {
-        final int GRATER_THAN_CAR_LIST_SIZE = 11;
-        final String[] names = new String[GRATER_THAN_CAR_LIST_SIZE];
-        for (int i = 0; i < GRATER_THAN_CAR_LIST_SIZE; i++) {
-            names[i] = String.format("car%d", i);
+    private List<Car> createCarAs(int index) {
+        final Position start = Position.start();
+        final List<Car> cars = new ArrayList<>();
+        for (int i = 0; i < index; i++) {
+            final String carName = String.format("car%d", i);
+            cars.add(Car.of(carName, start));
         }
-        return names;
+        return cars;
     }
 }

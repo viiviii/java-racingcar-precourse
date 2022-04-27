@@ -2,7 +2,7 @@ package racingcar.race;
 
 import racingcar.rule.*;
 
-class Car {
+public class Car {
     private final Engine engine = new Engine();
     private final Name name;
     private final Position position;
