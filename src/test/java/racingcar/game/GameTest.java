@@ -3,6 +3,9 @@ package racingcar.game;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
+import racingcar.race.CarFactory;
+import racingcar.rule.Engine;
+import racingcar.rule.Position;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -12,7 +15,10 @@ import static org.mockito.Mockito.*;
 class GameTest {
     InputView inputView = mock(InputView.class);
     OutputView outputView = mock(OutputView.class);
-    Game game = new Game(inputView, outputView);
+    Engine engine = new Engine();
+    Position position = Position.start();
+    CarFactory carFactory = CarFactory.from(engine, position); // TODO
+    Game game = new Game(inputView, outputView, carFactory);
 
     @DisplayName("자동차 경주 게임 플레이")
     @Test

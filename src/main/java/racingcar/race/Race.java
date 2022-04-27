@@ -31,21 +31,12 @@ public final class Race {
         }
     }
 
-    public static Race from(String... names) {
-        return new Race(mapCars(names));
+    public static Race from(List<Car> cars) {
+        return new Race(cars);
     }
 
     public static Race from(Car... cars) {
-        return new Race(Arrays.asList(cars));
-    }
-
-    static List<Car> mapCars(String... names) {
-        final Position position = Position.start();
-        final List<Car> cars = new ArrayList<>();
-        for (String name : names) {
-            cars.add(Car.of(name, position));
-        }
-        return cars;
+        return Race.from(Arrays.asList(cars));
     }
 
     public List<List<CarDto>> startWith(MoveCount moveCount) {

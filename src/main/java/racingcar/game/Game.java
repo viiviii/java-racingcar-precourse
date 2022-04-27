@@ -1,8 +1,6 @@
 package racingcar.game;
 
-import racingcar.race.CarDto;
-import racingcar.race.Race;
-import racingcar.race.Winners;
+import racingcar.race.*;
 import racingcar.rule.MoveCount;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -12,10 +10,12 @@ import java.util.List;
 public class Game {
     private final InputView inputView;
     private final OutputView outputView;
+    private final CarFactory carFactory;
 
-    public Game(InputView inputView, OutputView outputView) {
+    public Game(InputView inputView, OutputView outputView, CarFactory carFactory) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.carFactory = carFactory;
     }
 
     public void play() {
@@ -30,8 +30,8 @@ public class Game {
     Race createRace() {
         try {
             final String names = inputView.inputCarsNames();
-            final String[] carNames = names.split(",");
-            return Race.from(carNames);
+            final List<Car> cars = carFactory.create(names);
+            return Race.from(cars);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return createRace();
