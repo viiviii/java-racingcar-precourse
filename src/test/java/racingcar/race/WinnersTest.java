@@ -2,6 +2,7 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.rule.Engine;
 import racingcar.rule.Position;
 
 import java.util.List;
@@ -9,10 +10,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersTest {
-    private Position position = new Position(5);
+    private Engine engine = new Engine();
+    private Position winningPosition = new Position(5);
     private String winningCarName = "pobi";
-    private Car winningCar = Car.of(winningCarName, position);
-    private Winners winners = Winners.asMaxPosition(position);
+    private Car winningCar = Car.of(engine, winningPosition, winningCarName);
+    private Winners winners = Winners.asMaxPosition(winningPosition);
 
     @DisplayName("자동차의 거리가 레이싱 최대 거리이면 값이 추가된다")
     @Test
@@ -28,7 +30,7 @@ class WinnersTest {
     @Test
     void addReturnFalseWhenNotWinners() {
         //given
-        Car unmovedCar = Car.of("user", Position.start());
+        Car unmovedCar = Car.of(engine, Position.start(), "user");
 
         //when
         boolean actual = winners.addIfMaxPosition(unmovedCar);

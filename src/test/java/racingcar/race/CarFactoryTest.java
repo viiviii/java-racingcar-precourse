@@ -2,6 +2,7 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.rule.Engine;
 import racingcar.rule.Position;
 
 import java.util.List;
@@ -14,11 +15,12 @@ class CarFactoryTest {
     @Test
     void factory() {
         //given
+        Engine engine = new Engine();
         Position position = Position.start();
         String model = "pobi,crong,honux";
 
         //when
-        List<Car> cars = CarFactory.from(position).create(model);
+        List<Car> cars = CarFactory.from(engine, position).create(model);
 
         //then
         assertThat(cars).hasSize(3);

@@ -3,18 +3,19 @@ package racingcar.race;
 import racingcar.rule.*;
 
 public class Car {
-    private final Engine engine = new Engine();
-    private final Name name;
+    private final Engine engine;
     private final Position position;
+    private final Name name;
 
-    private Car(Name name, Position position) {
-        this.name = name;
+    private Car(Engine engine, Position position, Name name) {
+        this.engine = engine;
         this.position = position;
+        this.name = name;
     }
 
-    static Car of(String name, Position position) {
+    static Car of(Engine engine, Position position, String name) {
         final Name carName = new Name(name);
-        return new Car(carName, position);
+        return new Car(engine, position, carName);
     }
 
     Name name() {

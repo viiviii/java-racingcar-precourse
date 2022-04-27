@@ -10,6 +10,7 @@ import racingcar.rule.Position;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CarTest {
+    private Engine engine = new Engine();
     private Position position = Position.start();
     private Position otherPosition = new Position(3);
     private String name = "apple";
@@ -17,15 +18,15 @@ class CarTest {
 
     @BeforeEach
     void setUp() {
-        car = Car.of(name, position);
+        car = Car.of(engine, position, name);
     }
 
     @DisplayName("다른 자동차와 위치 비교")
     @Test
     void comparePositionTo() {
         //given
-        Car sameCar = Car.of("same", position);
-        Car frontCar = Car.of("front", otherPosition);
+        Car sameCar = createCar(position, "same");
+        Car frontCar = createCar(otherPosition, "front");
 
         //then
         assertThat(car.comparePositionTo(frontCar)).isEqualTo(-1);
@@ -79,5 +80,9 @@ class CarTest {
         //then
         assertThat(firstPosition.get()).isEqualTo(1);
         assertThat(secondsPosition.get()).isEqualTo(2);
+    }
+
+    private Car createCar(Position position, String name) {
+        return Car.of(engine, position, name); // TODO
     }
 }

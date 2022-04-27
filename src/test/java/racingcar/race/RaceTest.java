@@ -2,6 +2,7 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.rule.Engine;
 import racingcar.rule.MoveCount;
 import racingcar.rule.Position;
 
@@ -15,7 +16,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class RaceTest {
-
     private Position position = new Position(1);
     private Position winnerPosition = new Position(3);
 
@@ -23,9 +23,9 @@ class RaceTest {
     @Test
     void winner() {
         //given
-        Car car1 = Car.of("pobi", position);
-        Car car2 = Car.of("crong", winnerPosition);
-        Car car3 = Car.of("honux", position);
+        Car car1 = createCar(position, "pobi");
+        Car car2 = createCar(winnerPosition, "crong");
+        Car car3 = createCar(position, "honux");
         Race race = Race.from(car1, car2, car3);
 
         //when
@@ -39,9 +39,9 @@ class RaceTest {
     @Test
     void winners() {
         //given
-        Car car1 = Car.of("pobi", position);
-        Car car2 = Car.of("crong", winnerPosition);
-        Car car3 = Car.of("honux", winnerPosition);
+        Car car1 = createCar(position, "pobi");
+        Car car2 = createCar(winnerPosition, "crong");
+        Car car3 = createCar(winnerPosition, "honux");
         Race race = Race.from(car1, car2, car3);
 
         //when
@@ -98,12 +98,17 @@ class RaceTest {
     }
 
     private List<Car> createCarAs(int index) {
-        final Position start = Position.start();
+        final Position position = Position.start();
         final List<Car> cars = new ArrayList<>();
         for (int i = 0; i < index; i++) {
             final String carName = String.format("car%d", i);
-            cars.add(Car.of(carName, start));
+            cars.add(createCar(position, carName));
         }
         return cars;
+    }
+
+    private Car createCar(Position position, String name) {
+        final Engine engine = new Engine();
+        return Car.of(engine, position, name); // TODO
     }
 }
