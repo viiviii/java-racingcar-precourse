@@ -2,9 +2,7 @@ package racingcar;
 
 import racingcar.game.Game;
 import racingcar.race.CarFactory;
-import racingcar.race.EnergyFactory;
-import racingcar.rule.Engine;
-import racingcar.rule.Position;
+import racingcar.rule.NameDelimiter;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 import racingcar.view.message.Message;
@@ -14,11 +12,8 @@ public class Application {
         final Message message = new Message();
         final InputView inputView = new InputView(message);
         final OutputView outputView = new OutputView(System.out, message);
-        final EnergyFactory energyFactory = new EnergyFactory();
-        final Engine engine = new Engine(energyFactory);
-        final Position position = Position.start();
-        final CarFactory carFactory = CarFactory.from(engine, position); // TODO
-
-        new Game(inputView, outputView, carFactory).play();
+        final CarFactory carFactory = CarFactory.fromDefault();
+        final NameDelimiter nameDelimiter = new NameDelimiter();
+        new Game(inputView, outputView, carFactory, nameDelimiter).play();
     }
 }

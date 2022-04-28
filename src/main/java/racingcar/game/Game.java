@@ -2,6 +2,8 @@ package racingcar.game;
 
 import racingcar.race.*;
 import racingcar.rule.MoveCount;
+import racingcar.rule.Name;
+import racingcar.rule.NameDelimiter;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -11,11 +13,13 @@ public class Game {
     private final InputView inputView;
     private final OutputView outputView;
     private final CarFactory carFactory;
+    private final NameDelimiter nameDelimiter;
 
-    public Game(InputView inputView, OutputView outputView, CarFactory carFactory) {
+    public Game(InputView inputView, OutputView outputView, CarFactory carFactory, NameDelimiter nameDelimiter) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.carFactory = carFactory;
+        this.nameDelimiter = nameDelimiter;
     }
 
     public void play() {
@@ -29,8 +33,9 @@ public class Game {
 
     Race createRace() {
         try {
-            final String names = inputView.inputCarsNames();
-            final List<Car> cars = carFactory.create(names);
+            final String inputNames = inputView.inputCarsNames();
+            final List<Name> delimitNames = nameDelimiter.delimit(inputNames);
+            final List<Car> cars = carFactory.create(delimitNames);
             return Race.from(cars);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());

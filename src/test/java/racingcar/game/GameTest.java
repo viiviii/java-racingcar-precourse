@@ -4,9 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import racingcar.race.CarFactory;
-import racingcar.race.EnergyFactory;
-import racingcar.rule.Engine;
-import racingcar.rule.Position;
+import racingcar.rule.NameDelimiter;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -16,11 +14,9 @@ import static org.mockito.Mockito.*;
 class GameTest {
     InputView inputView = mock(InputView.class);
     OutputView outputView = mock(OutputView.class);
-    EnergyFactory energyFactory = new EnergyFactory();
-    Engine engine = new Engine(energyFactory);
-    Position position = Position.start();
-    CarFactory carFactory = CarFactory.from(engine, position); // TODO
-    Game game = new Game(inputView, outputView, carFactory);
+    CarFactory carFactory = CarFactory.fromDefault();
+    NameDelimiter nameDelimiter = new NameDelimiter();
+    Game game = new Game(inputView, outputView, carFactory, nameDelimiter);
 
     @DisplayName("자동차 경주 게임 플레이")
     @Test

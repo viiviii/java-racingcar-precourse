@@ -16,6 +16,10 @@ public class Car {
         this.name = name;
     }
 
+    static Car of(Engine engine, Position position, Name name) {
+        return new Car(engine, position, name);
+    }
+
     static Car of(Engine engine, Position position, String name) {
         final Name carName = new Name(name);
         return new Car(engine, position, carName);

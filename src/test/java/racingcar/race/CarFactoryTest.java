@@ -2,29 +2,26 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.rule.Engine;
-import racingcar.rule.Position;
+import racingcar.rule.Name;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CarFactoryTest {
 
-    // TODO
-    @DisplayName("입력받은 문자열로 자동차를 만든다")
+    @DisplayName("입력받은 이름들로 자동차 목록을 만든다")
     @Test
     void factory() {
         //given
-        EnergyFactory energyFactory = new EnergyFactory();
-        Engine engine = new Engine(energyFactory);
-        Position position = Position.start();
-        String model = "pobi,crong,honux";
+        List<Name> names = Arrays.asList(new Name("pobi"));
 
         //when
-        List<Car> cars = CarFactory.from(engine, position).create(model);
+        CarFactory carFactory = CarFactory.fromDefault();
+        List<Car> cars = carFactory.create(names);
 
         //then
-        assertThat(cars).hasSize(3);
+        assertThat(cars).hasSize(1);
     }
 }
