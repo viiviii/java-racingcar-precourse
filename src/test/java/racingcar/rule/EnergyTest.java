@@ -68,9 +68,8 @@ class EnergyTest {
         assertThat(actual).isTrue();
     }
 
-    @DisplayName("natural ordering과 equals가 일치하도록 권장된다")
     @Test
-    void comparableAndEquality() {
+    void equality() {
         //given
         int sameNumber = 1;
 
@@ -81,7 +80,6 @@ class EnergyTest {
         //then
         assertThat(energy)
                 .isEqualTo(other)
-                .hasSameHashCodeAs(other)
-                .isEqualByComparingTo(other);
+                .hasSameHashCodeAs(other);
     }
 }

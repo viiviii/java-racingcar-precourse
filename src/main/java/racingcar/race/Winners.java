@@ -22,11 +22,11 @@ public final class Winners {
         return winnerNames.size();
     }
 
-    public boolean addIfMaxPosition(Car car) {
-        if (!car.inPosition(maxPosition)) {
+    public boolean addIfMaxPosition(Position position, Name name) {
+        if (!position.equals(maxPosition)) {
             return false;
         }
-        return winnerNames.add(car.name());
+        return winnerNames.add(name);
     }
 
     public List<String> get() {

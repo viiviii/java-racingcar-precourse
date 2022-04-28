@@ -1,12 +1,10 @@
 package racingcar.rule;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
 import java.util.Objects;
 
-public class Energy implements Comparable<Energy> {
-    private static final int MIN = 0;
-    private static final int MAX = 9;
+public class Energy {
+    public static final int MIN = 0;
+    public static final int MAX = 9;
 
     private final int value;
 
@@ -26,13 +24,16 @@ public class Energy implements Comparable<Energy> {
         return new Energy(energy);
     }
 
-    public static Energy atRandom() {
-        final int random = Randoms.pickNumberInRange(MIN, MAX);
-        return new Energy(random);
-    }
-
     public int get() {
         return value;
+    }
+
+    public boolean isLessThan(Energy other) {
+        return this.value < other.value;
+    }
+
+    public boolean isGraterThan(Energy other) {
+        return this.value > other.value;
     }
 
     @Override
@@ -47,19 +48,4 @@ public class Energy implements Comparable<Energy> {
     public int hashCode() {
         return Objects.hash(value);
     }
-
-    @Override
-    public int compareTo(Energy other) {
-        return Integer.compare(this.value, other.value);
-    }
-
-    public boolean isLessThan(Energy other) {
-        return this.compareTo(other) < 0;
-    }
-
-    public boolean isGraterThan(Energy other) {
-        return this.compareTo(other) > 0;
-    }
-
-
 }

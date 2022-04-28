@@ -1,6 +1,5 @@
 package racingcar.race;
 
-import racingcar.rule.Energy;
 import racingcar.rule.MoveCount;
 import racingcar.rule.Position;
 
@@ -51,8 +50,7 @@ public final class Race {
     private List<CarDto> move() {
         final List<CarDto> result = new ArrayList<>();
         for (Car car : cars) {
-            final Energy energy = Energy.atRandom();
-            car.moveBy(energy);
+            car.move();
             result.add(CarDto.from(car));
         }
         return result;
@@ -61,7 +59,7 @@ public final class Race {
     public Winners getWinners() {
         final Winners winners = Winners.asMaxPosition(maxPosition());
         for (Car car : cars) {
-            winners.addIfMaxPosition(car);
+            winners.addIfMaxPosition(car.position(), car.name());
         }
         return winners;
     }

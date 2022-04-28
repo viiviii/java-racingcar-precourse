@@ -2,36 +2,38 @@ package racingcar.rule;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.race.EnergyFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class EngineTest {
-    private Engine engine = new Engine();
-    private int ENGINE_FORWARD_ENERGY = 4;
+    private EnergyFactory energyFactory = mock(EnergyFactory.class);
+    private Engine engine = new Engine(energyFactory);
 
-    @DisplayName("에너지가 4 이상이면 전진한다")
+    @DisplayName("최소 전진 에너지 이상이면 전진한다")
     @Test
     void forwardWhenMoreThan4() {
         //given
-        int moreThan4 = ENGINE_FORWARD_ENERGY;
+        given(energyFactory.get()).willReturn(Engine.FORWARD_ENERGY);
 
         //when
-        Energy energy = Energy.from(moreThan4);
-        Move move = engine.powerBy(energy);
+        Move move = engine.power();
 
         //then
         assertThat(move.isForward()).isTrue();
     }
 
-    @DisplayName("에너지가 4 미만이면 멈춤이다")
+    @DisplayName("최소 전진 에너지 미만이면 멈춤이다")
     @Test
     void stopWhenLessThan4() {
         //given
-        int lessThan4 = ENGINE_FORWARD_ENERGY - 1;
+        Energy lessForwardEnergy = Energy.from(Engine.FORWARD_ENERGY.get() - 1);
+        given(energyFactory.get()).willReturn(lessForwardEnergy);
 
         //when
-        Energy energy = Energy.from(lessThan4);
-        Move move = engine.powerBy(energy);
+        Move move = engine.power();
 
         //then
         assertThat(move.isStop()).isTrue();
