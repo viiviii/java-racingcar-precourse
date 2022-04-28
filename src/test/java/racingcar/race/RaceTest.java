@@ -2,7 +2,6 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.rule.Engine;
 import racingcar.rule.MoveCount;
 import racingcar.rule.Position;
 
@@ -15,6 +14,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
 
 class RaceTest {
+    private CarFactory carFactory = CarFactory.fromDefault();
     private Position position = new Position(1);
     private Position winnerPosition = new Position(3);
 
@@ -22,9 +22,9 @@ class RaceTest {
     @Test
     void winner() {
         //given
-        Car car1 = createCar(position, "pobi");
-        Car car2 = createCar(winnerPosition, "crong");
-        Car car3 = createCar(position, "honux");
+        Car car1 = carFactory.of(position, "pobi");
+        Car car2 = carFactory.of(winnerPosition, "crong");
+        Car car3 = carFactory.of(position, "honux");
         Race race = Race.from(car1, car2, car3);
 
         //when
@@ -38,9 +38,9 @@ class RaceTest {
     @Test
     void winners() {
         //given
-        Car car1 = createCar(position, "pobi");
-        Car car2 = createCar(winnerPosition, "crong");
-        Car car3 = createCar(winnerPosition, "honux");
+        Car car1 = carFactory.of(position, "pobi");
+        Car car2 = carFactory.of(winnerPosition, "crong");
+        Car car3 = carFactory.of(winnerPosition, "honux");
         Race race = Race.from(car1, car2, car3);
 
         //when
@@ -96,19 +96,14 @@ class RaceTest {
                 .hasMessage("경주할 자동차는 10대 이하여야 한다.");
     }
 
+    // TODO
     private List<Car> createCarAs(int index) {
         final Position position = Position.start();
         final List<Car> cars = new ArrayList<>();
         for (int i = 0; i < index; i++) {
             final String carName = String.format("car%d", i);
-            cars.add(createCar(position, carName));
+            cars.add(carFactory.of(position, carName));
         }
         return cars;
-    }
-
-    private Car createCar(Position position, String name) {
-        final EnergyFactory energyFactory = new EnergyFactory();
-        final Engine engine = new Engine(energyFactory);
-        return Car.of(engine, position, name); // TODO
     }
 }

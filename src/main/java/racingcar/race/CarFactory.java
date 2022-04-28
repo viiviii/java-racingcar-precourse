@@ -16,10 +16,9 @@ public class CarFactory {
     }
 
     public static CarFactory fromDefault() {
-        final EnergyFactory energyFactory = new EnergyFactory();
-        final Engine engine = new Engine(energyFactory);
+        final Engine engine = new Engine(new EnergyFactory());
         final Position position = Position.start();
-        return new CarFactory(engine, position);
+        return CarFactory.from(engine, position);
     }
 
     public static CarFactory from(Engine engine, Position position) {
@@ -33,5 +32,9 @@ public class CarFactory {
             cars.add(Car.of(engine, position, name));
         }
         return cars;
+    }
+
+    public Car of(Position position, String name) {
+        return Car.of(engine, position, name);
     }
 }
