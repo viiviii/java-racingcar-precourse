@@ -59,7 +59,7 @@ public final class Race {
     public Winners getWinners() {
         final Winners winners = Winners.asMaxPosition(maxPosition());
         for (Car car : cars) {
-            winners.addIfMaxPosition(car);
+            winners.addIfMaxPosition(car.position(), car.name());
         }
         return winners;
     }

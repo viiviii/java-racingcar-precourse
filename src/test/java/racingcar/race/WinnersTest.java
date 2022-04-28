@@ -2,7 +2,7 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.rule.Engine;
+import racingcar.rule.Name;
 import racingcar.rule.Position;
 
 import java.util.List;
@@ -10,18 +10,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersTest {
-    private EnergyFactory energyFactory = new EnergyFactory();
-    private Engine engine = new Engine(energyFactory);
     private Position winningPosition = new Position(5);
-    private String winningCarName = "pobi";
-    private Car winningCar = Car.of(engine, winningPosition, winningCarName);
+    private Name winningCarName = new Name("pobi");
     private Winners winners = Winners.asMaxPosition(winningPosition);
 
     @DisplayName("자동차의 거리가 레이싱 최대 거리이면 값이 추가된다")
     @Test
     void addReturnTrueWhenWinners() {
         //when
-        boolean actual = winners.addIfMaxPosition(winningCar);
+        boolean actual = winners.addIfMaxPosition(winningPosition, winningCarName);
 
         //then
         assertThat(actual).isTrue();
@@ -31,10 +28,11 @@ class WinnersTest {
     @Test
     void addReturnFalseWhenNotWinners() {
         //given
-        Car unmovedCar = Car.of(engine, Position.start(), "user");
+        Position lessPosition = Position.start();
+        Name name = new Name("user");
 
         //when
-        boolean actual = winners.addIfMaxPosition(unmovedCar);
+        boolean actual = winners.addIfMaxPosition(lessPosition, name);
 
         //then
         assertThat(actual).isFalse();
@@ -44,7 +42,7 @@ class WinnersTest {
     @Test
     void size() {
         //when
-        winners.addIfMaxPosition(winningCar);
+        winners.addIfMaxPosition(winningPosition, winningCarName);
 
         //then
         assertThat(winners.size()).isOne();
@@ -54,11 +52,11 @@ class WinnersTest {
     @Test
     void get() {
         //when
-        winners.addIfMaxPosition(winningCar);
+        winners.addIfMaxPosition(winningPosition, winningCarName);
         List<String> actual = winners.get();
 
         //then
-        assertThat(actual).containsOnly(winningCarName);
+        assertThat(actual).containsOnly(winningCarName.get());
     }
 
     @DisplayName("우승자 이름 목록은 항상 새로운 목록에 담아 반환한다")
