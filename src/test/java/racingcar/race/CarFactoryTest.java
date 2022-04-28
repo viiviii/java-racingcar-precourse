@@ -11,11 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CarFactoryTest {
 
+    // TODO
     @DisplayName("입력받은 문자열로 자동차를 만든다")
     @Test
     void factory() {
         //given
-        Engine engine = new Engine();
+        EnergyFactory energyFactory = new EnergyFactory();
+        Engine engine = new Engine(energyFactory);
         Position position = Position.start();
         String model = "pobi,crong,honux";
 

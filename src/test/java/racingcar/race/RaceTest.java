@@ -12,7 +12,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class RaceTest {
@@ -62,7 +61,7 @@ class RaceTest {
         Race.from(car).startWith(moveCount);
 
         //then
-        verify(car, times(moveCount.get())).moveBy(any());
+        verify(car, times(moveCount.get())).move();
     }
 
 
@@ -108,7 +107,8 @@ class RaceTest {
     }
 
     private Car createCar(Position position, String name) {
-        final Engine engine = new Engine();
+        final EnergyFactory energyFactory = new EnergyFactory();
+        final Engine engine = new Engine(energyFactory);
         return Car.of(engine, position, name); // TODO
     }
 }

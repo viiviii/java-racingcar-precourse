@@ -1,6 +1,9 @@
 package racingcar.race;
 
-import racingcar.rule.*;
+import racingcar.rule.Engine;
+import racingcar.rule.Move;
+import racingcar.rule.Name;
+import racingcar.rule.Position;
 
 public class Car {
     private final Engine engine;
@@ -34,8 +37,8 @@ public class Car {
         return this.position.equals(other);
     }
 
-    Position moveBy(Energy energy) {
-        final Move move = engine.powerBy(energy);
+    Position move() {
+        final Move move = engine.power();
         if (move.isForward()) {
             position.increase();
         }

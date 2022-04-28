@@ -3,14 +3,16 @@ package racingcar.race;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.rule.Energy;
 import racingcar.rule.Engine;
+import racingcar.rule.Move;
 import racingcar.rule.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class CarTest {
-    private Engine engine = new Engine();
+    private Engine engine = mock(Engine.class);
     private Position position = Position.start();
     private Position otherPosition = new Position(3);
     private String name = "apple";
@@ -58,10 +60,10 @@ class CarTest {
     @Test
     void stopOnce() {
         //given
-        Energy stop = Energy.from(Engine.FORWARD_ENERGY.get() - 1);
+        given(engine.power()).willReturn(Move.STOP);
 
         //when
-        Position position = car.moveBy(stop);
+        Position position = car.move();
 
         //then
         assertThat(position.get()).isZero();
@@ -71,11 +73,11 @@ class CarTest {
     @Test
     void forwardTwice() {
         //given
-        Energy forward = Engine.FORWARD_ENERGY;
+        given(engine.power()).willReturn(Move.FORWARD);
 
         //when
-        Position firstPosition = car.moveBy(forward);
-        Position secondsPosition = car.moveBy(forward);
+        Position firstPosition = car.move();
+        Position secondsPosition = car.move();
 
         //then
         assertThat(firstPosition.get()).isEqualTo(1);

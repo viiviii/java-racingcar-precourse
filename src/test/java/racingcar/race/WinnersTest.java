@@ -10,7 +10,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersTest {
-    private Engine engine = new Engine();
+    private EnergyFactory energyFactory = new EnergyFactory();
+    private Engine engine = new Engine(energyFactory);
     private Position winningPosition = new Position(5);
     private String winningCarName = "pobi";
     private Car winningCar = Car.of(engine, winningPosition, winningCarName);
