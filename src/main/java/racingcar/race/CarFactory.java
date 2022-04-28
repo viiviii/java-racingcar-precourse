@@ -1,6 +1,7 @@
 package racingcar.race;
 
 import racingcar.rule.Engine;
+import racingcar.rule.Name;
 import racingcar.rule.Position;
 
 import java.util.ArrayList;
@@ -25,10 +26,9 @@ public class CarFactory {
         return new CarFactory(engine, position);
     }
 
-    public List<Car> create(String model) {
-        final String[] names = model.split(","); // TODO: , 문자열 포장
+    public List<Car> create(List<Name> names) {
         final List<Car> cars = new ArrayList<>();
-        for (String name : names) {
+        for (Name name : names) {
             cars.add(Car.of(engine, position, name));
         }
         return cars;
