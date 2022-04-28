@@ -2,7 +2,7 @@ package racingcar.rule;
 
 import java.util.Objects;
 
-public class Energy implements Comparable<Energy> {
+public class Energy {
     public static final int MIN = 0;
     public static final int MAX = 9;
 
@@ -28,6 +28,14 @@ public class Energy implements Comparable<Energy> {
         return value;
     }
 
+    public boolean isLessThan(Energy other) {
+        return this.value < other.value;
+    }
+
+    public boolean isGraterThan(Energy other) {
+        return this.value > other.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,18 +47,5 @@ public class Energy implements Comparable<Energy> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public int compareTo(Energy other) {
-        return Integer.compare(this.value, other.value);
-    }
-
-    public boolean isLessThan(Energy other) {
-        return this.compareTo(other) < 0;
-    }
-
-    public boolean isGraterThan(Energy other) {
-        return this.compareTo(other) > 0;
     }
 }
