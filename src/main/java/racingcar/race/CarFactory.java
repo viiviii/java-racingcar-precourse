@@ -15,6 +15,13 @@ public class CarFactory {
         this.position = position;
     }
 
+    public static CarFactory fromDefault() {
+        final EnergyFactory energyFactory = new EnergyFactory();
+        final Engine engine = new Engine(energyFactory);
+        final Position position = Position.start();
+        return new CarFactory(engine, position);
+    }
+
     public static CarFactory from(Engine engine, Position position) {
         return new CarFactory(engine, position);
     }
