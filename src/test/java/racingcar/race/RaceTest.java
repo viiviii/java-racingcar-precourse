@@ -28,7 +28,7 @@ class RaceTest {
         Race race = Race.from(car1, car2, car3);
 
         //when
-        Winners actual = race.getWinners();
+        WinnersDto actual = race.getWinners();
 
         //then
         assertThat(actual.get()).containsOnly("crong");
@@ -44,7 +44,7 @@ class RaceTest {
         Race race = Race.from(car1, car2, car3);
 
         //when
-        Winners actual = race.getWinners();
+        WinnersDto actual = race.getWinners();
 
         //then
         assertThat(actual.get()).containsOnly("crong", "honux");

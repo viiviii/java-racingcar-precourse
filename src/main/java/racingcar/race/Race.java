@@ -56,12 +56,12 @@ public final class Race {
         return result;
     }
 
-    public Winners getWinners() {
+    public WinnersDto getWinners() {
         final Winners winners = Winners.asMaxPosition(maxPosition());
         for (Car car : cars) {
             winners.addIfMaxPosition(car.position(), car.name());
         }
-        return winners;
+        return winners.get();
     }
 
     private Position maxPosition() {

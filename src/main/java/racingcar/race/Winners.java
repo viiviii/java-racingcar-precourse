@@ -29,11 +29,7 @@ public final class Winners {
         return winnerNames.add(name);
     }
 
-    public List<String> get() {
-        final List<String> names = new ArrayList<>();
-        for (Name winnerName : winnerNames) {
-            names.add(winnerName.get());
-        }
-        return names;
+    public WinnersDto get() {
+        return WinnersDto.from(winnerNames);
     }
 }
