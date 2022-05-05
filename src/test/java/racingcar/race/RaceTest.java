@@ -3,18 +3,16 @@ package racingcar.race;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.rule.MoveCount;
-import racingcar.rule.Position;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 class RaceTest {
-    private CarFactory carFactory = CarFactory.fromDefault();
 
     @DisplayName("이동 횟수만큼 자동차가 움직인다")
     @Test
@@ -30,8 +28,7 @@ class RaceTest {
         verify(car, times(moveCount.get())).move();
     }
 
-
-    @DisplayName("빈 목록인 경우 예외가 발생한다")
+    @DisplayName("경주할 자동차가 없는 경우 예외가 발생한다")
     @Test
     void throwExceptionWhenEmpty() {
         //given
@@ -46,12 +43,13 @@ class RaceTest {
                 .hasMessage("경주할 자동차는 1대 이상이어야 한다.");
     }
 
-    @DisplayName("경주할 자동차는 최대 10대까지 가능하다")
+    @DisplayName("경주할 자동차가 최대 값을 초과하는 경우 예외가 발생한다")
     @Test
-    void thrownExceptionWhenMaxCars() {
+    void thrownExceptionWhenGraterThanMaxSize() {
         //given
         int GRATER_THAN_CAR_LIST_SIZE = 10 + 1;
-        List<Car> cars = createCarAs(GRATER_THAN_CAR_LIST_SIZE);
+        List<Car> cars = mock(List.class);
+        given(cars.size()).willReturn(GRATER_THAN_CAR_LIST_SIZE);
 
         //when
         Throwable thrown = catchThrowable(() -> Race.from(cars));
@@ -60,16 +58,5 @@ class RaceTest {
         assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("경주할 자동차는 10대 이하여야 한다.");
-    }
-
-    // TODO
-    private List<Car> createCarAs(int index) {
-        final Position position = Position.start();
-        final List<Car> cars = new ArrayList<>();
-        for (int i = 0; i < index; i++) {
-            final String carName = String.format("car%d", i);
-            cars.add(carFactory.of(position, carName));
-        }
-        return cars;
     }
 }
