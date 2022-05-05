@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersTest {
@@ -46,28 +44,5 @@ class WinnersTest {
 
         //then
         assertThat(winners.size()).isOne();
-    }
-
-    @DisplayName("우승자 이름은 String 목록으로 리턴한다")
-    @Test
-    void get() {
-        //when
-        winners.addIfMaxPosition(winningPosition, winningCarName);
-        List<String> actual = winners.get();
-
-        //then
-        assertThat(actual).containsOnly(winningCarName.get());
-    }
-
-    @DisplayName("우승자 이름 목록은 항상 새로운 목록에 담아 반환한다")
-    @Test
-    void returnNewListWhenGetValues() {
-        //when
-        List<String> copy = winners.get();
-        copy.add("other");
-
-        //then
-        assertThat(winners.size()).isZero();
-        assertThat(copy.size()).isOne();
     }
 }
