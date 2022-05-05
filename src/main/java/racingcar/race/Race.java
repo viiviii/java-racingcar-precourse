@@ -1,11 +1,10 @@
 package racingcar.race;
 
 import racingcar.rule.MoveCount;
-import racingcar.rule.Position;
+import racingcar.rule.Name;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public final class Race {
@@ -56,17 +55,9 @@ public final class Race {
         return result;
     }
 
-    public Winners getWinners() {
-        final Winners winners = Winners.asMaxPosition(maxPosition());
-        for (Car car : cars) {
-            winners.addIfMaxPosition(car.position(), car.name());
-        }
-        return winners;
-    }
-
-    private Position maxPosition() {
-        return Collections
-                .max(cars, Car::comparePositionTo)
-                .position();
+    public WinnersDto getWinners() {
+        final Winners winners = new Winners();
+        final List<Name> winnerNames = winners.determineFrom(cars);
+        return WinnersDto.from(winnerNames);
     }
 }

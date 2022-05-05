@@ -27,7 +27,7 @@ public class Game {
         final MoveCount moveCount = createMoveCount();
         final List<List<CarDto>> result = race.startWith(moveCount);
         outputView.printResult(result);
-        final Winners winners = race.getWinners();
+        final WinnersDto winners = race.getWinners();
         outputView.printWinners(winners);
     }
 

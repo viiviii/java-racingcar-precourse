@@ -3,37 +3,42 @@ package racingcar.race;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public final class Winners {
-    private final List<Name> winnerNames = new ArrayList<>();
-    private final Position maxPosition;
+    private Map<Position, Names> record = new HashMap<>();
 
-    private Winners(Position position) {
-        this.maxPosition = position;
+    public List<Name> determineFrom(List<Car> cars) {
+        doRecord(cars);
+        return names(winningPosition()).toList();
     }
 
-    public static Winners asMaxPosition(Position position) {
-        return new Winners(position);
-    }
-
-    public int size() {
-        return winnerNames.size();
-    }
-
-    public boolean addIfMaxPosition(Position position, Name name) {
-        if (!position.equals(maxPosition)) {
-            return false;
+    private void doRecord(List<Car> cars) {
+        for (Car car : cars) {
+            final Position position = car.position();
+            final Names names = names(position);
+            record.put(position, names.add(car.name()));
         }
-        return winnerNames.add(name);
     }
 
-    public List<String> get() {
-        final List<String> names = new ArrayList<>();
-        for (Name winnerName : winnerNames) {
-            names.add(winnerName.get());
+    private Names names(Position position) {
+        return record.getOrDefault(position, new Names());
+    }
+
+    Position winningPosition() {
+        return Collections.max(record.keySet());
+    }
+
+    private static final class Names {
+        private List<Name> names = new ArrayList<>();
+
+        private Names add(Name name) {
+            names.add(name);
+            return this;
         }
-        return names;
+
+        private List<Name> toList() {
+            return new ArrayList<>(names);
+        }
     }
 }
