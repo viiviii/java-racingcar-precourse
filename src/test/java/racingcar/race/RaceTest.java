@@ -15,40 +15,6 @@ import static org.mockito.Mockito.*;
 
 class RaceTest {
     private CarFactory carFactory = CarFactory.fromDefault();
-    private Position position = new Position(1);
-    private Position winnerPosition = new Position(3);
-
-    @DisplayName("우승자가 한 명일 때")
-    @Test
-    void winner() {
-        //given
-        Car car1 = carFactory.of(position, "pobi");
-        Car car2 = carFactory.of(winnerPosition, "crong");
-        Car car3 = carFactory.of(position, "honux");
-        Race race = Race.from(car1, car2, car3);
-
-        //when
-        WinnersDto actual = race.getWinners();
-
-        //then
-        assertThat(actual.get()).containsOnly("crong");
-    }
-
-    @DisplayName("우승자가 여러 명일 때")
-    @Test
-    void winners() {
-        //given
-        Car car1 = carFactory.of(position, "pobi");
-        Car car2 = carFactory.of(winnerPosition, "crong");
-        Car car3 = carFactory.of(winnerPosition, "honux");
-        Race race = Race.from(car1, car2, car3);
-
-        //when
-        WinnersDto actual = race.getWinners();
-
-        //then
-        assertThat(actual.get()).containsOnly("crong", "honux");
-    }
 
     @DisplayName("이동 횟수만큼 자동차가 움직인다")
     @Test
