@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import racingcar.race.CarFactory;
+import racingcar.race.RacingCars;
+import racingcar.rule.MoveCount;
 import racingcar.rule.NameDelimiter;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -42,7 +44,7 @@ class GameTest {
         given(inputView.inputCarsNames()).willReturn("sixTxt", " ", "valid");
 
         //when
-        game.createRace();
+        game.createRacingCars();
 
         //then
         verify(inputView, times(3)).inputCarsNames();
@@ -59,5 +61,19 @@ class GameTest {
 
         //then
         verify(inputView, times(3)).inputMoveCount();
+    }
+
+    @DisplayName("이동 횟수만큼 자동차가 움직인다")
+    @Test
+    void startRaceWith() {
+        //given
+        RacingCars racingCars = mock(RacingCars.class);
+        MoveCount moveCount = MoveCount.fromString("5");
+
+        //when
+        game.startRaceWith(racingCars, moveCount);
+
+        //then
+        verify(racingCars, times(moveCount.get())).move();
     }
 }
