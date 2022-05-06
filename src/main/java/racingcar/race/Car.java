@@ -33,14 +33,6 @@ public class Car {
         return position;
     }
 
-    int comparePositionTo(Car car) {
-        return this.position.compareTo(car.position);
-    }
-
-    boolean inPosition(Position other) {
-        return this.position.equals(other);
-    }
-
     Position move() {
         final Move move = engine.power();
         if (move.isForward()) {
