@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class Race {
+public final class RacingCars {
     private final List<Car> cars;
 
-    private Race(List<Car> cars) {
+    private RacingCars(List<Car> cars) {
         validateMinSize(cars);
         validateMaxSize(cars);
         this.cars = cars;
@@ -29,12 +29,12 @@ public final class Race {
         }
     }
 
-    public static Race from(List<Car> cars) {
-        return new Race(cars);
+    public static RacingCars from(List<Car> cars) {
+        return new RacingCars(cars);
     }
 
-    public static Race from(Car... cars) {
-        return Race.from(Arrays.asList(cars));
+    public static RacingCars from(Car... cars) {
+        return RacingCars.from(Arrays.asList(cars));
     }
 
     public List<List<CarDto>> startWith(MoveCount moveCount) {

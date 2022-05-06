@@ -42,7 +42,7 @@ class GameTest {
         given(inputView.inputCarsNames()).willReturn("sixTxt", " ", "valid");
 
         //when
-        game.createRace();
+        game.createRacingCars();
 
         //then
         verify(inputView, times(3)).inputCarsNames();

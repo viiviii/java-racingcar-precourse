@@ -23,23 +23,23 @@ public class Game {
     }
 
     public void play() {
-        final Race race = createRace();
+        final RacingCars racingCars = createRacingCars();
         final MoveCount moveCount = createMoveCount();
-        final List<List<CarDto>> result = race.startWith(moveCount);
+        final List<List<CarDto>> result = racingCars.startWith(moveCount);
         outputView.printResult(result);
-        final WinnersDto winners = race.getWinners();
+        final WinnersDto winners = racingCars.getWinners();
         outputView.printWinners(winners);
     }
 
-    Race createRace() {
+    RacingCars createRacingCars() {
         try {
             final String inputNames = inputView.inputCarsNames();
             final List<Name> delimitNames = nameDelimiter.delimit(inputNames);
             final List<Car> cars = carFactory.create(delimitNames);
-            return Race.from(cars);
+            return RacingCars.from(cars);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
-            return createRace();
+            return createRacingCars();
         }
     }
 

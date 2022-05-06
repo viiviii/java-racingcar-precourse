@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-class RaceTest {
+class RacingCarsTest {
 
     @DisplayName("이동 횟수만큼 자동차가 움직인다")
     @Test
@@ -22,7 +22,7 @@ class RaceTest {
         MoveCount moveCount = MoveCount.fromString("5");
 
         //when
-        Race.from(car).startWith(moveCount);
+        RacingCars.from(car).startWith(moveCount);
 
         //then
         verify(car, times(moveCount.get())).move();
@@ -35,7 +35,7 @@ class RaceTest {
         List<Car> empty = Collections.emptyList();
 
         //when
-        Throwable thrown = catchThrowable(() -> Race.from(empty));
+        Throwable thrown = catchThrowable(() -> RacingCars.from(empty));
 
         //then
         assertThat(thrown)
@@ -52,7 +52,7 @@ class RaceTest {
         given(cars.size()).willReturn(GRATER_THAN_CAR_LIST_SIZE);
 
         //when
-        Throwable thrown = catchThrowable(() -> Race.from(cars));
+        Throwable thrown = catchThrowable(() -> RacingCars.from(cars));
 
         //then
         assertThat(thrown)
