@@ -1,6 +1,5 @@
 package racingcar.race;
 
-import racingcar.rule.MoveCount;
 import racingcar.rule.Name;
 
 import java.util.ArrayList;
@@ -33,20 +32,11 @@ public final class RacingCars {
         return new RacingCars(cars);
     }
 
-    public static RacingCars from(Car... cars) {
+    public static RacingCars of(Car... cars) {
         return RacingCars.from(Arrays.asList(cars));
     }
 
-    public List<List<CarDto>> startWith(MoveCount moveCount) {
-        final List<List<CarDto>> result = new ArrayList<>();
-        for (int i = 0; i < moveCount.get(); i++) {
-            final List<CarDto> moveCar = move();
-            result.add(moveCar);
-        }
-        return result;
-    }
-
-    private List<CarDto> move() {
+    public List<CarDto> move() {
         final List<CarDto> result = new ArrayList<>();
         for (Car car : cars) {
             car.move();
@@ -55,6 +45,7 @@ public final class RacingCars {
         return result;
     }
 
+    // TODO: Game으로 옮기기 -> CarDto와 getWinners 모두 자동차의 현재 위치, 이름을 필요로 한다
     public WinnersDto getWinners() {
         final Winners winners = new Winners();
         final List<Name> winnerNames = winners.determineFrom(cars);
