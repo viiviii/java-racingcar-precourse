@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,16 +15,17 @@ class WinnersTest {
     @Test
     void winners() {
         //given
+        Name expectedWinner = new Name("crong");
+        MoveRecords moveRecords = new MoveRecords();
+        moveRecords.recordOf(new Name("pobi"), new Position(1));
+        moveRecords.recordOf(expectedWinner, new Position(9));
+        moveRecords.recordOf(new Name("honux"), new Position(3));
         Winners winners = new Winners();
-        CarFactory carFactory = CarFactory.fromDefault();
-        Car car1 = carFactory.of(new Position(1), "pobi");
-        Car car2 = carFactory.of(new Position(9), "crong");
-        Car car3 = carFactory.of(new Position(3), "honux");
 
         //when
-        List<Name> winnerNames = winners.determineFrom(Arrays.asList(car1, car2, car3));
+        List<Name> winnerNames = winners.determineFrom(moveRecords);
 
         //then
-        assertThat(winnerNames).containsOnly(car2.name());
+        assertThat(winnerNames).containsOnly(expectedWinner);
     }
 }

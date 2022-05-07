@@ -28,7 +28,7 @@ public class Game {
         final MoveCount moveCount = createMoveCount();
         final List<MoveRecords> result = startRaceWith(racingCars, moveCount);
         outputView.printResult(result);
-        final WinnersDto winners = racingCars.getWinners();
+        final WinnersDto winners = determineWinners(result.get(result.size() - 1)); // TODO
         outputView.printWinners(winners);
     }
 
@@ -61,5 +61,11 @@ public class Game {
             result.add(moveRecords);
         }
         return result;
+    }
+
+    public WinnersDto determineWinners(MoveRecords moveRecords) {
+        final Winners winners = new Winners();
+        final List<Name> winnerNames = winners.determineFrom(moveRecords);
+        return WinnersDto.from(winnerNames);
     }
 }
