@@ -3,6 +3,7 @@ package racingcar.race;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,5 +22,9 @@ public final class MoveRecords {
 
     public Iterable<Name> allNames() {
         return records.keySet();
+    }
+
+    public Position maxPosition() {
+        return Collections.max(records.values());
     }
 }
