@@ -15,12 +15,14 @@ public class Game {
     private final OutputView outputView;
     private final CarFactory carFactory;
     private final NameDelimiter nameDelimiter;
+    private final WinnersReferee winnersReferee;
 
-    public Game(InputView inputView, OutputView outputView, CarFactory carFactory, NameDelimiter nameDelimiter) {
+    public Game(InputView inputView, OutputView outputView, CarFactory carFactory, NameDelimiter nameDelimiter, WinnersReferee winners) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.carFactory = carFactory;
         this.nameDelimiter = nameDelimiter;
+        this.winnersReferee = winners;
     }
 
     public void play() {
@@ -62,10 +64,9 @@ public class Game {
         }
         return result;
     }
-
+    
     public WinnersDto determineWinners(MoveRecords moveRecords) {
-        final WinnersReferee winners = new WinnersReferee();
-        final List<Name> winnerNames = winners.determineFrom(moveRecords);
+        final List<Name> winnerNames = winnersReferee.determineFrom(moveRecords);
         return WinnersDto.from(winnerNames);
     }
 }
