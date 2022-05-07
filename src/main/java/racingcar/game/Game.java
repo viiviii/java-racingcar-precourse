@@ -15,12 +15,14 @@ public class Game {
     private final OutputView outputView;
     private final CarFactory carFactory;
     private final NameDelimiter nameDelimiter;
+    private final WinnersReferee winnersReferee;
 
-    public Game(InputView inputView, OutputView outputView, CarFactory carFactory, NameDelimiter nameDelimiter) {
+    public Game(InputView inputView, OutputView outputView, CarFactory carFactory, NameDelimiter nameDelimiter, WinnersReferee winners) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.carFactory = carFactory;
         this.nameDelimiter = nameDelimiter;
+        this.winnersReferee = winners;
     }
 
     public void play() {
@@ -28,7 +30,7 @@ public class Game {
         final MoveCount moveCount = createMoveCount();
         final List<MoveRecords> result = startRaceWith(racingCars, moveCount);
         outputView.printResult(result);
-        final WinnersDto winners = racingCars.getWinners();
+        final WinnersDto winners = determineWinners(result.get(result.size() - 1)); // TODO
         outputView.printWinners(winners);
     }
 
@@ -61,5 +63,10 @@ public class Game {
             result.add(moveRecords);
         }
         return result;
+    }
+    
+    public WinnersDto determineWinners(MoveRecords moveRecords) {
+        final List<Name> winnerNames = winnersReferee.determineFrom(moveRecords);
+        return WinnersDto.from(winnerNames);
     }
 }

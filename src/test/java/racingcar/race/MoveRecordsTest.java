@@ -72,4 +72,21 @@ class MoveRecordsTest {
         //then
         assertThat(names).containsExactlyInAnyOrder(name1, name2);
     }
+
+
+    @DisplayName("기록된 최대 위치를 구할 수 있다")
+    @Test
+    void maxPosition() {
+        //given
+        Position expectedMaxPosition = new Position(5);
+        MoveRecords moveRecords = new MoveRecords();
+
+        //when
+        moveRecords.recordOf(new Name("pobi"), expectedMaxPosition);
+        moveRecords.recordOf(new Name("honux"), Position.start());
+        Position actual = moveRecords.maxPosition();
+
+        //then
+        assertThat(actual).isEqualTo(expectedMaxPosition);
+    }
 }

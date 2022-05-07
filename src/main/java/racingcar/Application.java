@@ -2,6 +2,7 @@ package racingcar;
 
 import racingcar.game.Game;
 import racingcar.race.CarFactory;
+import racingcar.race.WinnersReferee;
 import racingcar.rule.NameDelimiter;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -14,6 +15,9 @@ public class Application {
         final OutputView outputView = new OutputView(System.out, message);
         final CarFactory carFactory = CarFactory.fromDefault();
         final NameDelimiter nameDelimiter = new NameDelimiter();
-        new Game(inputView, outputView, carFactory, nameDelimiter).play();
+        final WinnersReferee winnersReferee = new WinnersReferee();
+        // TODO: 부자다 부자
+        new Game(inputView, outputView, carFactory, nameDelimiter, winnersReferee)
+                .play();
     }
 }

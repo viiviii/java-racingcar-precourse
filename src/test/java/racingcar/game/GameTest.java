@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import racingcar.race.CarFactory;
 import racingcar.race.RacingCars;
+import racingcar.race.WinnersReferee;
 import racingcar.rule.MoveCount;
 import racingcar.rule.NameDelimiter;
 import racingcar.view.InputView;
@@ -14,11 +15,12 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 class GameTest {
-    InputView inputView = mock(InputView.class);
-    OutputView outputView = mock(OutputView.class);
-    CarFactory carFactory = CarFactory.fromDefault();
-    NameDelimiter nameDelimiter = new NameDelimiter();
-    Game game = new Game(inputView, outputView, carFactory, nameDelimiter);
+    private InputView inputView = mock(InputView.class);
+    private OutputView outputView = mock(OutputView.class);
+    private CarFactory carFactory = CarFactory.fromDefault();
+    private NameDelimiter nameDelimiter = new NameDelimiter();
+    private WinnersReferee winnersReferee = new WinnersReferee();
+    private Game game = new Game(inputView, outputView, carFactory, nameDelimiter, winnersReferee);
 
     @DisplayName("자동차 경주 게임 플레이")
     @Test
