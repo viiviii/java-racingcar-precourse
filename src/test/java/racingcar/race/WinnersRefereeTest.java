@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinnersTest {
+class WinnersRefereeTest {
 
     @DisplayName("가장 먼 위치의 자동차가 우승이다")
     @Test
@@ -20,7 +20,7 @@ class WinnersTest {
         moveRecords.recordOf(new Name("pobi"), new Position(1));
         moveRecords.recordOf(expectedWinner, new Position(9));
         moveRecords.recordOf(new Name("honux"), new Position(3));
-        Winners winners = new Winners();
+        WinnersReferee winners = new WinnersReferee();
 
         //when
         List<Name> winnerNames = winners.determineFrom(moveRecords);

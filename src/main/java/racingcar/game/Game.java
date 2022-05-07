@@ -64,7 +64,7 @@ public class Game {
     }
 
     public WinnersDto determineWinners(MoveRecords moveRecords) {
-        final Winners winners = new Winners();
+        final WinnersReferee winners = new WinnersReferee();
         final List<Name> winnerNames = winners.determineFrom(moveRecords);
         return WinnersDto.from(winnerNames);
     }

@@ -6,7 +6,7 @@ import racingcar.rule.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Winners {
+public final class WinnersReferee {
 
     // TODO
     public List<Name> determineFrom(MoveRecords moveRecords) {
