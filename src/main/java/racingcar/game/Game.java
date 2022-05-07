@@ -26,7 +26,7 @@ public class Game {
     public void play() {
         final RacingCars racingCars = createRacingCars();
         final MoveCount moveCount = createMoveCount();
-        final List<List<CarDto>> result = startRaceWith(racingCars, moveCount);
+        final List<MoveRecords> result = startRaceWith(racingCars, moveCount);
         outputView.printResult(result);
         final WinnersDto winners = racingCars.getWinners();
         outputView.printWinners(winners);
@@ -54,11 +54,11 @@ public class Game {
         }
     }
 
-    List<List<CarDto>> startRaceWith(RacingCars racingCars, MoveCount moveCount) {
-        final List<List<CarDto>> result = new ArrayList<>();
+    List<MoveRecords> startRaceWith(RacingCars racingCars, MoveCount moveCount) {
+        final List<MoveRecords> result = new ArrayList<>();
         for (int i = 0; i < moveCount.get(); i++) {
-            final List<CarDto> moveCar = racingCars.move();
-            result.add(moveCar);
+            final MoveRecords moveRecords = racingCars.move();
+            result.add(moveRecords);
         }
         return result;
     }

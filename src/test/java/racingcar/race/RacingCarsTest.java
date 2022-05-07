@@ -2,6 +2,8 @@ package racingcar.race;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.rule.Name;
+import racingcar.rule.Position;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,13 +52,17 @@ class RacingCarsTest {
     @Test
     void move() {
         //given
+        Name name = new Name("pobi");
+        Position position = new Position(5);
         Car car = mock(Car.class);
+        given(car.name()).willReturn(name);
+        given(car.move()).willReturn(position);
 
         //when
-        RacingCars racingCars = RacingCars.of(car);
-        racingCars.move();
+        MoveRecords moveRecords = RacingCars.of(car).move();
 
         //then
         verify(car).move();
+        assertThat(moveRecords.positionBy(name)).isEqualTo(position);
     }
 }

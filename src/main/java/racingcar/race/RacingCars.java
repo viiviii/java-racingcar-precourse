@@ -1,8 +1,8 @@
 package racingcar.race;
 
 import racingcar.rule.Name;
+import racingcar.rule.Position;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,13 +36,14 @@ public final class RacingCars {
         return RacingCars.from(Arrays.asList(cars));
     }
 
-    public List<CarDto> move() {
-        final List<CarDto> result = new ArrayList<>();
+    // TODO: 이게 맞나
+    public MoveRecords move() {
+        final MoveRecords records = new MoveRecords();
         for (Car car : cars) {
-            car.move();
-            result.add(CarDto.from(car));
+            final Position movedPosition = car.move();
+            records.recordOf(car.name(), movedPosition);
         }
-        return result;
+        return records;
     }
 
     // TODO: Game으로 옮기기 -> CarDto와 getWinners 모두 자동차의 현재 위치, 이름을 필요로 한다
