@@ -52,4 +52,19 @@ class NameTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차 이름은 5자 이하여야 한다.");
     }
+
+    @Test
+    void equality() {
+        //given
+        String same = "pobi";
+
+        //when
+        Name name = new Name(same);
+        Name other = new Name(same);
+
+        //then
+        assertThat(name)
+                .isEqualTo(other)
+                .hasSameHashCodeAs(other);
+    }
 }
