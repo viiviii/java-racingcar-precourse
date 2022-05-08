@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersRefereeTest {
@@ -20,12 +18,13 @@ class WinnersRefereeTest {
         moveRecords.recordOf(new Name("pobi"), new Position(1));
         moveRecords.recordOf(expectedWinner, new Position(9));
         moveRecords.recordOf(new Name("honux"), new Position(3));
-        WinnersReferee winners = new WinnersReferee();
+        WinnersReferee winnersReferee = new WinnersReferee();
 
         //when
-        List<Name> winnerNames = winners.determineFrom(moveRecords);
+        Winners winners = winnersReferee.determineFrom(moveRecords);
 
         //then
-        assertThat(winnerNames).containsOnly(expectedWinner);
+        assertThat(winners.contains(expectedWinner)).isTrue();
+        assertThat(winners.number()).isOne();
     }
 }

@@ -9,15 +9,15 @@ import java.util.List;
 public final class WinnersReferee {
 
     // TODO
-    public List<Name> determineFrom(MoveRecords moveRecords) {
+    public Winners determineFrom(MoveRecords moveRecords) {
         final Position winningPosition = moveRecords.maxPosition();
-        final List<Name> winners = new ArrayList<>();
+        final List<Name> winnerNames = new ArrayList<>();
         for (Name name : moveRecords.allNames()) {
-            Position position = moveRecords.positionBy(name);
+            final Position position = moveRecords.positionBy(name);
             if (position.equals(winningPosition)) {
-                winners.add(name);
+                winnerNames.add(name);
             }
         }
-        return winners;
+        return Winners.from(winnerNames);
     }
 }
