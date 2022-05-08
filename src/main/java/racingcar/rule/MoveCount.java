@@ -1,9 +1,11 @@
 package racingcar.rule;
 
-public class MoveCount {
+import java.util.Objects;
+
+public final class MoveCount {
     private final int value;
 
-    private MoveCount(int value) {
+    public MoveCount(int value) {
         validateMin(value);
         validateMax(value);
         this.value = value;
@@ -23,6 +25,7 @@ public class MoveCount {
         }
     }
 
+    // TODO
     public static MoveCount fromString(String input) {
         final int count = Integer.parseInt(input);
         return new MoveCount(count);
@@ -30,5 +33,18 @@ public class MoveCount {
 
     public int get() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MoveCount)) return false;
+        MoveCount moveCount = (MoveCount) o;
+        return value == moveCount.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

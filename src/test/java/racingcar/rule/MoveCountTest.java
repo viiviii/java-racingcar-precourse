@@ -63,4 +63,19 @@ class MoveCountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("시도 횟수는 100 이하여야 한다.");
     }
+
+    @Test
+    void equality() {
+        //given
+        int same = 5;
+
+        //when
+        MoveCount moveCount = new MoveCount(same);
+        MoveCount other = new MoveCount(same);
+
+        //then
+        assertThat(moveCount)
+                .isEqualTo(other)
+                .hasSameHashCodeAs(other);
+    }
 }

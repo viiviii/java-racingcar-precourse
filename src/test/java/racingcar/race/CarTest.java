@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.rule.Engine;
 import racingcar.rule.Move;
+import racingcar.rule.Name;
 import racingcar.rule.Position;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,12 +15,12 @@ import static org.mockito.Mockito.mock;
 class CarTest {
     private Engine engine = mock(Engine.class);
     private Position position = Position.start();
-    private String name = "apple";
+    private Name name = new Name("apple");
     private Car car;
 
     @BeforeEach
     void setUp() {
-        car = Car.of(engine, position, name);
+        car = Car.of(engine, name, position);
     }
 
     @DisplayName("자동차가 멈춰있으면 위치는 증가하지 않는다")

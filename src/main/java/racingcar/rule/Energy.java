@@ -2,7 +2,7 @@ package racingcar.rule;
 
 import java.util.Objects;
 
-public class Energy {
+public final class Energy {
     public static final int MIN = 0;
     public static final int MAX = 9;
 

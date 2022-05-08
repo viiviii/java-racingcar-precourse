@@ -2,10 +2,10 @@ package racingcar.rule;
 
 import java.util.Objects;
 
-public class Position implements Comparable<Position> {
+public final class Position implements Comparable<Position> {
     private static final int START_POSITION = 0;
 
-    private int value;
+    private final int value;
 
     public Position(int position) {
         validateMin(position);
@@ -23,16 +23,8 @@ public class Position implements Comparable<Position> {
         return new Position(START_POSITION);
     }
 
-    public void increase() {
-        value += 1;
-    }
-
     public int get() {
         return value;
-    }
-
-    public Position copy() {
-        return new Position(value);
     }
 
     @Override
