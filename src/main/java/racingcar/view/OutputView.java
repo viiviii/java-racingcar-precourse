@@ -1,7 +1,7 @@
 package racingcar.view;
 
 import racingcar.race.MoveRecords;
-import racingcar.race.WinnersDto;
+import racingcar.race.Winners;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 import racingcar.view.message.Distance;
@@ -45,7 +45,7 @@ public class OutputView {
         }
     }
 
-    public void printWinners(WinnersDto winners) {
+    public void printWinners(Winners winners) {
         output.println(message.winners(winners.get()));
     }
 
