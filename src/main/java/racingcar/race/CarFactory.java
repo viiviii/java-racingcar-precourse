@@ -8,33 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarFactory {
-    private final Engine engine;
-    private final Position position;
-
-    private CarFactory(Engine engine, Position position) {
-        this.engine = engine;
-        this.position = position;
-    }
-
-    public static CarFactory fromDefault() {
-        final Engine engine = new Engine(new EnergyFactory());
-        final Position position = Position.start();
-        return CarFactory.from(engine, position);
-    }
-
-    public static CarFactory from(Engine engine, Position position) {
-        return new CarFactory(engine, position);
-    }
 
     public List<Car> create(List<Name> names) {
         final List<Car> cars = new ArrayList<>();
         for (Name name : names) {
-            cars.add(Car.of(engine, position, name));
+            final Car car = createDefaultCarWith(name);
+            cars.add(car);
         }
         return cars;
     }
 
-    public Car of(Position position, String name) {
+    private Car createDefaultCarWith(Name name) {
+        final Engine engine = createDefaultEngineWithDefaultEnergyFactory();
+        final Position position = createDefaultStartPosition();
         return Car.of(engine, position, name);
+    }
+
+    private Engine createDefaultEngineWithDefaultEnergyFactory() {
+        return new Engine(new EnergyFactory());
+    }
+
+    private Position createDefaultStartPosition() {
+        return Position.start();
     }
 }
