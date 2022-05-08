@@ -13,14 +13,14 @@ import java.util.List;
 public class Game {
     private final InputView inputView;
     private final OutputView outputView;
-    private final CarFactory carFactory;
+    private final RacingCarsFactory racingCarsFactory;
     private final NameDelimiter nameDelimiter;
     private final WinnersReferee winnersReferee;
 
-    public Game(InputView inputView, OutputView outputView, CarFactory carFactory, NameDelimiter nameDelimiter, WinnersReferee winners) {
+    public Game(InputView inputView, OutputView outputView, RacingCarsFactory racingCarsFactory, NameDelimiter nameDelimiter, WinnersReferee winners) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.carFactory = carFactory;
+        this.racingCarsFactory = racingCarsFactory;
         this.nameDelimiter = nameDelimiter;
         this.winnersReferee = winners;
     }
@@ -37,9 +37,8 @@ public class Game {
     RacingCars createRacingCars() {
         try {
             final String inputNames = inputView.inputCarsNames();
-            final List<Name> delimitNames = nameDelimiter.delimit(inputNames);
-            final List<Car> cars = carFactory.create(delimitNames);
-            return RacingCars.from(cars);
+            final List<Name> delimitedNames = nameDelimiter.delimit(inputNames);
+            return racingCarsFactory.create(delimitedNames);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return createRacingCars();
@@ -64,8 +63,8 @@ public class Game {
         }
         return result;
     }
-    
-    public WinnersDto determineWinners(MoveRecords moveRecords) {
+
+    WinnersDto determineWinners(MoveRecords moveRecords) {
         final List<Name> winnerNames = winnersReferee.determineFrom(moveRecords);
         return WinnersDto.from(winnerNames);
     }

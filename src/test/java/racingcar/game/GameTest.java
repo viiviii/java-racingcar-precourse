@@ -3,8 +3,8 @@ package racingcar.game;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
-import racingcar.race.CarFactory;
 import racingcar.race.RacingCars;
+import racingcar.race.RacingCarsFactory;
 import racingcar.race.WinnersReferee;
 import racingcar.rule.MoveCount;
 import racingcar.rule.NameDelimiter;
@@ -17,10 +17,10 @@ import static org.mockito.Mockito.*;
 class GameTest {
     private InputView inputView = mock(InputView.class);
     private OutputView outputView = mock(OutputView.class);
-    private CarFactory carFactory = new CarFactory();
+    private RacingCarsFactory racingCarsFactory = new RacingCarsFactory();
     private NameDelimiter nameDelimiter = new NameDelimiter();
     private WinnersReferee winnersReferee = new WinnersReferee();
-    private Game game = new Game(inputView, outputView, carFactory, nameDelimiter, winnersReferee);
+    private Game game = new Game(inputView, outputView, racingCarsFactory, nameDelimiter, winnersReferee);
 
     @DisplayName("자동차 경주 게임 플레이")
     @Test
