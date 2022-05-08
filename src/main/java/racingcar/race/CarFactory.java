@@ -29,7 +29,7 @@ public class CarFactory {
     public List<Car> create(List<Name> names) {
         final List<Car> cars = new ArrayList<>();
         for (Name name : names) {
-            cars.add(Car.of(engine, position, name));
+            cars.add(Car.of(engine, position.copy(), name)); // TODO: 임시 처리
         }
         return cars;
     }
