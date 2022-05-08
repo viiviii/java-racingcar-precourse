@@ -7,8 +7,8 @@ import racingcar.rule.Position;
 
 public class Car {
     private final Engine engine;
-    private final Position position;
     private final Name name;
+    private Position position;
 
     private Car(Engine engine, Position position, Name name) {
         this.engine = engine;
@@ -29,15 +29,16 @@ public class Car {
         return name;
     }
 
-    Position position() {
-        return position;
-    }
-
     Position move() {
         final Move move = engine.power();
         if (move.isForward()) {
-            position.increase();
+            position = increasePosition();
         }
-        return position.copy();
+        return position;
+    }
+
+    private Position increasePosition() {
+        final int current = position.get();
+        return new Position(current + 1);
     }
 }
