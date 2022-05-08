@@ -5,7 +5,7 @@ import java.util.Objects;
 public final class Position implements Comparable<Position> {
     private static final int START_POSITION = 0;
 
-    private int value;
+    private final int value;
 
     public Position(int position) {
         validateMin(position);
