@@ -13,7 +13,7 @@ public class Application {
         final Message message = new Message();
         final InputView inputView = new InputView(message);
         final OutputView outputView = new OutputView(System.out, message);
-        final CarFactory carFactory = CarFactory.fromDefault();
+        final CarFactory carFactory = new CarFactory();
         final NameDelimiter nameDelimiter = new NameDelimiter();
         final WinnersReferee winnersReferee = new WinnersReferee();
         // TODO: 부자다 부자

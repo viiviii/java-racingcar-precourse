@@ -18,8 +18,7 @@ class CarFactoryTest {
         List<Name> names = Arrays.asList(new Name("pobi"));
 
         //when
-        CarFactory carFactory = CarFactory.fromDefault();
-        List<Car> cars = carFactory.create(names);
+        List<Car> cars = new CarFactory().create(names);
 
         //then
         assertThat(cars).hasSize(1);

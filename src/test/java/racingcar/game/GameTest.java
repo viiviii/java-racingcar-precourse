@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 class GameTest {
     private InputView inputView = mock(InputView.class);
     private OutputView outputView = mock(OutputView.class);
-    private CarFactory carFactory = CarFactory.fromDefault();
+    private CarFactory carFactory = new CarFactory();
     private NameDelimiter nameDelimiter = new NameDelimiter();
     private WinnersReferee winnersReferee = new WinnersReferee();
     private Game game = new Game(inputView, outputView, carFactory, nameDelimiter, winnersReferee);
