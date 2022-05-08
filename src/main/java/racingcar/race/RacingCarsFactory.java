@@ -21,7 +21,7 @@ public class RacingCarsFactory {
     private Car createDefaultCarWith(Name name) {
         final Engine engine = createDefaultEngineWithDefaultEnergyFactory();
         final Position position = createDefaultStartPosition();
-        return Car.of(engine, position, name);
+        return Car.of(engine, name, position);
     }
 
     private Engine createDefaultEngineWithDefaultEnergyFactory() {
