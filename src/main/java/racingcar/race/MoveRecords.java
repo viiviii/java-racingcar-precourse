@@ -3,14 +3,14 @@ package racingcar.race;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public final class MoveRecords {
     private Map<Name, Position> records = new HashMap<>();
 
-    // TODO: recordOf 이런 값이 변하는 메서드는 최대한 숨기고 싶어
     public boolean recordOf(Name name, Position position) {
         records.put(name, position);
         return records.containsKey(name);
@@ -20,11 +20,11 @@ public final class MoveRecords {
         return records.get(name);
     }
 
-    public Iterable<Name> allNames() {
+    public Set<Name> allNames() {
         return records.keySet();
     }
 
-    public Position maxPosition() {
-        return Collections.max(records.values());
+    public Collection<Position> allPositions() {
+        return records.values();
     }
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import racingcar.rule.Name;
 import racingcar.rule.Position;
 
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoveRecordsTest {
@@ -62,9 +64,9 @@ class MoveRecordsTest {
         Name name1 = new Name("pobi");
         Name name2 = new Name("honux");
         Position position = new Position(5);
-        MoveRecords moveRecords = new MoveRecords();
 
         //when
+        MoveRecords moveRecords = new MoveRecords();
         moveRecords.recordOf(name1, position);
         moveRecords.recordOf(name2, position);
         Iterable<Name> names = moveRecords.allNames();
@@ -73,20 +75,21 @@ class MoveRecordsTest {
         assertThat(names).containsExactlyInAnyOrder(name1, name2);
     }
 
-
-    @DisplayName("기록된 최대 위치를 구할 수 있다")
+    @DisplayName("기록된 모든 위치를 구할 수 있다")
     @Test
-    void maxPosition() {
+    void allPositions() {
         //given
-        Position expectedMaxPosition = new Position(5);
-        MoveRecords moveRecords = new MoveRecords();
+        Position position1 = new Position(3);
+        Position position2 = new Position(5);
 
         //when
-        moveRecords.recordOf(new Name("pobi"), expectedMaxPosition);
-        moveRecords.recordOf(new Name("honux"), Position.start());
-        Position actual = moveRecords.maxPosition();
+        MoveRecords moveRecords = new MoveRecords();
+        moveRecords.recordOf(new Name("a"), position1);
+        moveRecords.recordOf(new Name("b"), position2);
+        moveRecords.recordOf(new Name("c"), position2);
+        Collection<Position> positions = moveRecords.allPositions();
 
         //then
-        assertThat(actual).isEqualTo(expectedMaxPosition);
+        assertThat(positions).containsExactly(position1, position2, position2);
     }
 }
