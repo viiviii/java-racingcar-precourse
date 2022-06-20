@@ -23,7 +23,7 @@ class ControllerTest {
         int forward = 4;
         boolean moved = true;
 
-        given(view.inputMoveCount()).willReturn(moveCount);
+        given(view.inputMoveTimes()).willReturn(moveCount);
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(forward);
         given(car.move(forward)).willReturn(moved);
 
@@ -31,7 +31,7 @@ class ControllerTest {
         controller.start();
 
         //then
-        verify(view).inputMoveCount();
+        verify(view).inputMoveTimes();
         verify(car, times(moveCount)).move(forward);
         verify(myRandom, times(moveCount)).pickNumberInRage(anyInt(), anyInt());
         verify(view).moveResult(Arrays.asList(true, true));

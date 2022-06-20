@@ -15,13 +15,18 @@ public final class Controller {
     }
 
     public void start() {
-        final int moveCount = view.inputMoveCount();
+        final int moveTimes = view.inputMoveTimes();
+        final List<Boolean> movements = carMovesBy(moveTimes);
+        view.moveResult(movements);
+    }
+
+    private List<Boolean> carMovesBy(int moveTimes) {
         final List<Boolean> movements = new ArrayList<>();
-        for (int move = 0; move < moveCount; move++) {
-            int condition = myRandom.pickNumberInRage(0, 9);
-            boolean moved = car.move(condition);
+        for (int move = 0; move < moveTimes; move++) {
+            final int condition = myRandom.pickNumberInRage(0, 9);
+            final boolean moved = car.move(condition);
             movements.add(moved);
         }
-        view.moveResult(movements);
+        return movements;
     }
 }
