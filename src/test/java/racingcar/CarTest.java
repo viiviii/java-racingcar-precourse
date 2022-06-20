@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CarTest {
 
-    ControllerTest.Car car = new CarImpl();
+    Car car = new CarImpl();
 
     @DisplayName("4 이상인 경우 전진한다")
     @Test
@@ -33,13 +33,5 @@ class CarTest {
 
         //then
         assertThat(moved).isFalse();
-    }
-
-    public static final class CarImpl implements ControllerTest.Car {
-
-        @Override
-        public boolean move(int number) {
-            return number > 3;
-        }
     }
 }

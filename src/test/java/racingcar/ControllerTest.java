@@ -1,6 +1,5 @@
 package racingcar;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,37 +29,5 @@ class ControllerTest {
         //then
         verify(car).move(forward);
         verify(view).moveResult(moved);
-    }
-
-    public static final class Controller {
-        private final View view;
-        private final Car car;
-        private final MyRandom myRandom;
-
-        public Controller(View view, Car car, MyRandom myRandom) {
-            this.view = view;
-            this.car = car;
-            this.myRandom = myRandom;
-        }
-
-        public void start() {
-            int conditions = myRandom.pickNumberInRage(0, 9);
-            boolean moved = car.move(conditions);
-            view.moveResult(moved);
-        }
-    }
-
-    public interface Car {
-        boolean move(int number);
-    }
-
-    public interface View {
-        void moveResult(boolean moved);
-    }
-
-    public class MyRandom {
-        public int pickNumberInRage(int startInclusive, int endInclusive) {
-            return Randoms.pickNumberInRange(startInclusive, endInclusive);
-        }
     }
 }
