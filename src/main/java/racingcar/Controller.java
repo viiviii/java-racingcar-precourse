@@ -1,5 +1,8 @@
 package racingcar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Controller {
     private final View view;
     private final Car car;
@@ -12,8 +15,13 @@ public final class Controller {
     }
 
     public void start() {
-        int condition = myRandom.pickNumberInRage(0, 9);
-        boolean moved = car.move(condition);
-        view.moveResult(moved);
+        final int moveCount = view.inputMoveCount();
+        final List<Boolean> movements = new ArrayList<>();
+        for (int move = 0; move < moveCount; move++) {
+            int condition = myRandom.pickNumberInRage(0, 9);
+            boolean moved = car.move(condition);
+            movements.add(moved);
+        }
+        view.moveResult(movements);
     }
 }
