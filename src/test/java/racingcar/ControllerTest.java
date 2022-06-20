@@ -3,7 +3,7 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -17,14 +17,14 @@ class ControllerTest {
     @Test
     void start() {
         //given
-        given(car.move()).willReturn(true);
+        given(car.move(anyInt())).willReturn(true);
 
         //when
         controller.start();
 
         //then
-        verify(car).move();
-        verify(view).moveResult(anyBoolean());
+        verify(car).move(anyInt());
+        verify(view).moveResult(true);
     }
 
     public static final class Controller {
@@ -37,13 +37,13 @@ class ControllerTest {
         }
 
         public void start() {
-            boolean moved = car.move();
+            boolean moved = car.move(4);
             view.moveResult(moved);
         }
     }
 
     public interface Car {
-        boolean move();
+        boolean move(int number);
     }
 
     public interface View {
