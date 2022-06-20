@@ -1,5 +1,9 @@
 package racingcar;
 
+import java.util.List;
+
 public interface View {
-    void moveResult(boolean moved);
+    void moveResult(List<Boolean> movements);
+
+    int inputMoveTimes();
 }
