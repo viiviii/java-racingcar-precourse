@@ -29,7 +29,7 @@ class AttemptCountTest {
         RaceResult raceResult = attemptCount.move(race);
 
         //then
-        assertThat(raceResult.moveTimes()).isEqualTo(count);
+        assertThat(raceResult.attemptCount()).isEqualTo(count);
     }
 
     private Car createCar(String carName) {

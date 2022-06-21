@@ -27,13 +27,13 @@ public final class AttemptCount {
         }
 
         @Override
-        public int moveTimes() {
+        public int attemptCount() {
             return records.size();
         }
 
         @Override
-        public Record recordOf(int moveTime) {
-            return records.get(moveTime);
+        public Record recordOf(int attemptIndex) {
+            return records.get(attemptIndex);
         }
     }
 }

@@ -32,7 +32,7 @@ public final class Controller {
     }
 
     private AttemptCount inputAttemptCount() {
-        final int inputAttemptCount = view.inputMoveTimes();
-        return new AttemptCount(inputAttemptCount);
+        final int attemptCount = view.inputAttemptCount();
+        return new AttemptCount(attemptCount);
     }
 }

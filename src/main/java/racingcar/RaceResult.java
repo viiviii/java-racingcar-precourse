@@ -1,7 +1,7 @@
 package racingcar;
 
 public interface RaceResult {
-    int moveTimes();
+    int attemptCount();
 
-    Record recordOf(int moveTime); // TODO: 이동시간이냐 이름이 뭐 이럼
+    Record recordOf(int attemptIndex);
 }
