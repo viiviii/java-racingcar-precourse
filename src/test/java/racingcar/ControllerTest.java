@@ -10,30 +10,30 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 class ControllerTest {
-    private final Car car = mock(Car.class);
     private final View view = mock(View.class);
     private final MyRandom myRandom = mock(MyRandom.class);
-    private final Controller controller = new Controller(view, car, myRandom);
+    private final Controller controller = new Controller(view, myRandom);
 
-    @DisplayName("1대의 자동차가 2번 움직인다")
+    @DisplayName("자동차 횟수를 입력받은 후 실행 결과를 출력한다")
     @Test
     void start() {
         //given
         int moveCount = 2;
         int forward = 4;
-        boolean moved = true;
 
         given(view.inputMoveTimes()).willReturn(moveCount);
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(forward);
-        given(car.move(forward)).willReturn(moved);
 
         //when
         controller.start();
 
         //then
         verify(view).inputMoveTimes();
-        verify(car, times(moveCount)).move(forward);
         verify(myRandom, times(moveCount)).pickNumberInRage(anyInt(), anyInt());
-        verify(view).moveResult(Arrays.asList(true, true));
+        verify(view).moveResult(Arrays.asList(position(1), position(2)));
+    }
+
+    private Position position(int value) {
+        return new Position(value);
     }
 }
