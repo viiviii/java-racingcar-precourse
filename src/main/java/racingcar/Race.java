@@ -17,7 +17,8 @@ public final class Race {
         for (int move = 0; move < moveTimes; move++) {
             final int condition = myRandom.pickNumberInRage(0, 9);
             final boolean moved = car.move(condition);
-            movements.add(moved ? 1 : 0);
+            final Integer previous = move == 0 ? 0 : movements.get(move - 1);
+            movements.add(previous + (moved ? 1 : 0));
         }
         return movements;
     }
