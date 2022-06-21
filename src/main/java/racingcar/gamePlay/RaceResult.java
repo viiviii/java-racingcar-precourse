@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.gamePlay;
 
 public interface RaceResult {
     int attemptCount();

@@ -1,4 +1,9 @@
-package racingcar;
+package racingcar.gamePlay;
+
+import racingcar.MyRandom;
+import racingcar.gameStrategy.AttemptCount;
+import racingcar.gameStrategy.CarImpl;
+import racingcar.gameStrategy.Cars;
 
 import java.util.ArrayList;
 import java.util.List;

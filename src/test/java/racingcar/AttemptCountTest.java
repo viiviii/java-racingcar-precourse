@@ -2,6 +2,11 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.gamePlay.Car;
+import racingcar.gamePlay.RaceResult;
+import racingcar.gameStrategy.AttemptCount;
+import racingcar.gameStrategy.CarImpl;
+import racingcar.gameStrategy.Cars;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
