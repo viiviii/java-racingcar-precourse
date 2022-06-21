@@ -18,15 +18,16 @@ class RaceTest {
     void moves() throws Exception {
         //given
         int moveTimes = 2;
-        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(4);
+        int forward = 4;
+        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(forward);
 
         //when
         Car car = new CarImpl();
         Race race = new Race(car, myRandom);
-        List<Boolean> moved = race.movesBy(moveTimes);
+        List<Integer> positions = race.movesBy(moveTimes);
 
         //then
-        assertThat(moved).hasSize(moveTimes);
-        assertThat(moved).containsExactly(true, true);
+        assertThat(positions).hasSize(moveTimes);
+        assertThat(positions).containsExactly(1, 2);
     }
 }

@@ -30,6 +30,6 @@ class ControllerTest {
         //then
         verify(view).inputMoveTimes();
         verify(myRandom, times(moveCount)).pickNumberInRage(anyInt(), anyInt());
-        verify(view).moveResult(Arrays.asList(true, true));
+        verify(view).moveResult(Arrays.asList(1, 2));
     }
 }
