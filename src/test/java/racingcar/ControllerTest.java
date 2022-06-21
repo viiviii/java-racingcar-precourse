@@ -2,6 +2,10 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
@@ -16,18 +20,23 @@ class ControllerTest {
     @Test
     void start() {
         //given
+        List<String> carNames = Arrays.asList("pobi", "woni");
         int moveTimes = 2;
+        int wantedRandomCalls = carNames.size() * moveTimes; // TODO
         int forward = 4;
 
+        given(view.inputCarNames()).willReturn(carNames);
         given(view.inputMoveTimes()).willReturn(moveTimes);
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(forward);
+        InOrder inOrder = inOrder(view, myRandom);
 
         //when
         controller.start();
 
         //then
-        verify(view).inputMoveTimes();
-        verify(myRandom, times(moveTimes)).pickNumberInRage(anyInt(), anyInt());
-        verify(view).raceResult(any());
+        inOrder.verify(view).inputCarNames();
+        inOrder.verify(view).inputMoveTimes();
+        inOrder.verify(myRandom, times(wantedRandomCalls)).pickNumberInRage(anyInt(), anyInt());
+        inOrder.verify(view).raceResult(any());
     }
 }

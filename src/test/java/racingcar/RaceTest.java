@@ -3,6 +3,8 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
@@ -21,8 +23,8 @@ class RaceTest {
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(STOP, FORWARD, FORWARD);
 
         //when
-        Car car = new CarImpl();
-        Race race = new Race(car, myRandom);
+        Car car = new CarImpl("pobi");
+        Race race = new Race(Arrays.asList(car), myRandom); // TODO
         RaceResult result = race.movesBy(moveTimes);
 
         //then

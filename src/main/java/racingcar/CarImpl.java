@@ -1,10 +1,11 @@
 package racingcar;
 
 public final class CarImpl implements Car {
-
+    private final String name;
     private int position = 0;
 
-    public CarImpl() {
+    public CarImpl(String name) {
+        this.name = name;
     }
 
     @Override
