@@ -39,8 +39,8 @@ public final class Race {
         }
 
         @Override
-        public List<Record> toList() {
-            return new ArrayList<>(records); // TODO
+        public Record recordOf(int moveTime) {
+            return records.get(moveTime);
         }
     }
 

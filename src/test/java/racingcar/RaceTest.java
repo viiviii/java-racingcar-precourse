@@ -31,8 +31,8 @@ class RaceTest {
         //then
         assertThat(result.moveTimes()).isEqualTo(moveTimes);
 //        assertThat(result.toList()).containsExactly(0, 1, 2);  // TODO
-        assertThat(result.toList().get(0).carNames()).containsExactly("pobi", "woni");  // TODO
-        assertThat(result.toList().get(0).positionBy("pobi")).isOne();  // TODO
-        assertThat(result.toList().get(1).positionBy("pobi")).isEqualTo(2);  // TODO
+        assertThat(result.recordOf(0).carNames()).containsExactly("pobi", "woni");  // TODO
+        assertThat(result.recordOf(0).positionBy("pobi")).isEqualTo(1);  // TODO
+        assertThat(result.recordOf(1).positionBy("pobi")).isEqualTo(2);  // TODO
     }
 }
