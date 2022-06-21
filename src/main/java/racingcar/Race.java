@@ -12,12 +12,12 @@ public final class Race {
         this.myRandom = myRandom;
     }
 
-    public List<Boolean> movesBy(int moveTimes) {
-        final List<Boolean> movements = new ArrayList<>();
+    public List<Integer> movesBy(int moveTimes) {
+        final List<Integer> movements = new ArrayList<>();
         for (int move = 0; move < moveTimes; move++) {
             final int condition = myRandom.pickNumberInRage(0, 9);
             final boolean moved = car.move(condition);
-            movements.add(moved);
+            movements.add(moved ? 1 : 0);
         }
         return movements;
     }

@@ -16,7 +16,7 @@ public final class Controller {
         // TODO: new Car, new Race
         final Car car = new CarImpl();
         final Race race = new Race(car, myRandom);
-        final List<Boolean> movements = race.movesBy(moveTimes);
+        final List<Integer> movements = race.movesBy(moveTimes);
         view.moveResult(movements);
     }
 }
