@@ -3,8 +3,6 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -18,10 +16,10 @@ class ControllerTest {
     @Test
     void start() {
         //given
-        int moveCount = 2;
+        int moveTimes = 2;
         int forward = 4;
 
-        given(view.inputMoveTimes()).willReturn(moveCount);
+        given(view.inputMoveTimes()).willReturn(moveTimes);
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(forward);
 
         //when
@@ -29,11 +27,7 @@ class ControllerTest {
 
         //then
         verify(view).inputMoveTimes();
-        verify(myRandom, times(moveCount)).pickNumberInRage(anyInt(), anyInt());
-        verify(view).moveResult(Arrays.asList(position(1), position(2)));
-    }
-
-    private Position position(int value) {
-        return new Position(value);
+        verify(myRandom, times(moveTimes)).pickNumberInRage(anyInt(), anyInt());
+        verify(view).moveResult(any());
     }
 }
