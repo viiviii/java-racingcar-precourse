@@ -3,7 +3,7 @@ package racingcar;
 import java.util.List;
 
 public interface View {
-    void moveResult(List<Integer> movements);
+    void moveResult(List<Position> positions);
 
     int inputMoveTimes();
 }

@@ -12,14 +12,33 @@ public final class Race {
         this.myRandom = myRandom;
     }
 
-    public List<Integer> movesBy(int moveTimes) {
-        final List<Integer> movements = new ArrayList<>();
-        for (int move = 0; move < moveTimes; move++) {
+    public List<Position> movesBy(int moveTimes) {
+        final Record record = new Record();
+        for (int index = 0; index < moveTimes; index++) {
             final int condition = myRandom.pickNumberInRage(0, 9);
             final boolean moved = car.move(condition);
-            final Integer previous = move == 0 ? 0 : movements.get(move - 1);
-            movements.add(previous + (moved ? 1 : 0));
+            final Position position = new Position(moved ? 1 : 0); // TODO: 어디서?
+            record.put(position);
         }
-        return movements;
+        return record.toList(); // TODO
+    }
+
+    // TODO: 얘도 주입받아야 될 거 같애 자동차 이름까지 생기면 변경하기
+    private static final class Record {
+        private final List<Position> positions = new ArrayList<>();
+
+        private void put(Position position) {
+            final Position previous = last();
+            positions.add(position.add(previous));
+        }
+
+        private Position last() {
+            final int size = positions.size();
+            return size == 0 ? Position.zero : positions.get(size - 1);
+        }
+
+        private List<Position> toList() {
+            return new ArrayList<>(positions);
+        }
     }
 }
