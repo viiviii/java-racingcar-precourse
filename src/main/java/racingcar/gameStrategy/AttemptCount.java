@@ -1,5 +1,6 @@
 package racingcar.gameStrategy;
 
+import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.RaceResult;
 import racingcar.gamePlay.Record;
 

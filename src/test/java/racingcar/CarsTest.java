@@ -3,9 +3,10 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gamePlay.Car;
+import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.Record;
 import racingcar.gameStrategy.CarImpl;
-import racingcar.gameStrategy.Cars;
+import racingcar.gameStrategy.RandomMoveCars;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -23,7 +24,7 @@ class CarsTest {
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
         Car car1 = createCar("pobi");
         Car car2 = createCar("woni");
-        Cars cars = Cars.of(myRandom, car1, car2);
+        Cars cars = RandomMoveCars.of(myRandom, car1, car2);
 
         //when
         Record record = cars.move();

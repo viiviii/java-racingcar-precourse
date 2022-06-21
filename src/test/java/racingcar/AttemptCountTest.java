@@ -3,10 +3,11 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gamePlay.Car;
+import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.RaceResult;
 import racingcar.gameStrategy.AttemptCount;
 import racingcar.gameStrategy.CarImpl;
-import racingcar.gameStrategy.Cars;
+import racingcar.gameStrategy.RandomMoveCars;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -28,7 +29,7 @@ class AttemptCountTest {
 
         //when
         AttemptCount attemptCount = new AttemptCount(count);
-        Cars cars = Cars.of(myRandom, createCar("pobi"));
+        Cars cars = RandomMoveCars.of(myRandom, createCar("pobi"));
         RaceResult raceResult = attemptCount.move(cars);
 
         //then

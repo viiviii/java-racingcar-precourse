@@ -3,7 +3,7 @@ package racingcar.gamePlay;
 import racingcar.MyRandom;
 import racingcar.gameStrategy.AttemptCount;
 import racingcar.gameStrategy.CarImpl;
-import racingcar.gameStrategy.Cars;
+import racingcar.gameStrategy.RandomMoveCars;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public final class Controller {
             final Car car = new CarImpl(carName);
             cars.add(car);
         }
-        return new Cars(cars, myRandom);
+        return new RandomMoveCars(cars, myRandom);
     }
 
     private AttemptCount inputAttemptCount() {
