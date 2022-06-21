@@ -1,6 +1,9 @@
 package racingcar;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public final class Race {
     private final List<Car> cars;
@@ -11,16 +14,7 @@ public final class Race {
         this.myRandom = myRandom;
     }
 
-    public RaceResult movesBy(int moveTimes) {
-        final RaceResultImpl raceResult = new RaceResultImpl();
-        for (int index = 0; index < moveTimes; index++) {
-            final Record record = moveAllCars();
-            raceResult.add(record);
-        }
-        return raceResult; // TODO
-    }
-
-    private Record moveAllCars() {
+    public Record moveAllCars() {
         final MoveRecord record = new MoveRecord();
         for (Car car : cars) {
             final int condition = myRandom.pickNumberInRage(0, 9);
@@ -28,25 +22,6 @@ public final class Race {
             record.put(car.name(), movedPosition);
         }
         return record;
-    }
-
-    // TODO: 얘도 주입받아야 될 거 같애 자동차 이름까지 생기면 변경하기
-    private static final class RaceResultImpl implements RaceResult {
-        private final List<Record> records = new ArrayList<>();
-
-        private void add(Record record) {
-            records.add(record);
-        }
-
-        @Override
-        public int moveTimes() {
-            return records.size();
-        }
-
-        @Override
-        public Record recordOf(int moveTime) {
-            return records.get(moveTime);
-        }
     }
 
     private static final class MoveRecord implements Record {

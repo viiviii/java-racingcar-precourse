@@ -13,21 +13,26 @@ public final class Controller {
     }
 
     public void start() {
-        final List<String> carNames = view.inputCarNames();
-        final int moveTimes = view.inputMoveTimes();
-        // TODO: new Car, new Race
-        final List<Car> cars = createCars(carNames);
+        // TODO: new Car, new Race, new AttemptCount
+        final List<Car> cars = inputCars();
         final Race race = new Race(cars, myRandom);
-        final RaceResult movements = race.movesBy(moveTimes);
-        view.raceResult(movements);
+        final AttemptCount attemptCount = inputAttemptCount();
+        final RaceResult raceResult = attemptCount.move(race);
+        view.raceResult(raceResult);
     }
 
-    private List<Car> createCars(List<String> carNames) {
+    private List<Car> inputCars() {
+        final List<String> carNames = view.inputCarNames();
         final List<Car> cars = new ArrayList<>();
         for (String carName : carNames) {
             final Car car = new CarImpl(carName);
             cars.add(car);
         }
         return cars;
+    }
+
+    private AttemptCount inputAttemptCount() {
+        final int inputAttemptCount = view.inputMoveTimes();
+        return new AttemptCount(inputAttemptCount);
     }
 }

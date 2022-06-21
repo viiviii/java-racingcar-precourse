@@ -4,35 +4,38 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class RaceTest {
     private final MyRandom myRandom = mock(MyRandom.class);
-    private final int STOP = 3;
     private final int FORWARD = 4;
 
-    @DisplayName("자동차가 여러번 움직인다")
+    @DisplayName("자동차가 움직인다")
     @Test
     void moves() {
         //given
-        int moveTimes = 3;
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
+        Car car1 = createCar("pobi");
+        Car car2 = createCar("woni");
+        List<Car> cars = Arrays.asList(car1, car2);
+        Race race = new Race(cars, myRandom);
 
         //when
-        Car car1 = new CarImpl("pobi");
-        Car car2 = new CarImpl("woni");
-        Race race = new Race(Arrays.asList(car1, car2), myRandom); // TODO
-        RaceResult result = race.movesBy(moveTimes);
+        Record record = race.moveAllCars();
 
         //then
-        assertThat(result.moveTimes()).isEqualTo(moveTimes);
-//        assertThat(result.toList()).containsExactly(0, 1, 2);  // TODO
-        assertThat(result.recordOf(0).carNames()).containsExactly("pobi", "woni");  // TODO
-        assertThat(result.recordOf(0).positionBy("pobi")).isEqualTo(1);  // TODO
-        assertThat(result.recordOf(1).positionBy("pobi")).isEqualTo(2);  // TODO
+        assertThat(record.carNames()).containsExactly(car1.name(), car2.name());
+        assertThat(record.positionBy(car1.name())).isEqualTo(1);
+        assertThat(record.positionBy(car2.name())).isEqualTo(1);
+        verify(myRandom, times(cars.size())).pickNumberInRage(anyInt(), anyInt()); // TODO
+    }
+
+    private Car createCar(String carName) {
+        return new CarImpl(carName);
     }
 }
