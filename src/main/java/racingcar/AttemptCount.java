@@ -10,10 +10,10 @@ public final class AttemptCount {
         this.count = count;
     }
 
-    public RaceResult move(Race race) {
+    public RaceResult move(Cars cars) {
         final ResultImpl result = new ResultImpl();
         for (int i = 0; i < count; i++) {
-            final Record record = race.moveAllCars();
+            final Record record = cars.move();
             result.add(record);
         }
         return result;

@@ -25,8 +25,8 @@ class AttemptCountTest {
 
         //when
         AttemptCount attemptCount = new AttemptCount(count);
-        Race race = new Race(Arrays.asList(createCar("pobi")), myRandom);
-        RaceResult raceResult = attemptCount.move(race);
+        Cars cars = new Cars(Arrays.asList(createCar("pobi")), myRandom);
+        RaceResult raceResult = attemptCount.move(cars);
 
         //then
         assertThat(raceResult.attemptCount()).isEqualTo(count);

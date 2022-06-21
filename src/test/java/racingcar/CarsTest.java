@@ -11,28 +11,28 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-class RaceTest {
+class CarsTest {
     private final MyRandom myRandom = mock(MyRandom.class);
     private final int FORWARD = 4;
 
-    @DisplayName("자동차가 움직인다")
+    @DisplayName("자동차들이 움직인다")
     @Test
     void moves() {
         //given
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
         Car car1 = createCar("pobi");
         Car car2 = createCar("woni");
-        List<Car> cars = Arrays.asList(car1, car2);
-        Race race = new Race(cars, myRandom);
+        List<Car> carList = Arrays.asList(car1, car2);
+        Cars cars = new Cars(carList, myRandom);
 
         //when
-        Record record = race.moveAllCars();
+        Record record = cars.move();
 
         //then
         assertThat(record.carNames()).containsExactly(car1.name(), car2.name());
         assertThat(record.positionBy(car1.name())).isEqualTo(1);
         assertThat(record.positionBy(car2.name())).isEqualTo(1);
-        verify(myRandom, times(cars.size())).pickNumberInRage(anyInt(), anyInt()); // TODO
+        verify(myRandom, times(carList.size())).pickNumberInRage(anyInt(), anyInt()); // TODO
     }
 
     private Car createCar(String carName) {

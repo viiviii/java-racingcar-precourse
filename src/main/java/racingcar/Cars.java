@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public final class Race {
+public final class Cars {
     private final List<Car> cars;
-    private final MyRandom myRandom;
+    private final MyRandom myRandom; // TODO
 
-    public Race(List<Car> cars, MyRandom myRandom) {
+    public Cars(List<Car> cars, MyRandom myRandom) {
         this.cars = cars;
         this.myRandom = myRandom;
     }
 
-    public Record moveAllCars() {
-        final MoveRecord record = new MoveRecord();
+    public Record move() {
+        final PositionRecord record = new PositionRecord();
         for (Car car : cars) {
             final int condition = myRandom.pickNumberInRage(0, 9);
             final int movedPosition = car.move(condition);
@@ -24,7 +24,7 @@ public final class Race {
         return record;
     }
 
-    private static final class MoveRecord implements Record {
+    private static final class PositionRecord implements Record {
         private final Map<String, Integer> record = new HashMap<>();
 
         private void put(String carName, int position) {
