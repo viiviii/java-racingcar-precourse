@@ -1,7 +1,7 @@
 package racingcar.gamePlay;
 
 import racingcar.MyRandom;
-import racingcar.gameStrategy.AttemptCount;
+import racingcar.gameStrategy.AttemptCountImpl;
 import racingcar.gameStrategy.CarImpl;
 import racingcar.gameStrategy.RandomMoveCars;
 
@@ -37,6 +37,6 @@ public final class Controller {
 
     private AttemptCount inputAttemptCount() {
         final int attemptCount = view.inputAttemptCount();
-        return new AttemptCount(attemptCount);
+        return new AttemptCountImpl(attemptCount);
     }
 }
