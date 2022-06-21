@@ -14,15 +14,20 @@ public final class Race {
     public RaceResult movesBy(int moveTimes) {
         final RaceResultImpl raceResult = new RaceResultImpl();
         for (int index = 0; index < moveTimes; index++) {
-            final MoveRecord record = new MoveRecord();
-            for (Car car : cars) {
-                final int condition = myRandom.pickNumberInRage(0, 9);
-                final int movedPosition = car.move(condition);
-                record.put(car.name(), movedPosition);
-            }
+            final Record record = moveAllCars();
             raceResult.add(record);
         }
         return raceResult; // TODO
+    }
+
+    private Record moveAllCars() {
+        final MoveRecord record = new MoveRecord();
+        for (Car car : cars) {
+            final int condition = myRandom.pickNumberInRage(0, 9);
+            final int movedPosition = car.move(condition);
+            record.put(car.name(), movedPosition);
+        }
+        return record;
     }
 
     // TODO: 얘도 주입받아야 될 거 같애 자동차 이름까지 생기면 변경하기
