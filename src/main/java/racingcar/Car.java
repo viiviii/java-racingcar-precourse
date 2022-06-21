@@ -1,5 +1,7 @@
 package racingcar;
 
 public interface Car {
-    boolean move(int condition);
+    int position();
+
+    int move(int condition);
 }

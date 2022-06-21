@@ -18,7 +18,6 @@ class RaceTest {
     @DisplayName("자동차가 여러번 움직인다")
     @Test
     void moves() {
-
         //given
         int moveTimes = 5;
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD, STOP, FORWARD);
@@ -26,16 +25,11 @@ class RaceTest {
         //when
         Car car = new CarImpl();
         Race race = new Race(car, myRandom);
-        List<Position> positions = race.movesBy(moveTimes);
+        List<Integer> positions = race.movesBy(moveTimes);
 
         //then
         assertThat(positions)
                 .hasSize(moveTimes)
-                // TODO
-                .containsExactly(position(1), position(1), position(2), position(3), position(4));
-    }
-
-    private Position position(int value) {
-        return new Position(value);
+                .containsExactly(1, 1, 2, 3, 4);
     }
 }
