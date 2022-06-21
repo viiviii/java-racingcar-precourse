@@ -3,8 +3,6 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
@@ -25,7 +23,7 @@ class AttemptCountTest {
 
         //when
         AttemptCount attemptCount = new AttemptCount(count);
-        Cars cars = new Cars(Arrays.asList(createCar("pobi")), myRandom);
+        Cars cars = Cars.of(myRandom, createCar("pobi"));
         RaceResult raceResult = attemptCount.move(cars);
 
         //then

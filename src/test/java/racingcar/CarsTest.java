@@ -3,13 +3,10 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 class CarsTest {
     private final MyRandom myRandom = mock(MyRandom.class);
@@ -22,8 +19,7 @@ class CarsTest {
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
         Car car1 = createCar("pobi");
         Car car2 = createCar("woni");
-        List<Car> carList = Arrays.asList(car1, car2);
-        Cars cars = new Cars(carList, myRandom);
+        Cars cars = Cars.of(myRandom, car1, car2);
 
         //when
         Record record = cars.move();
@@ -32,7 +28,6 @@ class CarsTest {
         assertThat(record.carNames()).containsExactly(car1.name(), car2.name());
         assertThat(record.positionBy(car1.name())).isEqualTo(1);
         assertThat(record.positionBy(car2.name())).isEqualTo(1);
-        verify(myRandom, times(carList.size())).pickNumberInRage(anyInt(), anyInt()); // TODO
     }
 
     private Car createCar(String carName) {

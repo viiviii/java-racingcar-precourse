@@ -1,17 +1,19 @@
 package racingcar;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public final class Cars {
     private final List<Car> cars;
     private final MyRandom myRandom; // TODO
 
+    // TODO
     public Cars(List<Car> cars, MyRandom myRandom) {
         this.cars = cars;
         this.myRandom = myRandom;
+    }
+
+    public static Cars of(MyRandom myRandom, Car... cars) {
+        return new Cars(Arrays.asList(cars), myRandom);
     }
 
     public Record move() {
