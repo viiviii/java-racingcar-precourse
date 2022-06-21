@@ -28,6 +28,6 @@ class ControllerTest {
         //then
         verify(view).inputMoveTimes();
         verify(myRandom, times(moveTimes)).pickNumberInRage(anyInt(), anyInt());
-        verify(view).moveResult(any());
+        verify(view).raceResult(any());
     }
 }

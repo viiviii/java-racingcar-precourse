@@ -3,8 +3,6 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
@@ -19,17 +17,16 @@ class RaceTest {
     @Test
     void moves() {
         //given
-        int moveTimes = 5;
-        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD, STOP, FORWARD);
+        int moveTimes = 3;
+        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(STOP, FORWARD, FORWARD);
 
         //when
         Car car = new CarImpl();
         Race race = new Race(car, myRandom);
-        List<Integer> positions = race.movesBy(moveTimes);
+        RaceResult result = race.movesBy(moveTimes);
 
         //then
-        assertThat(positions)
-                .hasSize(moveTimes)
-                .containsExactly(1, 1, 2, 3, 4);
+        assertThat(result.moveTimes()).isEqualTo(moveTimes);
+        assertThat(result.toList()).containsExactly(0, 1, 2);  // TODO
     }
 }

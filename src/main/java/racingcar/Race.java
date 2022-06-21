@@ -12,25 +12,31 @@ public final class Race {
         this.myRandom = myRandom;
     }
 
-    public List<Integer> movesBy(int moveTimes) {
-        final Record record = new Record();
+    public RaceResult movesBy(int moveTimes) {
+        final RaceResultImpl record = new RaceResultImpl();
         for (int index = 0; index < moveTimes; index++) {
             final int condition = myRandom.pickNumberInRage(0, 9);
             final int movedPosition = car.move(condition);
             record.put(movedPosition);
         }
-        return record.toList(); // TODO
+        return record; // TODO
     }
 
     // TODO: 얘도 주입받아야 될 거 같애 자동차 이름까지 생기면 변경하기
-    private static final class Record {
+    private static final class RaceResultImpl implements RaceResult {
         private final List<Integer> positions = new ArrayList<>();
 
         private void put(int position) {
             positions.add(position);
         }
 
-        private List<Integer> toList() {
+        @Override
+        public int moveTimes() {
+            return positions.size();
+        }
+
+        @Override
+        public List<Integer> toList() {
             return new ArrayList<>(positions);
         }
     }

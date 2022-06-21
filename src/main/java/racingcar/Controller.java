@@ -1,7 +1,5 @@
 package racingcar;
 
-import java.util.List;
-
 public final class Controller {
     private final View view;
     private final MyRandom myRandom;
@@ -16,7 +14,7 @@ public final class Controller {
         // TODO: new Car, new Race
         final Car car = new CarImpl();
         final Race race = new Race(car, myRandom);
-        final List<Integer> movements = race.movesBy(moveTimes);
-        view.moveResult(movements);
+        final RaceResult movements = race.movesBy(moveTimes);
+        view.raceResult(movements);
     }
 }
