@@ -1,4 +1,6 @@
-package racingcar;
+package racingcar.gameStrategy;
+
+import racingcar.gamePlay.Car;
 
 public final class CarImpl implements Car {
     private final String name;

@@ -1,15 +1,22 @@
-package racingcar;
+package racingcar.gameStrategy;
+
+import racingcar.gamePlay.AttemptCount;
+import racingcar.gamePlay.Cars;
+import racingcar.gamePlay.RaceResult;
+import racingcar.gamePlay.Record;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class AttemptCount {
+// TODO: 클래스명
+public final class AttemptCountImpl implements AttemptCount {
     private final int count;
 
-    public AttemptCount(int count) {
+    public AttemptCountImpl(int count) {
         this.count = count;
     }
 
+    @Override
     public RaceResult move(Cars cars) {
         final ResultImpl result = new ResultImpl();
         for (int i = 0; i < count; i++) {

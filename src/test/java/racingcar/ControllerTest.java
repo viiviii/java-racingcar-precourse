@@ -3,6 +3,8 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
+import racingcar.gamePlay.Controller;
+import racingcar.gamePlay.View;
 
 import java.util.Arrays;
 import java.util.List;

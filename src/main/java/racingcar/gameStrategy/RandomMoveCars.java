@@ -1,21 +1,27 @@
-package racingcar;
+package racingcar.gameStrategy;
+
+import racingcar.MyRandom;
+import racingcar.gamePlay.Car;
+import racingcar.gamePlay.Cars;
+import racingcar.gamePlay.Record;
 
 import java.util.*;
 
-public final class Cars {
+public final class RandomMoveCars implements Cars {
     private final List<Car> cars;
     private final MyRandom myRandom; // TODO
 
     // TODO
-    public Cars(List<Car> cars, MyRandom myRandom) {
+    public RandomMoveCars(List<Car> cars, MyRandom myRandom) {
         this.cars = cars;
         this.myRandom = myRandom;
     }
 
     public static Cars of(MyRandom myRandom, Car... cars) {
-        return new Cars(Arrays.asList(cars), myRandom);
+        return new RandomMoveCars(Arrays.asList(cars), myRandom);
     }
 
+    @Override
     public Record move() {
         final PositionRecord record = new PositionRecord();
         for (Car car : cars) {
