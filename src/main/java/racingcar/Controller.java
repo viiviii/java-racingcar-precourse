@@ -1,32 +1,22 @@
 package racingcar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class Controller {
     private final View view;
-    private final Car car;
     private final MyRandom myRandom;
 
-    public Controller(View view, Car car, MyRandom myRandom) {
+    public Controller(View view, MyRandom myRandom) {
         this.view = view;
-        this.car = car;
         this.myRandom = myRandom;
     }
 
     public void start() {
         final int moveTimes = view.inputMoveTimes();
-        final List<Boolean> movements = carMovesBy(moveTimes);
+        // TODO: new Car, new Race
+        final Car car = new CarImpl();
+        final Race race = new Race(car, myRandom);
+        final List<Boolean> movements = race.movesBy(moveTimes);
         view.moveResult(movements);
-    }
-
-    private List<Boolean> carMovesBy(int moveTimes) {
-        final List<Boolean> movements = new ArrayList<>();
-        for (int move = 0; move < moveTimes; move++) {
-            final int condition = myRandom.pickNumberInRage(0, 9);
-            final boolean moved = car.move(condition);
-            movements.add(moved);
-        }
-        return movements;
     }
 }
