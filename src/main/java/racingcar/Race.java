@@ -1,7 +1,6 @@
 package racingcar;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public final class Race {
     private final List<Car> cars;
@@ -13,34 +12,53 @@ public final class Race {
     }
 
     public RaceResult movesBy(int moveTimes) {
-        final RaceResult raceResult = new RaceResultImpl();
+        final RaceResultImpl raceResult = new RaceResultImpl();
         for (int index = 0; index < moveTimes; index++) {
-            final List<Integer> positions = new ArrayList<>();
+            final MoveRecord record = new MoveRecord();
             for (Car car : cars) {
                 final int condition = myRandom.pickNumberInRage(0, 9);
                 final int movedPosition = car.move(condition);
-                positions.add(movedPosition);
+                record.put(car.name(), movedPosition);
             }
+            raceResult.add(record);
         }
         return raceResult; // TODO
     }
 
     // TODO: 얘도 주입받아야 될 거 같애 자동차 이름까지 생기면 변경하기
     private static final class RaceResultImpl implements RaceResult {
-        private final List<Integer> positions = new ArrayList<>();
+        private final List<Record> records = new ArrayList<>();
 
-        private void put(int position) {
-            positions.add(position);
+        private void add(Record record) {
+            records.add(record);
         }
 
         @Override
         public int moveTimes() {
-            return positions.size();
+            return records.size();
         }
 
         @Override
-        public List<Integer> toList() {
-            return new ArrayList<>(positions);
+        public List<Record> toList() {
+            return new ArrayList<>(records); // TODO
+        }
+    }
+
+    private static final class MoveRecord implements Record {
+        private final Map<String, Integer> record = new HashMap<>();
+
+        private void put(String carName, int position) {
+            record.put(carName, position);
+        }
+
+        @Override
+        public Set<String> carNames() {
+            return record.keySet();
+        }
+
+        @Override
+        public int positionBy(String carName) {
+            return record.get(carName);
         }
     }
 }

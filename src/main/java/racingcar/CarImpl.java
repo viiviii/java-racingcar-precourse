@@ -9,6 +9,11 @@ public final class CarImpl implements Car {
     }
 
     @Override
+    public String name() {
+        return name;
+    }
+
+    @Override
     public int position() {
         return position;
     }

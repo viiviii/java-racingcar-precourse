@@ -20,15 +20,19 @@ class RaceTest {
     void moves() {
         //given
         int moveTimes = 3;
-        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(STOP, FORWARD, FORWARD);
+        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
 
         //when
-        Car car = new CarImpl("pobi");
-        Race race = new Race(Arrays.asList(car), myRandom); // TODO
+        Car car1 = new CarImpl("pobi");
+        Car car2 = new CarImpl("woni");
+        Race race = new Race(Arrays.asList(car1, car2), myRandom); // TODO
         RaceResult result = race.movesBy(moveTimes);
 
         //then
         assertThat(result.moveTimes()).isEqualTo(moveTimes);
-        assertThat(result.toList()).containsExactly(0, 1, 2);  // TODO
+//        assertThat(result.toList()).containsExactly(0, 1, 2);  // TODO
+        assertThat(result.toList().get(0).carNames()).containsExactly("pobi", "woni");  // TODO
+        assertThat(result.toList().get(0).positionBy("pobi")).isOne();  // TODO
+        assertThat(result.toList().get(1).positionBy("pobi")).isEqualTo(2);  // TODO
     }
 }
