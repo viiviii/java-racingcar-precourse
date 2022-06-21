@@ -49,6 +49,6 @@ class CarTest {
     }
 
     private Car createCar() {
-        return new CarImpl();
+        return new CarImpl("pobi");
     }
 }

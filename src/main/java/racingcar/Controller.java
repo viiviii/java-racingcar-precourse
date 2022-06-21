@@ -1,5 +1,6 @@
 package racingcar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Controller {
@@ -12,11 +13,25 @@ public final class Controller {
     }
 
     public void start() {
-        final int moveTimes = view.inputMoveTimes();
-        // TODO: new Car, new Race
-        final Car car = new CarImpl();
-        final Race race = new Race(car, myRandom);
-        final List<Integer> movements = race.movesBy(moveTimes);
-        view.moveResult(movements);
+        // TODO: new Car, new Cars, new AttemptCount
+        final Cars cars = inputCars();
+        final AttemptCount attemptCount = inputAttemptCount();
+        final RaceResult raceResult = attemptCount.move(cars);
+        view.raceResult(raceResult);
+    }
+
+    private Cars inputCars() {
+        final List<String> carNames = view.inputCarNames();
+        final List<Car> cars = new ArrayList<>();
+        for (String carName : carNames) {
+            final Car car = new CarImpl(carName);
+            cars.add(car);
+        }
+        return new Cars(cars, myRandom);
+    }
+
+    private AttemptCount inputAttemptCount() {
+        final int attemptCount = view.inputAttemptCount();
+        return new AttemptCount(attemptCount);
     }
 }
