@@ -12,7 +12,6 @@ public final class Controller {
     }
 
     public void start() {
-        // TODO: new Car (v), new Cars (v), new AttemptCount
         final Cars cars = inputCars();
         final AttemptCount attemptCount = inputAttemptCount();
         final RaceResult raceResult = attemptCount.move(cars);
