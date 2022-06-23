@@ -2,8 +2,7 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.Car;
-import racingcar.gameStrategy.CarImpl;
+import racingcar.gameStrategy.Car;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,6 +50,6 @@ class CarTest {
     }
 
     private Car createCar() {
-        return new CarImpl("pobi");
+        return new Car("pobi");
     }
 }

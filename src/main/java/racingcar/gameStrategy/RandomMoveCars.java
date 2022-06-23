@@ -1,7 +1,6 @@
 package racingcar.gameStrategy;
 
 import racingcar.MyRandom;
-import racingcar.gamePlay.Car;
 import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.Record;
 

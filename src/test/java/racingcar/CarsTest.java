@@ -2,10 +2,9 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.Car;
 import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.Record;
-import racingcar.gameStrategy.CarImpl;
+import racingcar.gameStrategy.Car;
 import racingcar.gameStrategy.RandomMoveCars;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +35,6 @@ class CarsTest {
     }
 
     private Car createCar(String carName) {
-        return new CarImpl(carName);
+        return new Car(carName);
     }
 }
