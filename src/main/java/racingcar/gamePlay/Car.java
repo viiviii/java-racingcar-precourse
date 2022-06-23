@@ -7,5 +7,5 @@ public interface Car {
 
     int position();
 
-    int move();
+    int move(int condition);
 }

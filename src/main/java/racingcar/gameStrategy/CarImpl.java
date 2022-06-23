@@ -1,15 +1,12 @@
 package racingcar.gameStrategy;
 
-import racingcar.MyRandom;
 import racingcar.gamePlay.Car;
 
 public final class CarImpl implements Car {
-    private final MyRandom myRandom;
     private final String name;
     private int position = 0;
 
-    public CarImpl(MyRandom myRandom, String name) {
-        this.myRandom = myRandom;
+    public CarImpl(String name) {
         this.name = name;
     }
 
@@ -24,8 +21,7 @@ public final class CarImpl implements Car {
     }
 
     @Override
-    public int move() {
-        final int condition = myRandom.pickNumberInRage(0, 9); // TODO
+    public int move(int condition) {
         increasePosition(condition);
         return position();
     }

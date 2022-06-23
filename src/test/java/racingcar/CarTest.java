@@ -6,13 +6,8 @@ import racingcar.gamePlay.Car;
 import racingcar.gameStrategy.CarImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 class CarTest {
-    private final MyRandom myRandom = mock(MyRandom.class);
-
 
     @DisplayName("시작 위치는 0이다")
     @Test
@@ -32,11 +27,10 @@ class CarTest {
     void forward() {
         //given
         int forward = 4;
-        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(forward); // TODO
         Car car = createCar();
 
         //when
-        int position = car.move();
+        int position = car.move(forward);
 
         //then
         assertThat(position).isOne();
@@ -47,17 +41,16 @@ class CarTest {
     void stop() {
         //given
         int stop = 3;
-        given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(stop); // TODO
         Car car = createCar();
 
         //when
-        int position = car.move();
+        int position = car.move(stop);
 
         //then
         assertThat(position).isZero();
     }
 
     private Car createCar() {
-        return new CarImpl(myRandom, "pobi"); // TODO
+        return new CarImpl("pobi");
     }
 }
