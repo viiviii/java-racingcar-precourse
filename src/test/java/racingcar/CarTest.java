@@ -2,7 +2,6 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.Car;
 import racingcar.gameStrategy.CarImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +12,7 @@ class CarTest {
     @Test
     void startPosition() {
         //given
-        Car car = createCar();
+        CarImpl car = createCar();
 
         //when
         int position = car.position();
@@ -27,7 +26,7 @@ class CarTest {
     void forward() {
         //given
         int forward = 4;
-        Car car = createCar();
+        CarImpl car = createCar();
 
         //when
         int position = car.move(forward);
@@ -41,7 +40,7 @@ class CarTest {
     void stop() {
         //given
         int stop = 3;
-        Car car = createCar();
+        CarImpl car = createCar();
 
         //when
         int position = car.move(stop);
@@ -50,7 +49,7 @@ class CarTest {
         assertThat(position).isZero();
     }
 
-    private Car createCar() {
+    private CarImpl createCar() {
         return new CarImpl("pobi");
     }
 }

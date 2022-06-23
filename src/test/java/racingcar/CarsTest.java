@@ -2,7 +2,6 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.Car;
 import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.Record;
 import racingcar.gameStrategy.CarImpl;
@@ -22,8 +21,8 @@ class CarsTest {
     void moves() {
         //given
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
-        Car car1 = createCar("pobi");
-        Car car2 = createCar("woni");
+        CarImpl car1 = createCar("pobi");
+        CarImpl car2 = createCar("woni");
         Cars cars = RandomMoveCars.of(myRandom, car1, car2);
 
         //when
@@ -35,7 +34,7 @@ class CarsTest {
         assertThat(record.positionBy(car2.name())).isEqualTo(1);
     }
 
-    private Car createCar(String carName) {
+    private CarImpl createCar(String carName) {
         return new CarImpl(carName);
     }
 }
