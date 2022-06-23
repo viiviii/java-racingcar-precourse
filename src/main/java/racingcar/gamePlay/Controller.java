@@ -26,6 +26,6 @@ public final class Controller {
 
     private AttemptCount inputAttemptCount() {
         final int attemptCount = view.inputAttemptCount();
-        return new AttemptCountImpl(attemptCount);
+        return new AttemptCount(attemptCount);
     }
 }

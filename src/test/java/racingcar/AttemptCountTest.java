@@ -2,7 +2,10 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.*;
+import racingcar.gamePlay.AttemptCount;
+import racingcar.gamePlay.Car;
+import racingcar.gamePlay.Cars;
+import racingcar.gamePlay.RaceResult;
 import racingcar.gameStrategy.CarImpl;
 import racingcar.gameStrategy.RandomMoveCars;
 
@@ -25,7 +28,7 @@ class AttemptCountTest {
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD); // TODO
 
         //when
-        AttemptCount attemptCount = new AttemptCountImpl(count);
+        AttemptCount attemptCount = new AttemptCount(count);
         Cars cars = RandomMoveCars.of(myRandom, createCar("pobi"));
         RaceResult raceResult = attemptCount.move(cars);
 
