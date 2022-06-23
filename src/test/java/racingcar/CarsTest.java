@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gamePlay.Cars;
 import racingcar.gamePlay.Record;
-import racingcar.gameStrategy.CarImpl;
+import racingcar.gameStrategy.Car;
 import racingcar.gameStrategy.RandomMoveCars;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,8 +21,8 @@ class CarsTest {
     void moves() {
         //given
         given(myRandom.pickNumberInRage(anyInt(), anyInt())).willReturn(FORWARD);
-        CarImpl car1 = createCar("pobi");
-        CarImpl car2 = createCar("woni");
+        Car car1 = createCar("pobi");
+        Car car2 = createCar("woni");
         Cars cars = RandomMoveCars.of(myRandom, car1, car2);
 
         //when
@@ -34,7 +34,7 @@ class CarsTest {
         assertThat(record.positionBy(car2.name())).isEqualTo(1);
     }
 
-    private CarImpl createCar(String carName) {
-        return new CarImpl(carName);
+    private Car createCar(String carName) {
+        return new Car(carName);
     }
 }

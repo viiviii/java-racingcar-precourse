@@ -1,10 +1,10 @@
 package racingcar.gameStrategy;
 
-public final class CarImpl {
+public final class Car {
     private final String name;
     private int position = 0;
 
-    public CarImpl(String name) {
+    public Car(String name) {
         this.name = name;
     }
 
