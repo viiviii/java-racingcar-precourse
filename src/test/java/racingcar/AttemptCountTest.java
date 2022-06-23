@@ -2,11 +2,7 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.AttemptCount;
-import racingcar.gamePlay.Car;
-import racingcar.gamePlay.Cars;
-import racingcar.gamePlay.RaceResult;
-import racingcar.gameStrategy.AttemptCountImpl;
+import racingcar.gamePlay.*;
 import racingcar.gameStrategy.CarImpl;
 import racingcar.gameStrategy.RandomMoveCars;
 

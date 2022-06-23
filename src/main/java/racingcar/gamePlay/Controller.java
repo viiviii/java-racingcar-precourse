@@ -1,7 +1,5 @@
 package racingcar.gamePlay;
 
-import racingcar.gameStrategy.AttemptCountImpl;
-
 import java.util.List;
 
 public final class Controller {
