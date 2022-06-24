@@ -1,11 +1,13 @@
 package racingcar.gameStrategy;
 
 public final class Car {
+    private final EnergyFactory energyFactory;
     private final String name;
     private int position = 0;
 
-    public Car(String name) {
-        this.name = name;
+    public Car(EnergyFactory energyFactory, String carName) {
+        this.energyFactory = energyFactory;
+        this.name = carName;
     }
 
     public String name() {
@@ -16,12 +18,20 @@ public final class Car {
         return position;
     }
 
-    public int move(int condition) {
-        increasePosition(condition);
+    public int move() {
+        final Energy energy = energyFactory.random();
+        if (isForward(energy)) {
+            increasePosition();
+        }
         return position();
     }
 
-    private void increasePosition(int condition) {
-        position += condition > 3 ? 1 : 0;
+    private boolean isForward(Energy energy) {
+        final Energy MINIMUM_FORWARD = Energy.valueOf(4);// TODO
+        return energy.isMoreThan(MINIMUM_FORWARD);
+    }
+
+    private void increasePosition() {
+        position += 1;
     }
 }
