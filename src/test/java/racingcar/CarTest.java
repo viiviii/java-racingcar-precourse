@@ -3,10 +3,15 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gameStrategy.Car;
+import racingcar.gameStrategy.Energy;
+import racingcar.gameStrategy.EnergyFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class CarTest {
+    private final EnergyFactory energyFactory = mock(EnergyFactory.class);
 
     @DisplayName("시작 위치는 0이다")
     @Test
@@ -25,11 +30,12 @@ class CarTest {
     @Test
     void forward() {
         //given
-        int forward = 4;
         Car car = createCar();
+        Energy forward = Energy.valueOf(4); // TODO
+        given(energyFactory.random()).willReturn(forward);
 
         //when
-        int position = car.move(forward);
+        int position = car.move();
 
         //then
         assertThat(position).isOne();
@@ -39,17 +45,18 @@ class CarTest {
     @Test
     void stop() {
         //given
-        int stop = 3;
         Car car = createCar();
+        Energy stop = Energy.valueOf(3); // TODO
+        given(energyFactory.random()).willReturn(stop);
 
         //when
-        int position = car.move(stop);
+        int position = car.move();
 
         //then
         assertThat(position).isZero();
     }
 
     private Car createCar() {
-        return new Car("pobi");
+        return new Car(energyFactory, "pobi");
     }
 }
