@@ -4,12 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gamePlay.AttemptCount;
 import racingcar.gamePlay.Cars;
-import racingcar.gamePlay.RaceResult;
 import racingcar.gamePlay.Record;
+import racingcar.gamePlay.Result;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -41,17 +39,17 @@ class AttemptCountTest {
         given(cars.move()).willReturn(record);
 
         //when
-        RaceResult result = new AttemptCount(count).move(cars);
+        Result result = new AttemptCount(count).move(cars);
 
         //then
         assertThat(result.attemptCount()).isEqualTo(count);
-        assertThat(result.recordOf(0)).isEqualTo(record); // TODO: index 0, count 1이 이상함
+        assertThat(result.allRecords()).containsOnlyOnce(record);
     }
 
     private static final class StubRecord implements Record {
         @Override
-        public Set<String> carNames() {
-            return new HashSet<>(Arrays.asList("pobi"));
+        public Iterable<String> carNames() {
+            return Arrays.asList("pobi");
         }
 
         @Override
