@@ -4,12 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gamePlay.AttemptCount;
 import racingcar.gamePlay.Cars;
-import racingcar.gamePlay.RaceResult;
 import racingcar.gamePlay.Record;
+import racingcar.gamePlay.Result;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -36,27 +34,38 @@ class AttemptCountTest {
     @Test
     void result() {
         //given
-        int count = 1;
-        StubRecord record = new StubRecord();
-        given(cars.move()).willReturn(record);
+        int count = 2;
+        Record firstRecord = new StubRecord("pobi", 1);
+        Record lastRecord = new StubRecord("pobi", 2);
+        given(cars.move()).willReturn(firstRecord, lastRecord);
 
         //when
-        RaceResult result = new AttemptCount(count).move(cars);
+        Result result = new AttemptCount(count).move(cars);
 
         //then
         assertThat(result.attemptCount()).isEqualTo(count);
-        assertThat(result.recordOf(0)).isEqualTo(record); // TODO: index 0, count 1이 이상함
+        assertThat(result.firstRecord()).isEqualTo(firstRecord);
+        assertThat(result.lastRecord()).isEqualTo(lastRecord);
+        assertThat(result.allRecords()).containsOnlyOnce(firstRecord, lastRecord);
     }
 
     private static final class StubRecord implements Record {
+        private final String carName;
+        private final int position;
+
+        private StubRecord(String carName, int position) {
+            this.carName = carName;
+            this.position = position;
+        }
+
         @Override
-        public Set<String> carNames() {
-            return new HashSet<>(Arrays.asList("pobi"));
+        public Iterable<String> carNames() {
+            return Arrays.asList(carName);
         }
 
         @Override
         public int positionBy(String carName) {
-            return 1;
+            return position;
         }
     }
 }

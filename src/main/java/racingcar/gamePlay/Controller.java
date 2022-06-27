@@ -14,8 +14,8 @@ public final class Controller {
     public void start() {
         final Cars cars = inputCars();
         final AttemptCount attemptCount = inputAttemptCount();
-        final RaceResult raceResult = attemptCount.move(cars);
-        view.raceResult(raceResult);
+        final Result result = attemptCount.move(cars);
+        view.outputResult(result);
     }
 
     private Cars inputCars() {

@@ -38,7 +38,7 @@ class ControllerTest {
         inOrder.verify(view).inputCarNames();
         inOrder.verify(carFactory).createCars(carNames);
         inOrder.verify(view).inputAttemptCount();
-        inOrder.verify(view).raceResult(any(RaceResult.class));
+        inOrder.verify(view).outputResult(any(Result.class));
     }
 
     private final class StubCars implements Cars {

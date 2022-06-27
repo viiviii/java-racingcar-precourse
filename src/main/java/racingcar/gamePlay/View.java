@@ -8,5 +8,5 @@ public interface View {
 
     int inputAttemptCount();
 
-    void raceResult(RaceResult raceResult);
+    void outputResult(Result result);
 }
