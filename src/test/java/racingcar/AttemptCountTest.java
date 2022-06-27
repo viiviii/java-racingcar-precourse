@@ -34,27 +34,38 @@ class AttemptCountTest {
     @Test
     void result() {
         //given
-        int count = 1;
-        StubRecord record = new StubRecord();
-        given(cars.move()).willReturn(record);
+        int count = 2;
+        Record firstRecord = new StubRecord("pobi", 1);
+        Record lastRecord = new StubRecord("pobi", 2);
+        given(cars.move()).willReturn(firstRecord, lastRecord);
 
         //when
         Result result = new AttemptCount(count).move(cars);
 
         //then
         assertThat(result.attemptCount()).isEqualTo(count);
-        assertThat(result.allRecords()).containsOnlyOnce(record);
+        assertThat(result.firstRecord()).isEqualTo(firstRecord);
+        assertThat(result.lastRecord()).isEqualTo(lastRecord);
+        assertThat(result.allRecords()).containsOnlyOnce(firstRecord, lastRecord);
     }
 
     private static final class StubRecord implements Record {
+        private final String carName;
+        private final int position;
+
+        private StubRecord(String carName, int position) {
+            this.carName = carName;
+            this.position = position;
+        }
+
         @Override
         public Iterable<String> carNames() {
-            return Arrays.asList("pobi");
+            return Arrays.asList(carName);
         }
 
         @Override
         public int positionBy(String carName) {
-            return 1;
+            return position;
         }
     }
 }
