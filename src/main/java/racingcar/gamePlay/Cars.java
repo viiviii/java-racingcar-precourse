@@ -1,6 +1,8 @@
 package racingcar.gamePlay;
 
+import java.util.List;
+
 public interface Cars {
-    
-    Record move();
+
+    List<CarPosition> move();
 }

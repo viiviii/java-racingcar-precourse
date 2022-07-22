@@ -1,45 +1,54 @@
 package racingcar;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.gamePlay.CarPosition;
 import racingcar.gamePlay.Cars;
-import racingcar.gamePlay.Record;
 import racingcar.gameStrategy.Car;
 import racingcar.gameStrategy.CarsImpl;
 import racingcar.gameStrategy.Energy;
 import racingcar.gameStrategy.EnergyFactory;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 // TODO
 class CarsTest {
-    private final EnergyFactory alwaysStop = mock(EnergyFactory.class);
-    private final EnergyFactory alwaysForward = mock(EnergyFactory.class);
-    private final Energy STOP = Energy.valueOf(3);
-    private final Energy FORWARD = Energy.valueOf(4);
 
-    @DisplayName("자동차들이 움직인다")
     @Test
-    void moves() {
+    void move() {
         //given
-        given(alwaysStop.random()).willReturn(STOP);
-        given(alwaysForward.random()).willReturn(FORWARD);
-        Car alwaysStopCar = createCar(alwaysStop, "pobi");
-        Car alwaysForwardCar = createCar(alwaysForward, "woni");
-        Cars cars = CarsImpl.of(alwaysStopCar, alwaysForwardCar);
+        // TODO: 테스트 리팩토링
+        Car forwardCar = createCar(new AlwaysForward(), "pobi");
+        Car stopCar = createCar(new AlwaysStop(), "woni");
+        Cars cars = CarsImpl.of(forwardCar, stopCar);
+        CarPosition forwardPosition = new CarPosition(forwardCar.name(), 1);
+        CarPosition stoppedPosition = new CarPosition(stopCar.name(), 0);
 
         //when
-        Record record = cars.move();
+        List<CarPosition> carMovements = cars.move();
 
         //then
-        assertThat(record.carNames()).containsExactly(alwaysStopCar.name(), alwaysForwardCar.name());
-        assertThat(record.positionBy(alwaysStopCar.name())).isEqualTo(0);
-        assertThat(record.positionBy(alwaysForwardCar.name())).isEqualTo(1);
+        assertThat(carMovements).containsExactly(forwardPosition, stoppedPosition);
     }
 
+    // TODO
     private Car createCar(EnergyFactory energyFactory, String carName) {
         return new Car(energyFactory, carName);
+    }
+
+    // TODO: EnergyFactory 같은 애는 인터페이스로 해야된대
+    private static final class AlwaysForward extends EnergyFactory {
+        @Override
+        public Energy random() {
+            return Energy.valueOf(Energy.MAX); // TODO: 팩토리 메서드 일관성있게 바꾸기
+        }
+    }
+
+    private static final class AlwaysStop extends EnergyFactory {
+        @Override
+        public Energy random() {
+            return Energy.valueOf(Energy.MIN); // TODO: 팩토리 메서드 일관성있게 바꾸기
+        }
     }
 }

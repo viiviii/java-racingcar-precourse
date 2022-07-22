@@ -39,6 +39,6 @@ class ControllerTest {
         verify(carFactory).createCars(carNames);
         verify(view).inputAttemptCount();
         verify(cars, times(attemptCount)).move();
-        verify(view, times(attemptCount)).outputResult(any());
+        verify(view, times(attemptCount)).outputPositionOfCars(any());
     }
 }

@@ -15,9 +15,8 @@ public final class Controller {
         final Cars cars = inputCars();
         final AttemptCount attemptCount = inputAttemptCount();
         attemptCount.forEachRemaining(sequence -> {
-            cars.move();
-            Result result = null; // TODO
-            view.outputResult(result);
+            final List<CarPosition> positions = cars.move();
+            view.outputPositionOfCars(positions);
         });
     }
 
