@@ -2,13 +2,13 @@ package racingcar;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-import racingcar.gamePlay.*;
+import racingcar.gamePlay.CarFactory;
+import racingcar.gamePlay.Cars;
+import racingcar.gamePlay.Controller;
+import racingcar.gamePlay.View;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -17,6 +17,7 @@ class ControllerTest {
     private final List<String> carNames = Arrays.asList("pobi", "woni");
 
     private final View view = mock(View.class);
+    private final Cars cars = mock(Cars.class);
     private final CarFactory carFactory = mock(CarFactory.class);
     private final Controller controller = new Controller(view, carFactory);
 
@@ -28,35 +29,16 @@ class ControllerTest {
 
         given(view.inputCarNames()).willReturn(carNames);
         given(view.inputAttemptCount()).willReturn(attemptCount);
-        given(carFactory.createCars(carNames)).willReturn(new StubCars());
-        InOrder inOrder = inOrder(view, carFactory);
+        given(carFactory.createCars(carNames)).willReturn(cars);
 
         //when
         controller.start();
 
         //then
-        inOrder.verify(view).inputCarNames();
-        inOrder.verify(carFactory).createCars(carNames);
-        inOrder.verify(view).inputAttemptCount();
-        inOrder.verify(view).outputResult(any(Result.class));
-    }
-
-    private final class StubCars implements Cars {
-        @Override
-        public Record move() {
-            return new StubRecord();
-        }
-    }
-
-    private final class StubRecord implements Record {
-        @Override
-        public Set<String> carNames() {
-            return new HashSet<>(carNames);
-        }
-
-        @Override
-        public int positionBy(String carName) {
-            return 0;
-        }
+        verify(view).inputCarNames();
+        verify(carFactory).createCars(carNames);
+        verify(view).inputAttemptCount();
+        verify(cars, times(attemptCount)).move();
+        verify(view, times(attemptCount)).outputResult(any());
     }
 }

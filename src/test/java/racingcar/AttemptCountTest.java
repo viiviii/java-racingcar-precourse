@@ -3,69 +3,67 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gamePlay.AttemptCount;
-import racingcar.gamePlay.Cars;
-import racingcar.gamePlay.Record;
-import racingcar.gamePlay.Result;
 
-import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class AttemptCountTest {
 
-    private final Cars cars = mock(Cars.class);
-
-    @DisplayName("이동 횟수 만큼 자동차들이 이동한다")
+    @DisplayName("더 시도할 수 있다")
     @Test
-    void moveCars() {
+    void hasNextReturnTrue() {
         //given
-        int count = 5;
+        int onceAttempts = 1;
 
         //when
-        new AttemptCount(count).move(cars);
+        AttemptCount attemptCount = new AttemptCount(onceAttempts);
+        boolean actual = attemptCount.hasNext();
 
         //then
-        verify(cars, times(count)).move();
+        assertThat(actual).isTrue();
     }
 
-    @DisplayName("자동차들의 이동 기록 목록을 리턴한다")
+    @DisplayName("더 시도할 수 없다")
     @Test
-    void result() {
+    void hasNextReturnFalse() {
         //given
-        int count = 2;
-        Record firstRecord = new StubRecord("pobi", 1);
-        Record lastRecord = new StubRecord("pobi", 2);
-        given(cars.move()).willReturn(firstRecord, lastRecord);
+        int noAttempts = 0;
 
         //when
-        Result result = new AttemptCount(count).move(cars);
+        AttemptCount attemptCount = new AttemptCount(noAttempts);
+        boolean actual = attemptCount.hasNext();
 
         //then
-        assertThat(result.attemptCount()).isEqualTo(count);
-        assertThat(result.firstRecord()).isEqualTo(firstRecord);
-        assertThat(result.lastRecord()).isEqualTo(lastRecord);
-        assertThat(result.allRecords()).containsOnlyOnce(firstRecord, lastRecord);
+        assertThat(actual).isFalse();
     }
 
-    private static final class StubRecord implements Record {
-        private final String carName;
-        private final int position;
+    @DisplayName("다음 시도 순서를 반환한다")
+    @Test
+    void move() {
+        //given
+        int onceAttempts = 1;
 
-        private StubRecord(String carName, int position) {
-            this.carName = carName;
-            this.position = position;
-        }
+        //when
+        AttemptCount attemptCount = new AttemptCount(onceAttempts);
+        int next = attemptCount.next();
 
-        @Override
-        public Iterable<String> carNames() {
-            return Arrays.asList(carName);
-        }
+        //then
+        assertThat(next).isOne();
+    }
 
-        @Override
-        public int positionBy(String carName) {
-            return position;
-        }
+    @DisplayName("다음 시도 순서가 없으면 예외를 던진다")
+    @Test
+    void unableToMove() {
+        //given
+        int noAttempts = 0;
+
+        //when
+        AttemptCount attemptCount = new AttemptCount(noAttempts);
+
+        //then
+        assertThatThrownBy(() -> attemptCount.next())
+                .isInstanceOf(NoSuchElementException.class);
     }
 }
