@@ -19,16 +19,16 @@ public final class Car {
     }
 
     public int move() {
-        final Energy energy = energyFactory.random();
-        if (isForward(energy)) {
+        final MovementNumber movementNumber = energyFactory.random();
+        if (isForward(movementNumber)) {
             increasePosition();
         }
         return position();
     }
 
-    private boolean isForward(Energy energy) {
-        final Energy MINIMUM_FORWARD = Energy.valueOf(4);// TODO
-        return energy.isMoreThan(MINIMUM_FORWARD);
+    private boolean isForward(MovementNumber movementNumber) {
+        final MovementNumber MINIMUM_FORWARD = MovementNumber.valueOf(4);// TODO
+        return movementNumber.isMoreThan(MINIMUM_FORWARD);
     }
 
     private void increasePosition() {

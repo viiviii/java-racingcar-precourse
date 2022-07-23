@@ -3,8 +3,8 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gameStrategy.Car;
-import racingcar.gameStrategy.Energy;
 import racingcar.gameStrategy.EnergyFactory;
+import racingcar.gameStrategy.MovementNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -31,7 +31,7 @@ class CarTest {
     void forward() {
         //given
         Car car = createCar();
-        Energy forward = Energy.valueOf(4); // TODO
+        MovementNumber forward = MovementNumber.valueOf(4); // TODO
         given(energyFactory.random()).willReturn(forward);
 
         //when
@@ -46,7 +46,7 @@ class CarTest {
     void stop() {
         //given
         Car car = createCar();
-        Energy stop = Energy.valueOf(3); // TODO
+        MovementNumber stop = MovementNumber.valueOf(3); // TODO
         given(energyFactory.random()).willReturn(stop);
 
         //when

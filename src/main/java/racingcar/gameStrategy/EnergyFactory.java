@@ -4,11 +4,11 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class EnergyFactory {
 
-    public Energy random() {
-        return Energy.valueOf(randomNumber());
+    public MovementNumber random() {
+        return MovementNumber.valueOf(randomNumber());
     }
 
     private int randomNumber() {
-        return Randoms.pickNumberInRange(Energy.MIN, Energy.MAX);
+        return Randoms.pickNumberInRange(MovementNumber.MIN, MovementNumber.MAX);
     }
 }
