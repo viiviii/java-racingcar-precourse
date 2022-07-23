@@ -5,12 +5,14 @@ import racingcar.gamePlay.CarPosition;
 import racingcar.gamePlay.Cars;
 import racingcar.gameStrategy.Car;
 import racingcar.gameStrategy.CarsImpl;
-import racingcar.gameStrategy.MovementNumber;
-import racingcar.gameStrategy.MovementNumberStrategy;
+import racingcar.gameStrategy.Movement;
+import racingcar.gameStrategy.MovementStrategy;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.gameStrategy.Movement.FORWARD;
+import static racingcar.gameStrategy.Movement.STOP;
 
 // TODO
 class CarsTest {
@@ -19,8 +21,8 @@ class CarsTest {
     void move() {
         //given
         // TODO: 테스트 리팩토링
-        Car forwardCar = createCar(new AlwaysForward(), "pobi");
-        Car stopCar = createCar(new AlwaysStop(), "woni");
+        Car forwardCar = createCarThatAlways(FORWARD, "pobi");
+        Car stopCar = createCarThatAlways(STOP, "woni");
         Cars cars = CarsImpl.of(forwardCar, stopCar);
         CarPosition forwardPosition = new CarPosition(forwardCar.name(), 1);
         CarPosition stoppedPosition = new CarPosition(stopCar.name(), 0);
@@ -33,22 +35,21 @@ class CarsTest {
     }
 
     // TODO
-    private Car createCar(MovementNumberStrategy movementNumberStrategy, String carName) {
-        return new Car(movementNumberStrategy, carName);
+    private Car createCarThatAlways(Movement movement, String carName) {
+        final MovementStrategy movementStrategy = new AlwaysReturns(movement);
+        return new Car(movementStrategy, carName);
     }
 
-    private static final class AlwaysForward implements MovementNumberStrategy {
+    private static final class AlwaysReturns implements MovementStrategy {
+        private final Movement movement;
 
-        @Override
-        public MovementNumber get() {
-            return MovementNumber.valueOf(MovementNumber.MAX);
+        private AlwaysReturns(Movement movement) {
+            this.movement = movement;
         }
-    }
 
-    private static final class AlwaysStop implements MovementNumberStrategy {
         @Override
-        public MovementNumber get() {
-            return MovementNumber.valueOf(MovementNumber.MIN);
+        public Movement movement() {
+            return movement;
         }
     }
 }

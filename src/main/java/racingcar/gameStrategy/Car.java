@@ -1,12 +1,12 @@
 package racingcar.gameStrategy;
 
 public final class Car {
-    private final MovementNumberStrategy movementNumberStrategy;
+    private final MovementStrategy movementStrategy;
     private final String name;
     private int position = 0;
 
-    public Car(MovementNumberStrategy movementNumberStrategy, String carName) {
-        this.movementNumberStrategy = movementNumberStrategy;
+    public Car(MovementStrategy movementStrategy, String carName) {
+        this.movementStrategy = movementStrategy;
         this.name = carName;
     }
 
@@ -19,16 +19,11 @@ public final class Car {
     }
 
     public int move() {
-        final MovementNumber movementNumber = movementNumberStrategy.get();
-        if (isForward(movementNumber)) {
+        final Movement movement = movementStrategy.movement();
+        if (movement.isForward()) {
             increasePosition();
         }
         return position();
-    }
-
-    private boolean isForward(MovementNumber movementNumber) {
-        final MovementNumber MINIMUM_FORWARD = MovementNumber.valueOf(4);// TODO
-        return movementNumber.isMoreThan(MINIMUM_FORWARD);
     }
 
     private void increasePosition() {

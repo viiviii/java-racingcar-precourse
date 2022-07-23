@@ -3,8 +3,12 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gameStrategy.Car;
+import racingcar.gameStrategy.Movement;
+import racingcar.gameStrategy.MovementStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.gameStrategy.Movement.FORWARD;
+import static racingcar.gameStrategy.Movement.STOP;
 
 class CarTest {
 
@@ -12,7 +16,7 @@ class CarTest {
     @Test
     void startPosition() {
         //given
-        MovementStrategy movementStrategy = new AlwaysReturns(Movement.STOP);
+        MovementStrategy movementStrategy = new AlwaysReturns(STOP);
         Car car = new Car(movementStrategy, "pobi");
 
         //when
@@ -26,7 +30,7 @@ class CarTest {
     @Test
     void stopped() {
         //given
-        MovementStrategy movementStrategy = new AlwaysReturns(Movement.STOP);
+        MovementStrategy movementStrategy = new AlwaysReturns(STOP);
         Car car = new Car(movementStrategy, "pobi");
 
         //when
@@ -40,7 +44,7 @@ class CarTest {
     @Test
     void movingForward() {
         //given
-        MovementStrategy movementStrategy = new AlwaysReturns(Movement.FORWARD);
+        MovementStrategy movementStrategy = new AlwaysReturns(FORWARD);
         Car car = new Car(movementStrategy, "pobi");
 
         //when
@@ -58,17 +62,8 @@ class CarTest {
         }
 
         @Override
-        public Movement get() {
+        public Movement movement() {
             return movement;
         }
-    }
-
-    private interface MovementStrategy {
-
-        Movement get();
-    }
-
-    private enum Movement {
-        FORWARD, STOP
     }
 }
