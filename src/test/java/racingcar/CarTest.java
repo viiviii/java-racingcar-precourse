@@ -3,8 +3,6 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gameStrategy.Car;
-import racingcar.gameStrategy.MovementNumber;
-import racingcar.gameStrategy.MovementNumberStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,22 +12,36 @@ class CarTest {
     @Test
     void startPosition() {
         //given
-        MovementNumberStrategy strategy = new AlwaysSameNumberReturn(4);
-        Car car = new Car(strategy, "pobi");
+        MovementStrategy movementStrategy = new AlwaysReturns(Movement.STOP);
+        Car car = new Car(movementStrategy, "pobi");
 
         //when
-        int position = car.position();
+        int startPosition = car.position();
+
+        //then
+        assertThat(startPosition).isZero();
+    }
+
+    @DisplayName("자동차가 정지한 경우 위치는 그대로이다")
+    @Test
+    void stopped() {
+        //given
+        MovementStrategy movementStrategy = new AlwaysReturns(Movement.STOP);
+        Car car = new Car(movementStrategy, "pobi");
+
+        //when
+        int position = car.move();
 
         //then
         assertThat(position).isZero();
     }
 
-    @DisplayName("4 이상인 경우 전진한다")
+    @DisplayName("자동차가 전진한 경우 위치가 1 증가한다")
     @Test
-    void forward() {
+    void movingForward() {
         //given
-        MovementNumberStrategy strategy = new AlwaysSameNumberReturn(4);
-        Car car = new Car(strategy, "pobi");
+        MovementStrategy movementStrategy = new AlwaysReturns(Movement.FORWARD);
+        Car car = new Car(movementStrategy, "pobi");
 
         //when
         int position = car.move();
@@ -38,30 +50,25 @@ class CarTest {
         assertThat(position).isOne();
     }
 
-    @DisplayName("3 이하인 경우 움직이지 않는다")
-    @Test
-    void stop() {
-        //given
-        MovementNumberStrategy strategy = new AlwaysSameNumberReturn(3);
-        Car car = new Car(strategy, "pobi");
+    private static final class AlwaysReturns implements MovementStrategy {
+        private final Movement movement;
 
-        //when
-        int position = car.move();
-
-        //then
-        assertThat(position).isZero();
-    }
-
-    private static final class AlwaysSameNumberReturn implements MovementNumberStrategy {
-        private final int number;
-
-        private AlwaysSameNumberReturn(int number) {
-            this.number = number;
+        private AlwaysReturns(Movement movement) {
+            this.movement = movement;
         }
 
         @Override
-        public MovementNumber get() {
-            return MovementNumber.valueOf(number);
+        public Movement get() {
+            return movement;
         }
+    }
+
+    private interface MovementStrategy {
+
+        Movement get();
+    }
+
+    private enum Movement {
+        FORWARD, STOP
     }
 }
