@@ -2,9 +2,10 @@ package racingcar.gameStrategy;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class EnergyFactory {
+public final class MovementNumberStrategyRandom implements MovementNumberStrategy {
 
-    public MovementNumber random() {
+    @Override
+    public MovementNumber get() {
         return MovementNumber.valueOf(randomNumber());
     }
 

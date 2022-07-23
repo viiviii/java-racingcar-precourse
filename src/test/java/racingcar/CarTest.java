@@ -3,21 +3,19 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.gameStrategy.Car;
-import racingcar.gameStrategy.EnergyFactory;
 import racingcar.gameStrategy.MovementNumber;
+import racingcar.gameStrategy.MovementNumberStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 class CarTest {
-    private final EnergyFactory energyFactory = mock(EnergyFactory.class);
 
     @DisplayName("시작 위치는 0이다")
     @Test
     void startPosition() {
         //given
-        Car car = createCar();
+        MovementNumberStrategy strategy = new AlwaysSameNumberReturn(4);
+        Car car = new Car(strategy, "pobi");
 
         //when
         int position = car.position();
@@ -30,9 +28,8 @@ class CarTest {
     @Test
     void forward() {
         //given
-        Car car = createCar();
-        MovementNumber forward = MovementNumber.valueOf(4); // TODO
-        given(energyFactory.random()).willReturn(forward);
+        MovementNumberStrategy strategy = new AlwaysSameNumberReturn(4);
+        Car car = new Car(strategy, "pobi");
 
         //when
         int position = car.move();
@@ -45,9 +42,8 @@ class CarTest {
     @Test
     void stop() {
         //given
-        Car car = createCar();
-        MovementNumber stop = MovementNumber.valueOf(3); // TODO
-        given(energyFactory.random()).willReturn(stop);
+        MovementNumberStrategy strategy = new AlwaysSameNumberReturn(3);
+        Car car = new Car(strategy, "pobi");
 
         //when
         int position = car.move();
@@ -56,7 +52,16 @@ class CarTest {
         assertThat(position).isZero();
     }
 
-    private Car createCar() {
-        return new Car(energyFactory, "pobi");
+    private static final class AlwaysSameNumberReturn implements MovementNumberStrategy {
+        private final int number;
+
+        private AlwaysSameNumberReturn(int number) {
+            this.number = number;
+        }
+
+        @Override
+        public MovementNumber get() {
+            return MovementNumber.valueOf(number);
+        }
     }
 }

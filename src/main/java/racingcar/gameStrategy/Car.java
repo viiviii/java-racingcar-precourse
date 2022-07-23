@@ -1,12 +1,12 @@
 package racingcar.gameStrategy;
 
 public final class Car {
-    private final EnergyFactory energyFactory;
+    private final MovementNumberStrategy movementNumberStrategy;
     private final String name;
     private int position = 0;
 
-    public Car(EnergyFactory energyFactory, String carName) {
-        this.energyFactory = energyFactory;
+    public Car(MovementNumberStrategy movementNumberStrategy, String carName) {
+        this.movementNumberStrategy = movementNumberStrategy;
         this.name = carName;
     }
 
@@ -19,7 +19,7 @@ public final class Car {
     }
 
     public int move() {
-        final MovementNumber movementNumber = energyFactory.random();
+        final MovementNumber movementNumber = movementNumberStrategy.get();
         if (isForward(movementNumber)) {
             increasePosition();
         }
