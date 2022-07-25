@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface Cars {
 
-    List<CarPosition> move();
+    void move();
+
+    List<CarPosition> positions();
 }

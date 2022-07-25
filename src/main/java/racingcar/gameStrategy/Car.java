@@ -3,7 +3,8 @@ package racingcar.gameStrategy;
 public final class Car {
     private final MovementStrategy movementStrategy;
     private final String name;
-    private int position = 0;
+
+    private int position = 0; // TODO
 
     public Car(MovementStrategy movementStrategy, String carName) {
         this.movementStrategy = movementStrategy;
@@ -18,12 +19,15 @@ public final class Car {
         return position;
     }
 
-    public int move() {
-        final Movement movement = movementStrategy.movement();
-        if (movement.isForward()) {
+    public void move() {
+        if (canForward()) {
             increasePosition();
         }
-        return position();
+    }
+
+    private boolean canForward() {
+        final Movement movement = movementStrategy.movement();
+        return movement.isForward();
     }
 
     private void increasePosition() {

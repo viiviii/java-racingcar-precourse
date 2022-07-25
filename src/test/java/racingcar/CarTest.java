@@ -16,8 +16,7 @@ class CarTest {
     @Test
     void startPosition() {
         //given
-        MovementStrategy movementStrategy = new AlwaysReturns(STOP);
-        Car car = new Car(movementStrategy, "pobi");
+        Car car = new Car(null, "pobi");
 
         //when
         int startPosition = car.position();
@@ -28,30 +27,30 @@ class CarTest {
 
     @DisplayName("자동차가 정지한 경우 위치는 그대로이다")
     @Test
-    void stopped() {
+    void stop() {
         //given
-        MovementStrategy movementStrategy = new AlwaysReturns(STOP);
-        Car car = new Car(movementStrategy, "pobi");
+        MovementStrategy movementStrategyIsStop = new AlwaysReturns(STOP);
+        Car car = new Car(movementStrategyIsStop, "pobi");
 
         //when
-        int position = car.move();
+        car.move();
 
         //then
-        assertThat(position).isZero();
+        assertThat(car.position()).isZero();
     }
 
     @DisplayName("자동차가 전진한 경우 위치가 1 증가한다")
     @Test
-    void movingForward() {
+    void forward() {
         //given
-        MovementStrategy movementStrategy = new AlwaysReturns(FORWARD);
-        Car car = new Car(movementStrategy, "pobi");
+        MovementStrategy movementStrategyIsForward = new AlwaysReturns(FORWARD);
+        Car car = new Car(movementStrategyIsForward, "pobi");
 
         //when
-        int position = car.move();
+        car.move();
 
         //then
-        assertThat(position).isOne();
+        assertThat(car.position()).isOne();
     }
 
     private static final class AlwaysReturns implements MovementStrategy {

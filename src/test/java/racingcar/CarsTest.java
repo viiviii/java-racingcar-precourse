@@ -8,8 +8,6 @@ import racingcar.gameStrategy.CarsImpl;
 import racingcar.gameStrategy.Movement;
 import racingcar.gameStrategy.MovementStrategy;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static racingcar.gameStrategy.Movement.FORWARD;
 import static racingcar.gameStrategy.Movement.STOP;
@@ -28,10 +26,10 @@ class CarsTest {
         CarPosition stoppedPosition = new CarPosition(stopCar.name(), 0);
 
         //when
-        List<CarPosition> carMovements = cars.move();
+        cars.move();
 
         //then
-        assertThat(carMovements).containsExactly(forwardPosition, stoppedPosition);
+        assertThat(cars.positions()).containsExactly(forwardPosition, stoppedPosition);
     }
 
     // TODO

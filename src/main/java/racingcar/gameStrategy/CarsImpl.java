@@ -11,7 +11,7 @@ public final class CarsImpl implements Cars {
     private final List<Car> cars;
 
     // TODO
-    public CarsImpl(List<Car> cars) {
+    private CarsImpl(List<Car> cars) {
         this.cars = cars;
     }
 
@@ -20,13 +20,22 @@ public final class CarsImpl implements Cars {
     }
 
     @Override
-    public List<CarPosition> move() {
+    public void move() {
+        for (Car car : cars) {
+            car.move();
+        }
+    }
+
+    @Override
+    public List<CarPosition> positions() {
         final List<CarPosition> carPositions = new ArrayList<>();
         for (Car car : cars) {
-            final int movedPosition = car.move();
-            final CarPosition carPosition = new CarPosition(car.name(), movedPosition);
-            carPositions.add(carPosition);
+            carPositions.add(toCarPosition(car));
         }
         return carPositions;
+    }
+
+    private CarPosition toCarPosition(Car car) {
+        return new CarPosition(car.name(), car.position());
     }
 }
