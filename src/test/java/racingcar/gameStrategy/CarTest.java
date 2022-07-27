@@ -1,10 +1,7 @@
-package racingcar;
+package racingcar.gameStrategy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gameStrategy.Car;
-import racingcar.gameStrategy.Movement;
-import racingcar.gameStrategy.MovementStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static racingcar.gameStrategy.Movement.FORWARD;

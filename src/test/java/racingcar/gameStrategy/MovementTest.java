@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.gameStrategy;
 
 import org.junit.jupiter.api.Test;
 

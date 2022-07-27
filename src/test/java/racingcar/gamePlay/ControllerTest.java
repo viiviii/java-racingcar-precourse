@@ -1,11 +1,7 @@
-package racingcar;
+package racingcar.gamePlay;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.CarFactory;
-import racingcar.gamePlay.Cars;
-import racingcar.gamePlay.Controller;
-import racingcar.gamePlay.View;
 
 import java.util.Arrays;
 import java.util.List;
