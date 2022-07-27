@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class CarsImpl implements Cars {
+final class CarsImpl implements Cars {
     private final List<Car> cars;
 
     // TODO
@@ -15,7 +15,7 @@ public final class CarsImpl implements Cars {
         this.cars = cars;
     }
 
-    public static Cars of(Car... cars) {
+    static Cars of(Car... cars) {
         return new CarsImpl(Arrays.asList(cars));
     }
 

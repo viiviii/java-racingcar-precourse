@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import static racingcar.gameStrategy.Movement.FORWARD;
 import static racingcar.gameStrategy.Movement.STOP;
 
-public final class MovementStrategyRandom implements MovementStrategy {
+final class MovementStrategyRandom implements MovementStrategy {
 
     @Override
     public Movement movement() {

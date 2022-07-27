@@ -1,25 +1,25 @@
 package racingcar.gameStrategy;
 
-public final class Car {
+final class Car {
     private final MovementStrategy movementStrategy;
     private final String name;
 
     private int position = 0; // TODO
 
-    public Car(MovementStrategy movementStrategy, String carName) {
+    Car(MovementStrategy movementStrategy, String carName) {
         this.movementStrategy = movementStrategy;
         this.name = carName;
     }
 
-    public String name() {
+    String name() {
         return name;
     }
 
-    public int position() {
+    int position() {
         return position;
     }
 
-    public void move() {
+    void move() {
         if (canForward()) {
             increasePosition();
         }

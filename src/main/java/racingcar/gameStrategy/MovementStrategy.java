@@ -1,6 +1,6 @@
 package racingcar.gameStrategy;
 
-public interface MovementStrategy {
+interface MovementStrategy {
 
     Movement movement();
 }
