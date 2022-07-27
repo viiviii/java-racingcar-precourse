@@ -10,17 +10,17 @@ public final class MovementStrategyRandom implements MovementStrategy {
     @Override
     public Movement movement() {
         final int randomNumber = pickNumberInRange();
-        return isForwardCondition(randomNumber) ? FORWARD : STOP;
+        return toMovement(randomNumber);
     }
-    
+
     private int pickNumberInRange() {
         final int START = 0;
         final int END = 9;
         return Randoms.pickNumberInRange(START, END);
     }
 
-    private boolean isForwardCondition(int randomNumber) {
+    private Movement toMovement(int randomNumber) {
         final int MINIMUM_FORWARD_NUMBER = 4;
-        return randomNumber >= MINIMUM_FORWARD_NUMBER;
+        return randomNumber >= MINIMUM_FORWARD_NUMBER ? FORWARD : STOP;
     }
 }

@@ -9,11 +9,11 @@ public final class AttemptCount implements Iterator<Integer> {
     private int currentIndex;
 
     public AttemptCount(int count) {
-        validateMinimum(count);
+        validateMin(count);
         this.count = count;
     }
 
-    private void validateMinimum(int count) {
+    private void validateMin(int count) {
         final int MIN = 0;
         if (count < MIN) {
             throw new IllegalArgumentException();
