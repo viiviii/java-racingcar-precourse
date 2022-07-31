@@ -2,52 +2,40 @@ package racingcar.gameStrategy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.gamePlay.Movement;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.gameStrategy.Movement.FORWARD;
-import static racingcar.gameStrategy.Movement.STOP;
+import static racingcar.gamePlay.Movement.FORWARD;
+import static racingcar.gamePlay.Movement.STOP;
 
 class CarTest {
 
-    @DisplayName("시작 위치는 0이다")
-    @Test
-    void startPosition() {
-        //given
-        Car car = new Car(null, "pobi");
-
-        //when
-        int startPosition = car.position();
-
-        //then
-        assertThat(startPosition).isZero();
-    }
-
-    @DisplayName("자동차가 정지한 경우 위치는 그대로이다")
+    @DisplayName("자동차가 정지했다")
     @Test
     void stop() {
         //given
-        MovementStrategy movementStrategyIsStop = new AlwaysReturns(STOP);
-        Car car = new Car(movementStrategyIsStop, "pobi");
+        Movement expectedMovement = STOP;
+        Car car = new Car(new AlwaysReturns(expectedMovement), "pobi");
 
         //when
-        car.move();
+        Movement movement = car.move();
 
         //then
-        assertThat(car.position()).isZero();
+        assertThat(movement).isEqualTo(expectedMovement);
     }
 
-    @DisplayName("자동차가 전진한 경우 위치가 1 증가한다")
+    @DisplayName("자동차가 전진했다")
     @Test
     void forward() {
         //given
-        MovementStrategy movementStrategyIsForward = new AlwaysReturns(FORWARD);
-        Car car = new Car(movementStrategyIsForward, "pobi");
+        Movement expectedMovement = FORWARD;
+        Car car = new Car(new AlwaysReturns(expectedMovement), "pobi");
 
         //when
-        car.move();
+        Movement movement = car.move();
 
         //then
-        assertThat(car.position()).isOne();
+        assertThat(movement).isEqualTo(expectedMovement);
     }
 
     private static final class AlwaysReturns implements MovementStrategy {

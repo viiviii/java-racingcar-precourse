@@ -1,13 +1,14 @@
 package racingcar.gameStrategy;
 
-import racingcar.gamePlay.CarPosition;
 import racingcar.gamePlay.Cars;
+import racingcar.gamePlay.Movement;
+import racingcar.gamePlay.Records;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-final class CarsImpl implements Cars {
+public final class CarsImpl implements Cars {
+    private final RememberingRecords records = new RememberingRecords();
     private final List<Car> cars;
 
     // TODO
@@ -15,27 +16,20 @@ final class CarsImpl implements Cars {
         this.cars = cars;
     }
 
-    static Cars of(Car... cars) {
+    public static Cars of(Car... cars) {
         return new CarsImpl(Arrays.asList(cars));
     }
 
     @Override
     public void move() {
         for (Car car : cars) {
-            car.move();
+            final Movement movement = car.move();
+            records.save(car.name(), movement);
         }
     }
 
     @Override
-    public List<CarPosition> positions() {
-        final List<CarPosition> carPositions = new ArrayList<>();
-        for (Car car : cars) {
-            carPositions.add(toCarPosition(car));
-        }
-        return carPositions;
-    }
-
-    private CarPosition toCarPosition(Car car) {
-        return new CarPosition(car.name(), car.position());
+    public Records records() {
+        return records;
     }
 }

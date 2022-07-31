@@ -8,5 +8,5 @@ public interface View {
 
     int inputAttemptCount();
 
-    void outputPositionOfCars(List<CarPosition> result);
+    void outputRecords(Records records);
 }

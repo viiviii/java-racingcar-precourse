@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.gameStrategy.Movement.FORWARD;
-import static racingcar.gameStrategy.Movement.STOP;
+import static racingcar.gamePlay.Movement.FORWARD;
+import static racingcar.gamePlay.Movement.STOP;
 
 class MovementStrategyRandomTest {
 

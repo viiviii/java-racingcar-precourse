@@ -1,9 +1,10 @@
 package racingcar.gameStrategy;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.gamePlay.Movement;
 
-import static racingcar.gameStrategy.Movement.FORWARD;
-import static racingcar.gameStrategy.Movement.STOP;
+import static racingcar.gamePlay.Movement.FORWARD;
+import static racingcar.gamePlay.Movement.STOP;
 
 final class MovementStrategyRandom implements MovementStrategy {
 

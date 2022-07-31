@@ -1,6 +1,6 @@
-package racingcar.gameStrategy;
+package racingcar.gamePlay;
 
-enum Movement {
+public enum Movement {
     FORWARD, STOP;
 
     public boolean isForward() {

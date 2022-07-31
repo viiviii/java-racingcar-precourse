@@ -1,12 +1,13 @@
 package racingcar.gameStrategy;
 
 import org.junit.jupiter.api.Test;
-import racingcar.gamePlay.CarPosition;
 import racingcar.gamePlay.Cars;
+import racingcar.gamePlay.Movement;
+import racingcar.gamePlay.Records;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.gameStrategy.Movement.FORWARD;
-import static racingcar.gameStrategy.Movement.STOP;
+import static racingcar.gamePlay.Movement.FORWARD;
+import static racingcar.gamePlay.Movement.STOP;
 
 // TODO
 class CarsTest {
@@ -18,14 +19,14 @@ class CarsTest {
         Car forwardCar = createCarThatAlways(FORWARD, "pobi");
         Car stopCar = createCarThatAlways(STOP, "woni");
         Cars cars = CarsImpl.of(forwardCar, stopCar);
-        CarPosition forwardPosition = new CarPosition(forwardCar.name(), 1);
-        CarPosition stoppedPosition = new CarPosition(stopCar.name(), 0);
 
         //when
         cars.move();
+        Records records = cars.records();
 
         //then
-        assertThat(cars.positions()).containsExactly(forwardPosition, stoppedPosition);
+        assertThat(records.recordOf(forwardCar.name())).containsExactly(FORWARD);
+        assertThat(records.recordOf(stopCar.name())).containsExactly(STOP);
     }
 
     // TODO
@@ -46,4 +47,5 @@ class CarsTest {
             return movement;
         }
     }
+
 }

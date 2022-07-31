@@ -3,8 +3,8 @@ package racingcar.gameStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.gameStrategy.Movement.FORWARD;
-import static racingcar.gameStrategy.Movement.STOP;
+import static racingcar.gamePlay.Movement.FORWARD;
+import static racingcar.gamePlay.Movement.STOP;
 
 class MovementTest {
 

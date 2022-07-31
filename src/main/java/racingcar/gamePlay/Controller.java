@@ -16,7 +16,7 @@ public final class Controller {
         final AttemptCount attemptCount = inputAttemptCount();
         attemptCount.forEachRemaining(sequence -> {
             cars.move();
-            view.outputPositionOfCars(cars.positions());
+            view.outputRecords(cars.records());
         });
     }
 
