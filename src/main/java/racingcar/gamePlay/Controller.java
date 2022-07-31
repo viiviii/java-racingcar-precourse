@@ -11,16 +11,20 @@ public final class Controller {
         this.carFactory = carFactory;
     }
 
-    public void start() {
-        final Cars cars = inputCars();
+    public void play() {
+        final List<Car> cars = inputCars();
         final AttemptCount attemptCount = inputAttemptCount();
-        attemptCount.forEachRemaining(sequence -> {
-            cars.move();
-            view.outputRecords(cars.records());
-        });
+        attemptCount.forEachRemaining(index -> moves(cars));
     }
 
-    private Cars inputCars() {
+    private void moves(List<Car> cars) {
+        for (Car car : cars) {
+            car.move();
+            view.outputMoveState(car.name(), car.state());
+        }
+    }
+
+    private List<Car> inputCars() {
         final List<String> carNames = view.inputCarNames();
         return carFactory.createCars(carNames);
     }

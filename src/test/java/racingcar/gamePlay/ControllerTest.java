@@ -13,7 +13,7 @@ class ControllerTest {
     private final List<String> carNames = Arrays.asList("pobi", "woni");
 
     private final View view = mock(View.class);
-    private final Cars cars = mock(Cars.class);
+    private final Car car = mock(Car.class);
     private final CarFactory carFactory = mock(CarFactory.class);
     private final Controller controller = new Controller(view, carFactory);
 
@@ -25,16 +25,16 @@ class ControllerTest {
 
         given(view.inputCarNames()).willReturn(carNames);
         given(view.inputAttemptCount()).willReturn(attemptCount);
-        given(carFactory.createCars(carNames)).willReturn(cars);
+        given(carFactory.createCars(carNames)).willReturn(Arrays.asList(car));
 
         //when
-        controller.start();
+        controller.play();
 
         //then
         verify(view).inputCarNames();
         verify(carFactory).createCars(carNames);
         verify(view).inputAttemptCount();
-        verify(cars, times(attemptCount)).move();
-        verify(view, times(attemptCount)).outputRecords(any());
+        verify(car, times(attemptCount)).move();
+        verify(view, times(attemptCount)).outputMoveState(car.name(), car.state());
     }
 }
