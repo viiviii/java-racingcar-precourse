@@ -2,7 +2,7 @@ package racingcar.gamePlay;
 
 import java.util.List;
 
-public interface CarFactory {
+public interface CarFactory<T> {
 
-    List<Car> createCars(List<String> carNames);
+    List<T> create(List<String> carNames);
 }

@@ -8,5 +8,5 @@ public interface View {
 
     int inputAttemptCount();
 
-    void outputMoveState(String name, Car.State state);
+    void outputMovingState(Car car);
 }

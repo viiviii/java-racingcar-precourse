@@ -1,30 +1,30 @@
 package racingcar.gameStrategy;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.gamePlay.Movement.FORWARD;
-import static racingcar.gamePlay.Movement.STOP;
+import static racingcar.gameStrategy.Movement.FORWARD;
+import static racingcar.gameStrategy.Movement.STOP;
 
 class MovementStrategyRandomTest {
 
     private final MovementStrategy movementStrategy = new MovementStrategyRandom();
 
-    @DisplayName("랜덤 값이 4 이상일 경우 전진")
-    @Test
-    void forwardWhenMoreThanFour() {
+    @ParameterizedTest(name = "랜덤 값이 4 이상이면 전진: value={0}")
+    @ValueSource(ints = {4, 5, 6, 7, 8, 9})
+    void forwardWhenMoreThanFour(int randomNumber) {
         assertRandomNumberInRangeTest(
                 () -> assertThat(movementStrategy.movement()).isEqualTo(FORWARD),
-                4);
+                randomNumber);
     }
 
-    @DisplayName("랜덤 값이 4 미만이면 정지")
-    @Test
-    void stopWhenLessThanFour() {
+    @ParameterizedTest(name = "랜덤 값이 4 미만이면 정지: value={0}")
+    @ValueSource(ints = {1, 2, 3})
+    void stopWhenLessThanFour(int randomNumber) {
         assertRandomNumberInRangeTest(
                 () -> assertThat(movementStrategy.movement()).isEqualTo(STOP),
-                3);
+                randomNumber);
     }
 }

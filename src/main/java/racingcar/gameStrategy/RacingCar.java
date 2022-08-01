@@ -1,16 +1,24 @@
 package racingcar.gameStrategy;
 
 import racingcar.gamePlay.Car;
-import racingcar.gamePlay.Movement;
+import racingcar.gamePlay.Movable;
 
-public final class RacingCar implements Car {
-    private final RememberingState state = new RememberingState(); // TODO
+public final class RacingCar implements Car, Movable {
     private final MovementStrategy movementStrategy;
     private final String name;
+    private Position position = Position.init();
 
-    RacingCar(MovementStrategy movementStrategy, String name) {
+    public RacingCar(MovementStrategy movementStrategy, String name) {
         this.movementStrategy = movementStrategy;
         this.name = name;
+    }
+
+    @Override
+    public void move() {
+        final Movement movement = movementStrategy.movement();
+        if (movement.isForward()) {
+            position = position.increase();
+        }
     }
 
     @Override
@@ -19,13 +27,7 @@ public final class RacingCar implements Car {
     }
 
     @Override
-    public State state() {
-        return state;
-    }
-
-    @Override
-    public void move() {
-        final Movement movement = movementStrategy.movement();
-        state.save(movement);
+    public int position() {
+        return position.value();
     }
 }
