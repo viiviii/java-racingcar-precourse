@@ -1,12 +1,12 @@
 package racingcar.gamePlay;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 // TODO: 클래스명
-public final class AttemptCount {
-    private static final int MINIMUM_ATTEMPT_COUNT = 0;
+public final class AttemptCount implements Iterator<Integer> {
     private final int count;
+    private int currentIndex;
 
     public AttemptCount(int count) {
         validateMin(count);
@@ -14,45 +14,28 @@ public final class AttemptCount {
     }
 
     private void validateMin(int count) {
-        if (count < MINIMUM_ATTEMPT_COUNT) {
+        final int MIN = 0;
+        if (count < MIN) {
             throw new IllegalArgumentException();
         }
     }
 
-    public Result move(Cars cars) {
-        final ResultImpl result = new ResultImpl();
-        for (int i = MINIMUM_ATTEMPT_COUNT; i < count; i++) {
-            final Record record = cars.move();
-            result.add(record);
-        }
-        return result;
+    @Override
+    public boolean hasNext() {
+        return currentIndex < count;
     }
 
-    private static final class ResultImpl implements Result {
-        private final List<Record> records = new ArrayList<>();
 
-        private void add(Record record) {
-            records.add(record);
+    @Override
+    public Integer next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
+        increaseIndex();
+        return currentIndex;
+    }
 
-        @Override
-        public int attemptCount() {
-            return records.size();
-        }
-
-        @Override
-        public Record firstRecord() {
-            return records.get(MINIMUM_ATTEMPT_COUNT);
-        }
-
-        @Override
-        public Record lastRecord() {
-            return records.get(records.size() - 1);
-        }
-
-        @Override
-        public Iterable<Record> allRecords() {
-            return new ArrayList<>(records);
-        }
+    private void increaseIndex() {
+        currentIndex += 1;
     }
 }
